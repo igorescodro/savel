@@ -1,7 +1,9 @@
-package com.escodro.music;
+package com.escodro.music.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+
+import com.escodro.music.R;
 
 /**
  * Main {@link android.app.Activity} of Music Project application.
@@ -14,5 +16,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getSupportFragmentManager().beginTransaction()
+                .add(android.R.id.content, ArtistSearchFragment.newInstance(),
+                        ArtistSearchFragment.TAG).commit();
     }
 }

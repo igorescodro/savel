@@ -17,24 +17,38 @@ import com.escodro.music.adapter.ArtistSearchAdapter;
  */
 public class ArtistSearchFragment extends Fragment {
 
+    /**
+     * {@link ArtistSearchFragment} Tag.
+     */
     public static final String TAG = ArtistSearchFragment.class.getSimpleName();
 
+    /**
+     * Creates a new instance of {@link ArtistSearchFragment}.
+     *
+     * @return new instance of {@link ArtistSearchFragment}
+     */
     public static ArtistSearchFragment newInstance() {
         return new ArtistSearchFragment();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_artist_search, container, false);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final ListView mListView = (ListView) view.findViewById(R.id.artist_list);
         final ArtistSearchAdapter adapter = new ArtistSearchAdapter(
                 getActivity().getApplicationContext());
-        final ListView listView = (ListView) view.findViewById(R.id.artist_list);
-        listView.setAdapter(adapter);
+        mListView.setAdapter(adapter);
     }
 }

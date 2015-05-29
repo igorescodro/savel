@@ -12,6 +12,9 @@ import com.escodro.music.R;
  */
 public class MainActivity extends ActionBarActivity {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

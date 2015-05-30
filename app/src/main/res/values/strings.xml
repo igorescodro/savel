@@ -1,3 +1,4 @@
 <resources>
     <string name="application.name">Music Project</string>
+    <string name="search.view.title">Search</string>
 </resources>

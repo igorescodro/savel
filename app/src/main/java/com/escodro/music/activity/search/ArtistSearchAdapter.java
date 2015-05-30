@@ -1,4 +1,4 @@
-package com.escodro.music.adapter;
+package com.escodro.music.activity.search;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,21 +9,19 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.echonest.api.v4.Artist;
-import com.echonest.api.v4.EchoNestException;
+import com.escodro.music.MusicApp;
 import com.escodro.music.R;
-import com.escodro.music.request.ArtistSearchRequest;
-import com.escodro.music.request.MusicRequestListener;
+import com.escodro.music.rest.echonest.model.Artist;
+import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link BaseAdapter} to handle the {@link com.escodro.music.activity.ArtistSearchFragment} list.
+ * {@link BaseAdapter} to handle the {@link ArtistSearchFragment} list.
  * <p/>
  * Created by IgorEscodro on 22/05/15.
  */
-public class ArtistSearchAdapter extends BaseAdapter implements MusicRequestListener<List<Artist>> {
+public class ArtistSearchAdapter extends BaseAdapter {
 
     /**
      * Application {@link Context}.
@@ -38,12 +36,11 @@ public class ArtistSearchAdapter extends BaseAdapter implements MusicRequestList
     /**
      * Creates a new instance of {@link ArtistSearchAdapter}.
      *
-     * @param context application {@link Context}
+     * @param artists artists {@link List}
      */
-    public ArtistSearchAdapter(Context context) {
-        mContext = context;
-        mList = new ArrayList<Artist>();
-        new ArtistSearchRequest(this).execute("Echos");
+    public ArtistSearchAdapter(List<Artist> artists) {
+        mContext = MusicApp.getContext();
+        mList = artists;
     }
 
     /**
@@ -79,27 +76,33 @@ public class ArtistSearchAdapter extends BaseAdapter implements MusicRequestList
         if (view == null) {
             LayoutInflater li = (LayoutInflater) mContext
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = li.inflate(R.layout.item_artist_search, null);
+            view = li.inflate(R.layout.item_artist_search, null);
         }
-        try {
-            ((TextView) v.findViewById(R.id.artist_name)).setText(mList.get(i).getName());
-        } catch (EchoNestException e) {
-            e.printStackTrace();
-        }
-        return v;
+        final ViewHolder holder = new ViewHolder(view);
+        final Artist artist = mList.get(i);
+        holder.artistName.setText(artist.getName());
+        loadArtistImage(artist, holder);
+        return view;
     }
 
     /**
-     * {@inheritDoc}
+     * Load the {@link Artist} image or the placeholder using {@link Picasso}.
+     *
+     * @param artist {@link Artist} reference
+     * @param holder {@link ViewHolder} reference
      */
-    @Override
-    public void onRequestFinished(List<Artist> result) {
-        mList = result;
-        notifyDataSetChanged();
+    private void loadArtistImage(Artist artist, ViewHolder holder) {
+        if (!artist.getImages().isEmpty()) {
+            Picasso.with(MusicApp.getContext()).load(artist.getImages().get(0).getUrl())
+                    .fit().centerCrop().into(holder.artistThumb);
+        } else {
+            Picasso.with(MusicApp.getContext()).load(R.drawable.artist_placeholder).fit()
+                    .centerCrop().into(holder.artistThumb);
+        }
     }
 
     /**
-     * Class to hold the {@link com.escodro.music.activity.ArtistSearchFragment} views.
+     * Class to hold the {@link ArtistSearchFragment} views.
      */
     public static class ViewHolder {
         /**

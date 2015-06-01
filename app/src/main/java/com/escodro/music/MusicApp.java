@@ -1,8 +1,10 @@
 package com.escodro.music;
 
 import android.app.Application;
+import android.content.Context;
 
-import com.echonest.api.v4.EchoNestAPI;
+import com.escodro.music.rest.echonest.EchoNestAPI;
+import com.escodro.music.rest.echonest.EchoNestClient;
 
 /**
  * {@link Application} class with app Singletons.
@@ -19,15 +21,32 @@ public class MusicApp extends Application {
     /**
      * {@link EchoNestAPI} reference.
      */
-    private EchoNestAPI mEchoNestAPI;
+    private static EchoNestAPI mEchoNestAPI;
+
+    /**
+     * {@link Context} reference.
+     */
+    private static Context mContext;
 
     /**
      * Get {@link MusicApp} instance.
      *
      * @return {@link MusicApp} instance
      */
-    public static MusicApp getInstance() {
-        return appInstance;
+    public static Context getContext() {
+        return mContext;
+    }
+
+    /**
+     * Singleton to get {@link EchoNestAPI} instance.
+     *
+     * @return {@link EchoNestAPI} instance
+     */
+    public static EchoNestAPI getEchoNestAPI() {
+        if (mEchoNestAPI == null) {
+            mEchoNestAPI = new EchoNestClient().getEchoNestAPI();
+        }
+        return mEchoNestAPI;
     }
 
     /**
@@ -37,18 +56,6 @@ public class MusicApp extends Application {
     public void onCreate() {
         super.onCreate();
         appInstance = this;
-    }
-
-    /**
-     * Get {@link EchoNestAPI} instance.
-     *
-     * @return {@link EchoNestAPI} instance
-     */
-    public EchoNestAPI getEchoNestAPI() {
-        if (mEchoNestAPI == null) {
-            mEchoNestAPI = new EchoNestAPI(this.getResources().getString(R.string
-                    .api_echonest_key));
-        }
-        return mEchoNestAPI;
+        mContext = appInstance.getApplicationContext();
     }
 }

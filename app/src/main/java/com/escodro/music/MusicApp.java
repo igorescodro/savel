@@ -49,9 +49,6 @@ public class MusicApp extends Application {
         return mEchoNestAPI;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void onCreate() {
         super.onCreate();

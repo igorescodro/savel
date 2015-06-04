@@ -1,9 +1,11 @@
 package com.escodro.music.rest.echonest.model;
 
+import com.escodro.music.rest.echonest.EchoNestAPI;
+
 import java.util.List;
 
 /**
- * Object to represent an {@link com.escodro.music.rest.echonest.EchoNestAPI} {@link Response}.
+ * Object to represent an {@link EchoNestAPI} {@link Response}.
  */
 public class Response {
 

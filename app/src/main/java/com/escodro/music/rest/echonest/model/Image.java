@@ -1,7 +1,9 @@
 package com.escodro.music.rest.echonest.model;
 
+import com.escodro.music.rest.echonest.EchoNestAPI;
+
 /**
- * Object to represent an {@link com.escodro.music.rest.echonest.EchoNestAPI} {@link Image}.
+ * Object to represent an {@link EchoNestAPI} {@link Image}.
  */
 public class Image {
 

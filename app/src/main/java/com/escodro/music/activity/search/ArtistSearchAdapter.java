@@ -5,13 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.escodro.music.MusicApp;
 import com.escodro.music.R;
 import com.escodro.music.rest.echonest.model.Artist;
+import com.escodro.music.view.BlurTransformation;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -43,33 +45,21 @@ public class ArtistSearchAdapter extends BaseAdapter {
         mList = artists;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public int getCount() {
         return mList.size();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public Object getItem(int i) {
         return mList.get(i);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public long getItemId(int i) {
         return 0;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v = view;
@@ -91,13 +81,32 @@ public class ArtistSearchAdapter extends BaseAdapter {
      * @param artist {@link Artist} reference
      * @param holder {@link ViewHolder} reference
      */
-    private void loadArtistImage(Artist artist, ViewHolder holder) {
+    private void loadArtistImage(Artist artist, final ViewHolder holder) {
         if (!artist.getImages().isEmpty()) {
-            Picasso.with(MusicApp.getContext()).load(artist.getImages().get(0).getUrl())
-                    .fit().centerCrop().into(holder.artistThumb);
+            holder.progressBar.setVisibility(View.VISIBLE);
+            Picasso.with(MusicApp.getContext())
+                    .load(artist.getImages().get(0).getUrl())
+                    .fit()
+                    .centerCrop()
+                    .transform(new BlurTransformation())
+                    .into(holder.artistThumb, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            holder.progressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onError() {
+                            //Do nothing.
+                        }
+                    });
         } else {
-            Picasso.with(MusicApp.getContext()).load(R.drawable.artist_placeholder).fit()
-                    .centerCrop().into(holder.artistThumb);
+            holder.progressBar.setVisibility(View.GONE);
+            Picasso.with(MusicApp.getContext()).load(R.drawable.artist_placeholder)
+                    .fit()
+                    .centerCrop()
+                    .transform(new BlurTransformation())
+                    .into(holder.artistThumb);
         }
     }
 
@@ -108,17 +117,17 @@ public class ArtistSearchAdapter extends BaseAdapter {
         /**
          * {@link ImageView} reference to {@link Artist} thumbnail.
          */
-        public ImageView artistThumb;
+        public final ImageView artistThumb;
 
         /**
          * {@link TextView} reference to {@link Artist} name.
          */
-        public TextView artistName;
+        public final TextView artistName;
 
         /**
-         * {@link CheckBox} reference to {@link Artist} favorite.
+         * {@link ProgressBar} reference.
          */
-        public CheckBox artistCheck;
+        public final ProgressBar progressBar;
 
         /**
          * Default constructor to initialize the views.
@@ -128,7 +137,7 @@ public class ArtistSearchAdapter extends BaseAdapter {
         public ViewHolder(View view) {
             artistThumb = (ImageView) view.findViewById(R.id.artist_thumb);
             artistName = (TextView) view.findViewById(R.id.artist_name);
-            artistCheck = (CheckBox) view.findViewById(R.id.artist_check);
+            progressBar = (ProgressBar) view.findViewById(R.id.loading);
         }
     }
 }

@@ -36,9 +36,6 @@ public class ArtistSearchActivity extends AppCompatActivity implements
         activity.startActivity(intent);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -70,9 +67,6 @@ public class ArtistSearchActivity extends AppCompatActivity implements
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean onQueryTextChange(String s) {
         //Do nothing.

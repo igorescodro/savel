@@ -2,6 +2,7 @@ package com.escodro.music.rest.echonest;
 
 import com.escodro.music.MusicApp;
 import com.escodro.music.R;
+import com.escodro.music.rest.echonest.model.Artist;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -15,7 +16,7 @@ import retrofit.android.AndroidLog;
 public class EchoNestClient implements RequestInterceptor {
 
     /**
-     * URL to create a {@link com.escodro.music.rest.echonest.model.Artist} search request.
+     * URL to create a {@link Artist} search request.
      */
     public static final String ARTIST_SEARCH_URL = "/artist/search?bucket=images";
     /**

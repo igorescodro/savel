@@ -7,15 +7,12 @@ import com.escodro.music.R;
 import com.escodro.music.activity.search.ArtistSearchActivity;
 
 /**
- * Main {@link android.app.Activity} of Music Project application.
+ * Main {@link AppCompatActivity} of Music Project application.
  * <p/>
  * Created by IgorEscodro on 22/05/15.
  */
 public class MainActivity extends AppCompatActivity {
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,7 +17,7 @@ import retrofit.http.Query;
 public interface EchoNestAPI {
 
     /**
-     * {@link EchoNestAPI} request to search artists.
+     * {@link EchoNestAPI} request to search artists by name.
      *
      * @param name     {@link Artist} name
      * @param result   maximum number of results

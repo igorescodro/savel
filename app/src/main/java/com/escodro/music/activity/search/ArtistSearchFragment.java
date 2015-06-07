@@ -12,8 +12,8 @@ import com.escodro.music.MusicApp;
 import com.escodro.music.R;
 import com.escodro.music.rest.echonest.EchoNestAPI;
 import com.escodro.music.rest.echonest.model.Artist;
-import com.escodro.music.rest.echonest.model.EchoNestResponse;
-import com.escodro.music.rest.echonest.model.Sort;
+import com.escodro.music.rest.spotify.model.SpotifyResponse;
+import com.escodro.music.rest.spotify.model.Type;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -25,7 +25,7 @@ import retrofit.client.Response;
  * <p/>
  * Created by IgorEscodro on 22/05/15.
  */
-public class ArtistSearchFragment extends Fragment implements Callback<EchoNestResponse> {
+public class ArtistSearchFragment extends Fragment implements Callback<SpotifyResponse> {
 
     /**
      * {@link ArtistSearchFragment} Tag.
@@ -78,14 +78,13 @@ public class ArtistSearchFragment extends Fragment implements Callback<EchoNestR
      * @param query {@link Artist} name
      */
     private void createRequest(String query) {
-        MusicApp.getEchoNestAPI().searchArtistByName(query, 50, true, Sort.HOTNESS_DESC.toString(),
-                this);
+        MusicApp.getSpotifyAPI().searchItemByName(query, Type.ARTIST.toString(), this);
     }
 
     @Override
-    public void success(EchoNestResponse artists, Response response) {
-        final ArtistSearchAdapter adapter = new ArtistSearchAdapter(artists
-                .getResponse().getArtists());
+    public void success(SpotifyResponse artists, Response response) {
+        final ArtistSearchAdapter adapter = new ArtistSearchAdapter(
+                artists.getArtists().getItems());
         mListView.setAdapter(adapter);
     }
 

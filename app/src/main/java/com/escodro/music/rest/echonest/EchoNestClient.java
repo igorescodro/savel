@@ -30,6 +30,11 @@ public class EchoNestClient implements RequestInterceptor {
             .getString(R.string.api_echonest_key);
 
     /**
+     * Constant to represent the request format.
+     */
+    private static final String FORMAT = "json";
+
+    /**
      * {@link EchoNestAPI} reference.
      */
     private EchoNestAPI mInterface;
@@ -42,7 +47,7 @@ public class EchoNestClient implements RequestInterceptor {
                 .setEndpoint(BASE_URL)
                 .setRequestInterceptor(this)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
-                .setLog(new AndroidLog(""))
+                .setLog(new AndroidLog(EchoNestAPI.class.getSimpleName()))
                 .build();
         mInterface = restAdapter.create(EchoNestAPI.class);
     }
@@ -65,6 +70,6 @@ public class EchoNestClient implements RequestInterceptor {
     @Override
     public void intercept(RequestFacade request) {
         request.addQueryParam("api_key", API_KEY);
-        request.addQueryParam("format", "json");
+        request.addQueryParam("format", FORMAT);
     }
 }

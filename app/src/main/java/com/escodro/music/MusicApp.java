@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.escodro.music.rest.echonest.EchoNestAPI;
 import com.escodro.music.rest.echonest.EchoNestClient;
+import com.escodro.music.rest.spotify.SpotifyAPI;
+import com.escodro.music.rest.spotify.SpotifyClient;
 
 /**
  * {@link Application} class with app Singletons.
@@ -22,6 +24,8 @@ public class MusicApp extends Application {
      * {@link EchoNestAPI} reference.
      */
     private static EchoNestAPI mEchoNestAPI;
+
+    private static SpotifyAPI mSpotifyAPI;
 
     /**
      * {@link Context} reference.
@@ -47,6 +51,13 @@ public class MusicApp extends Application {
             mEchoNestAPI = new EchoNestClient().getEchoNestAPI();
         }
         return mEchoNestAPI;
+    }
+
+    public static SpotifyAPI getSpotifyAPI() {
+        if (mSpotifyAPI == null) {
+            mSpotifyAPI = new SpotifyClient().getSpotifyAPI();
+        }
+        return mSpotifyAPI;
     }
 
     @Override

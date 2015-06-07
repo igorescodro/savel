@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.escodro.music.MusicApp;
 import com.escodro.music.R;
-import com.escodro.music.rest.echonest.model.Artist;
+import com.escodro.music.rest.spotify.model.Item;
 import com.escodro.music.view.BlurTransformation;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -31,16 +31,16 @@ public class ArtistSearchAdapter extends BaseAdapter {
     private final Context mContext;
 
     /**
-     * {@link List} of {@link Artist}.
+     * {@link List} of {@link Item}.
      */
-    private List<Artist> mList;
+    private List<Item> mList;
 
     /**
      * Creates a new instance of {@link ArtistSearchAdapter}.
      *
      * @param artists artists {@link List}
      */
-    public ArtistSearchAdapter(List<Artist> artists) {
+    public ArtistSearchAdapter(List<Item> artists) {
         mContext = MusicApp.getContext();
         mList = artists;
     }
@@ -69,26 +69,25 @@ public class ArtistSearchAdapter extends BaseAdapter {
             view = li.inflate(R.layout.item_artist_search, null);
         }
         final ViewHolder holder = new ViewHolder(view);
-        final Artist artist = mList.get(i);
+        final Item artist = mList.get(i);
         holder.artistName.setText(artist.getName());
         loadArtistImage(artist, holder);
         return view;
     }
 
     /**
-     * Load the {@link Artist} image or the placeholder using {@link Picasso}.
+     * Load the {@link Item} image or the placeholder using {@link Picasso}.
      *
-     * @param artist {@link Artist} reference
+     * @param artist {@link Item} reference
      * @param holder {@link ViewHolder} reference
      */
-    private void loadArtistImage(Artist artist, final ViewHolder holder) {
+    private void loadArtistImage(Item artist, final ViewHolder holder) {
         if (!artist.getImages().isEmpty()) {
             holder.progressBar.setVisibility(View.VISIBLE);
             Picasso.with(MusicApp.getContext())
-                    .load(artist.getImages().get(0).getUrl())
+                    .load(artist.getImages().get(1).getUrl())
                     .fit()
                     .centerCrop()
-                    .transform(new BlurTransformation())
                     .into(holder.artistThumb, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -115,12 +114,12 @@ public class ArtistSearchAdapter extends BaseAdapter {
      */
     public static class ViewHolder {
         /**
-         * {@link ImageView} reference to {@link Artist} thumbnail.
+         * {@link ImageView} reference to {@link Item} thumbnail.
          */
         public final ImageView artistThumb;
 
         /**
-         * {@link TextView} reference to {@link Artist} name.
+         * {@link TextView} reference to {@link Item} name.
          */
         public final TextView artistName;
 

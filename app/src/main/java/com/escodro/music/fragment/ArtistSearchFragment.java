@@ -1,15 +1,19 @@
-package com.escodro.music.activity.search;
+package com.escodro.music.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.escodro.music.MusicApp;
 import com.escodro.music.R;
+import com.escodro.music.activity.ArtistSearchActivity;
+import com.escodro.music.adapter.ArtistSearchAdapter;
 import com.escodro.music.rest.echonest.EchoNestAPI;
 import com.escodro.music.rest.echonest.model.Artist;
 import com.escodro.music.rest.spotify.model.SpotifyResponse;
@@ -35,7 +39,7 @@ public class ArtistSearchFragment extends Fragment implements Callback<SpotifyRe
     /**
      * {@link ListView} reference.
      */
-    private ListView mListView;
+    private RecyclerView mRecyclerView;
 
     /**
      * Creates a new instance of {@link ArtistSearchFragment}.
@@ -66,9 +70,10 @@ public class ArtistSearchFragment extends Fragment implements Callback<SpotifyRe
      * @param view {@link View} with the components
      */
     private void initComponents(View view) {
-        final TextView emptyView = (TextView) view.findViewById(R.id.empty_list);
-        mListView = (ListView) view.findViewById(R.id.artist_list);
-        mListView.setEmptyView(emptyView);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.artist_list);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(MusicApp.getContext()));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     /**
@@ -78,14 +83,14 @@ public class ArtistSearchFragment extends Fragment implements Callback<SpotifyRe
      * @param query {@link Artist} name
      */
     private void createRequest(String query) {
-        MusicApp.getSpotifyAPI().searchItemByName(query, Type.ARTIST.toString(), this);
+        MusicApp.getSpotifyAPI().searchItemByName("*" + query + "*", Type.ARTIST.toString(), this);
     }
 
     @Override
     public void success(SpotifyResponse artists, Response response) {
-        final ArtistSearchAdapter adapter = new ArtistSearchAdapter(
+        final ArtistSearchAdapter mAdapter = new ArtistSearchAdapter(
                 artists.getArtists().getItems());
-        mListView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override

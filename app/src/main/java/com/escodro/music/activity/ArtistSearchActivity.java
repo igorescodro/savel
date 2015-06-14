@@ -1,6 +1,6 @@
-package com.escodro.music.activity.search;
+package com.escodro.music.activity;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,10 +11,12 @@ import android.view.MenuInflater;
 
 import com.escodro.music.MusicApp;
 import com.escodro.music.R;
+import com.escodro.music.fragment.ArtistSearchFragment;
 import com.escodro.music.rest.echonest.model.Artist;
+import com.escodro.music.rest.spotify.model.Item;
 
 /**
- * {@link AppCompatActivity} responsible for the {@link Artist} search.
+ * {@link AppCompatActivity} responsible for the {@link Item} search.
  * <p/>
  * Created by IgorEscodro on 30/05/15.
  */
@@ -27,13 +29,13 @@ public class ArtistSearchActivity extends AppCompatActivity implements
     public static final String ARGS_QUERY = "query";
 
     /**
-     * Start the {@link ArtistSearchActivity}.
-     *
-     * @param activity {@link Activity} reference
+     * Start {@link ArtistSearchActivity}.
      */
-    public static void startActivity(Activity activity) {
-        final Intent intent = new Intent(MusicApp.getContext(), ArtistSearchActivity.class);
-        activity.startActivity(intent);
+    public static void startActivity() {
+        final Context context = MusicApp.getContext();
+        final Intent intent = new Intent(context, ArtistSearchActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     @Override

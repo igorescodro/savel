@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.escodro.music.R;
-import com.escodro.music.activity.search.ArtistSearchActivity;
 
 /**
  * Main {@link AppCompatActivity} of Music Project application.
@@ -17,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ArtistSearchActivity.startActivity(this);
+        ArtistSearchActivity.startActivity();
     }
 }

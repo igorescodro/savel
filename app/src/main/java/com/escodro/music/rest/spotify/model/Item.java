@@ -1,64 +1,94 @@
 package com.escodro.music.rest.spotify.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.escodro.music.rest.spotify.SpotifyAPI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Object to represent an {@link SpotifyAPI} {@link Item}. An {@link Item} can be an Artist, an
- * Album, a Track or a Playlist.
+ * Object to represent an implements Parcelable {@link SpotifyAPI} {@link Item}. An {@link Item} can
+ * be an Artist, an Album, a Track or a Playlist.
  */
-public class Item {
+public class Item implements Parcelable {
 
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>() {
+        @Override
+        public Item createFromParcel(Parcel in) {
+            return new Item(in);
+        }
+
+        @Override
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
     /**
      * {@link Item} id.
      */
     private String id;
-
     /**
      * {@link Item} followers.
      */
     private Follower followers;
-
     /**
      * {@link Item} external urls.
      */
     private ExternalUrl external_urls;
-
     /**
      * {@link Item} genres.
      */
-    private String[] genres;
-
+    private List<String> genres;
     /**
      * {@link Item} name.
      */
     private String name;
-
     /**
      * {@link Item} images.
      */
     private List<Image> images;
-
     /**
      * {@link Item} type.
      */
     private String type;
-
     /**
      * {@link Item} uri.
      */
     private String uri;
-
     /**
      * {@link Item} href.
      */
     private String href;
-
     /**
      * {@link Item} popularity.
      */
     private String popularity;
+
+    protected Item(Parcel in) {
+        id = in.readString();
+        followers = (Follower) in.readValue(Follower.class.getClassLoader());
+        external_urls = (ExternalUrl) in.readValue(ExternalUrl.class.getClassLoader());
+        if (in.readByte() == 0x01) {
+            genres = new ArrayList<String>();
+            in.readList(genres, String.class.getClassLoader());
+        } else {
+            genres = null;
+        }
+        name = in.readString();
+        if (in.readByte() == 0x01) {
+            images = new ArrayList<Image>();
+            in.readList(images, Image.class.getClassLoader());
+        } else {
+            images = null;
+        }
+        type = in.readString();
+        uri = in.readString();
+        href = in.readString();
+        popularity = in.readString();
+    }
 
     public String getId() {
         return id;
@@ -84,11 +114,11 @@ public class Item {
         this.external_urls = external_urls;
     }
 
-    public String[] getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(String[] genres) {
+    public void setGenres(List<String> genres) {
         this.genres = genres;
     }
 
@@ -138,5 +168,34 @@ public class Item {
 
     public void setPopularity(String popularity) {
         this.popularity = popularity;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeValue(followers);
+        dest.writeValue(external_urls);
+        if (genres == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(genres);
+        }
+        dest.writeString(name);
+        if (images == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(images);
+        }
+        dest.writeString(type);
+        dest.writeString(uri);
+        dest.writeString(href);
+        dest.writeString(popularity);
     }
 }

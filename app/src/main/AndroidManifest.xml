@@ -19,7 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.search.ArtistSearchActivity"/>
+        <activity android:name=".activity.ArtistSearchActivity"/>
+        <activity
+            android:name=".activity.ArtistProfileActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

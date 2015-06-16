@@ -1,21 +1,40 @@
 package com.escodro.music.rest.spotify.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.escodro.music.rest.spotify.SpotifyAPI;
 
 /**
- * Object to represent an {@link SpotifyAPI} {@link Follower}.
+ * Object to represent an implements Parcelable {@link SpotifyAPI} {@link Follower}.
  */
-public class Follower {
+public class Follower implements Parcelable {
 
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Follower> CREATOR = new Parcelable.Creator<Follower>() {
+        @Override
+        public Follower createFromParcel(Parcel in) {
+            return new Follower(in);
+        }
+
+        @Override
+        public Follower[] newArray(int size) {
+            return new Follower[size];
+        }
+    };
     /**
      * {@link Follower} total.
      */
     private String total;
-
     /**
      * {@link Follower} href.
      */
     private String href;
+
+    protected Follower(Parcel in) {
+        total = in.readString();
+        href = in.readString();
+    }
 
     public String getTotal() {
         return total;
@@ -31,5 +50,16 @@ public class Follower {
 
     public void setHref(String href) {
         this.href = href;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(total);
+        dest.writeString(href);
     }
 }

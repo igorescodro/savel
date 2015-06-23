@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/progress_bar_loading"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"/>
+
+    <TextView
+        android:id="@+id/text_view_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress_bar_loading"
+        android:gravity="center"
+        android:text="Loading awesome artists..."
+        android:textColor="@android:color/white"
+        android:textSize="22sp"/>
+
+    <TextView
+        android:id="@+id/text_view_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No artist found"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:visibility="gone"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/artist_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="invisible"
         />
-</LinearLayout>
+</RelativeLayout>

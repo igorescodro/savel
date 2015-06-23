@@ -1,27 +1,27 @@
 <manifest
-    package="com.escodro.music"
+    package="com.escodro.savel"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:name=".MusicApp"
+        android:name="com.escodro.savel.MusicApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/application.name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.escodro.savel.activities.MainActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ArtistSearchActivity"/>
+        <activity android:name="com.escodro.savel.activities.ArtistSearchActivity"/>
         <activity
-            android:name=".activity.ArtistProfileActivity"
+            android:name="com.escodro.savel.activities.ArtistProfileActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 

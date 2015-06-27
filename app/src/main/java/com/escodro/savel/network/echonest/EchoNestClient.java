@@ -3,6 +3,7 @@ package com.escodro.savel.network.echonest;
 import com.escodro.savel.MusicApp;
 import com.escodro.savel.R;
 import com.escodro.savel.network.echonest.model.Artist;
+import com.escodro.savel.network.spotify.SpotifyAPI;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -19,6 +20,10 @@ public class EchoNestClient implements RequestInterceptor {
      * URL to create a {@link Artist} search request.
      */
     public static final String ARTIST_SEARCH_URL = "/artist/search?bucket=images";
+    /**
+     * URL to create a {@link Artist} search request by {@link SpotifyAPI} id.
+     */
+    public static final String PROFILE_SEARCH_URL = "/artist/profile?bucket=id:musicbrainz";
     /**
      * Base URL to request the data to {@link EchoNestAPI}.
      */

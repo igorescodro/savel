@@ -1,6 +1,7 @@
-package com.escodro.savel.network.spotify.model;
+package com.escodro.savel.network.spotify.enums;
 
 import com.escodro.savel.network.echonest.EchoNestAPI;
+import com.escodro.savel.network.spotify.model.Item;
 
 /**
  * {@link Enum} to represent the {@link Type} option to {@link EchoNestAPI} data.

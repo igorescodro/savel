@@ -1,7 +1,8 @@
 package com.escodro.savel.network.echonest;
 
-import com.escodro.savel.network.echonest.model.Artist;
 import com.escodro.savel.network.echonest.model.EchoNestResponse;
+import com.escodro.savel.network.spotify.SpotifyAPI;
+import com.escodro.savel.network.spotify.model.Item;
 
 import retrofit.Callback;
 import retrofit.http.GET;
@@ -17,19 +18,16 @@ import retrofit.http.Query;
 public interface EchoNestAPI {
 
     /**
-     * {@link EchoNestAPI} request to search artists by name.
+     * * {@link EchoNestAPI} request to search artists by {@link SpotifyAPI} id. This request is
+     * used to get the MusicBrainz id of the {@link Item}, which is an "universal" id for other
+     * services.
      *
-     * @param name     {@link Artist} name
-     * @param result   maximum number of results
-     * @param fuzzy    search for similar names (similar to LIKE in SQL)
-     * @param sort     sort criteria
+     * @param id       {@link SpotifyAPI} id
      * @param callback {@link Callback} to be implemented to handle request response
      *
-     * @see <a href="http://developer.echonest.com/docs/v4/artist.html#search">Echo Nest API
-     * Overview - Search</a>
+     * @see <a href="http://developer.echonest.com/docs/v4/artist.html#profile">Echo Nest API
+     * Overview - Profile</a>
      */
-    @GET(EchoNestClient.ARTIST_SEARCH_URL)
-    void searchArtistByName(@Query("name") String name, @Query("results") int result, @Query
-            ("fuzzy_match") boolean fuzzy, @Query("sort") String sort,
-                            Callback<EchoNestResponse> callback);
+    @GET(EchoNestClient.PROFILE_SEARCH_URL)
+    void searchArtistBySpotifyId(@Query("id") String id, Callback<EchoNestResponse> callback);
 }

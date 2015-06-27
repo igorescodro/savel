@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.escodro.savel.network.echonest.EchoNestAPI;
 import com.escodro.savel.network.echonest.EchoNestClient;
+import com.escodro.savel.network.lastfm.LastFmAPI;
+import com.escodro.savel.network.lastfm.LastFmClient;
 import com.escodro.savel.network.spotify.SpotifyAPI;
 import com.escodro.savel.network.spotify.SpotifyClient;
 
@@ -29,6 +31,11 @@ public class MusicApp extends Application {
      * {@link SpotifyAPI} reference.
      */
     private static SpotifyAPI mSpotifyAPI;
+
+    /**
+     * {@link LastFmAPI} reference.
+     */
+    private static LastFmAPI mLastFmAPI;
 
     /**
      * Get {@link MusicApp} instance.
@@ -61,6 +68,18 @@ public class MusicApp extends Application {
             mSpotifyAPI = new SpotifyClient().getSpotifyAPI();
         }
         return mSpotifyAPI;
+    }
+
+    /**
+     * Singleton to get {@link LastFmAPI} instance.
+     *
+     * @return {@link LastFmAPI} instance
+     */
+    public static LastFmAPI getLastFmAPI() {
+        if (mLastFmAPI == null) {
+            mLastFmAPI = new LastFmClient().getLastFmAPI();
+        }
+        return mLastFmAPI;
     }
 
     @Override

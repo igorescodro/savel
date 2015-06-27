@@ -18,9 +18,9 @@ import com.escodro.savel.activities.ArtistSearchActivity;
 import com.escodro.savel.adapters.ArtistSearchAdapter;
 import com.escodro.savel.network.echonest.EchoNestAPI;
 import com.escodro.savel.network.echonest.model.Artist;
+import com.escodro.savel.network.spotify.enums.Type;
 import com.escodro.savel.network.spotify.model.Item;
 import com.escodro.savel.network.spotify.model.SpotifyResponse;
-import com.escodro.savel.network.spotify.model.Type;
 
 import java.util.List;
 

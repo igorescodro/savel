@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="api.echonest.key">3VDDKJ3HEOLOBYD4I</string>
-    <string name="api.echonest.consumer.key">XXX</string>
-    <string name="api.echonest.shared.secret">XXX</string>
-</resources>

@@ -65,7 +65,7 @@ public class Item implements Parcelable {
     /**
      * {@link Item} popularity.
      */
-    private String popularity;
+    private int popularity;
 
     protected Item(Parcel in) {
         id = in.readString();
@@ -87,7 +87,7 @@ public class Item implements Parcelable {
         type = in.readString();
         uri = in.readString();
         href = in.readString();
-        popularity = in.readString();
+        popularity = in.readInt();
     }
 
     public String getId() {
@@ -162,11 +162,11 @@ public class Item implements Parcelable {
         this.href = href;
     }
 
-    public String getPopularity() {
+    public int getPopularity() {
         return popularity;
     }
 
-    public void setPopularity(String popularity) {
+    public void setPopularity(int popularity) {
         this.popularity = popularity;
     }
 
@@ -196,6 +196,6 @@ public class Item implements Parcelable {
         dest.writeString(type);
         dest.writeString(uri);
         dest.writeString(href);
-        dest.writeString(popularity);
+        dest.writeInt(popularity);
     }
 }

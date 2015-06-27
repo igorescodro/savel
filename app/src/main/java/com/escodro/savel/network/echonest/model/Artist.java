@@ -15,14 +15,14 @@ public class Artist {
     private String id;
 
     /**
+     * {@link Artist} foreign ids.
+     */
+    private List<ForeignId> foreign_ids;
+
+    /**
      * {@link Artist} name.
      */
     private String name;
-
-    /**
-     * {@link Artist} images.
-     */
-    private List<Image> images;
 
     public String getId() {
         return id;
@@ -32,19 +32,15 @@ public class Artist {
         this.id = id;
     }
 
+    public List<ForeignId> getForeign_ids() {
+        return foreign_ids;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
     }
 }

@@ -2,8 +2,6 @@ package com.escodro.savel.network.echonest.model;
 
 import com.escodro.savel.network.echonest.EchoNestAPI;
 
-import java.util.List;
-
 /**
  * Object to represent an {@link EchoNestAPI} {@link Response}.
  */
@@ -12,19 +10,19 @@ public class Response {
     /**
      * {@link Response} artists.
      */
-    private List<Artist> artists;
+    private Artist artist;
 
     /**
      * {@link Response} status.
      */
     private Status status;
 
-    public List<Artist> getArtists() {
-        return artists;
+    public Artist getArtist() {
+        return artist;
     }
 
-    public void setArtists(List<Artist> artists) {
-        this.artists = artists;
+    public void setArtist(Artist artists) {
+        this.artist = artists;
     }
 
     public Status getStatus() {

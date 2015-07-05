@@ -9,6 +9,7 @@ import com.escodro.savel.network.lastfm.LastFmAPI;
 import com.escodro.savel.network.lastfm.LastFmClient;
 import com.escodro.savel.network.spotify.SpotifyAPI;
 import com.escodro.savel.network.spotify.SpotifyClient;
+import com.escodro.savel.requests.RequestManager;
 
 /**
  * {@link Application} class with app Singletons.
@@ -21,6 +22,8 @@ public class MusicApp extends Application {
      * {@link Context} reference.
      */
     private static Context mContext;
+
+    private static RequestManager mRequestManager;
 
     /**
      * {@link EchoNestAPI} reference.
@@ -80,6 +83,13 @@ public class MusicApp extends Application {
             mLastFmAPI = new LastFmClient().getLastFmAPI();
         }
         return mLastFmAPI;
+    }
+
+    public static RequestManager getRequestManager() {
+        if (mRequestManager == null) {
+            mRequestManager = new RequestManager();
+        }
+        return mRequestManager;
     }
 
     @Override

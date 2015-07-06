@@ -10,14 +10,8 @@ import android.widget.ImageView;
 import com.escodro.savel.MusicApp;
 import com.escodro.savel.R;
 import com.escodro.savel.activities.ArtistProfileActivity;
-import com.escodro.savel.network.echonest.model.EchoNestResponse;
-import com.escodro.savel.network.lastfm.model.LastFmResponse;
 import com.escodro.savel.network.spotify.model.Item;
 import com.squareup.picasso.Picasso;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * {@link Fragment} responsible to load {@link Item} data in the views.
@@ -72,34 +66,6 @@ public class ArtistProfileFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         loadItem(view);
-
-        MusicApp.getEchoNestAPI().searchArtistBySpotifyId(mItem.getUri(),
-                new Callback<EchoNestResponse>() {
-                    @Override
-                    public void success(EchoNestResponse echoNestResponse, Response response) {
-                        final String mbid = echoNestResponse.getResponse().getArtist()
-                                .getForeign_ids().get(0).getForeign_id().replace
-                                        ("musicbrainz:artist:", "");
-                        MusicApp.getLastFmAPI().getArtistInfoByMBID(mbid,
-                                new Callback<LastFmResponse>() {
-                                    @Override
-                                    public void success(LastFmResponse lastFmResponse,
-                                                        Response response) {
-                                        System.out.println("Sucesso!");
-                                    }
-
-                                    @Override
-                                    public void failure(RetrofitError error) {
-                                        System.out.println("Falha!");
-                                    }
-                                });
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                        System.out.println("Falha!");
-                    }
-                });
     }
 
     /**

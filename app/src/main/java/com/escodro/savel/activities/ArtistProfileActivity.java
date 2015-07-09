@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.escodro.savel.MusicApp;
+import com.escodro.savel.SavelApp;
 import com.escodro.savel.fragments.ArtistProfileFragment;
 import com.escodro.savel.network.spotify.model.Item;
 
@@ -27,7 +27,7 @@ public class ArtistProfileActivity extends AppCompatActivity {
      * @param item {@link Item} to be shown
      */
     public static void startActivity(Item item) {
-        final Context context = MusicApp.getContext();
+        final Context context = SavelApp.getContext();
         final Intent intent = new Intent(context, ArtistProfileActivity.class);
         intent.putExtra(ARGS_ITEM, item);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

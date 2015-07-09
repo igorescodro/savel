@@ -9,8 +9,8 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 
-import com.escodro.savel.MusicApp;
 import com.escodro.savel.R;
+import com.escodro.savel.SavelApp;
 import com.escodro.savel.fragments.ArtistSearchFragment;
 import com.escodro.savel.network.echonest.model.Artist;
 import com.escodro.savel.network.spotify.model.Item;
@@ -32,7 +32,7 @@ public class ArtistSearchActivity extends AppCompatActivity implements
      * Start {@link ArtistSearchActivity}.
      */
     public static void startActivity() {
-        final Context context = MusicApp.getContext();
+        final Context context = SavelApp.getContext();
         final Intent intent = new Intent(context, ArtistSearchActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

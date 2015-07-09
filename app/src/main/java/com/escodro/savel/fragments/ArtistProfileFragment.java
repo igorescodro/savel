@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.escodro.savel.MusicApp;
 import com.escodro.savel.R;
+import com.escodro.savel.SavelApp;
 import com.escodro.savel.activities.ArtistProfileActivity;
 import com.escodro.savel.network.spotify.model.Item;
 import com.squareup.picasso.Picasso;
@@ -75,7 +75,7 @@ public class ArtistProfileFragment extends Fragment {
      */
     private void loadItem(View view) {
         final ImageView imageView = (ImageView) view.findViewById(R.id.artist_header);
-        Picasso.with(MusicApp.getContext())
+        Picasso.with(SavelApp.getContext())
                 .load(mItem.getImages().get(1).getUrl())
                 .fit()
                 .centerCrop()

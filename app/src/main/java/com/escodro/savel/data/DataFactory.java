@@ -1,7 +1,17 @@
 package com.escodro.savel.data;
 
-import com.escodro.savel.MusicApp;
+import com.escodro.savel.SavelApp;
+import com.escodro.savel.network.echonest.EchoNestAPI;
+import com.escodro.savel.network.echonest.model.EchoNestResponse;
+import com.escodro.savel.network.musicbrainz.MusicBrainzAPI;
+import com.escodro.savel.network.spotify.SpotifyAPI;
 import com.escodro.savel.requests.RequestManager;
+import com.escodro.savel.requests.apis.LastFmRequest;
+import com.escodro.savel.requests.apis.MusicBrainzRequest;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Class responsible to create a {@link Data} object. Because of the creation of the object is not
@@ -13,13 +23,65 @@ import com.escodro.savel.requests.RequestManager;
 public class DataFactory {
 
     /**
+     * Constant do represent the {@link SpotifyAPI} prefix to be used in the {@link EchoNestAPI}
+     * query.
+     */
+    private static final String SPOTIFY_QUERY_PREFIX = "spotify:artist:";
+
+    /**
+     * Field to represent the {@link SpotifyAPI} id.
+     */
+    private String mSpotifyId;
+
+    /**
+     * {@link com.escodro.savel.requests.RequestManager.OnRequestFinishListener} reference.
+     */
+    private RequestManager.OnRequestFinishListener mListener;
+
+    /**
      * Request the creation of a {@link Data} object. When it is created, the listener will be
      * notified.
      *
-     * @param listener listener to be notified when the object is created
+     * @param spotifyId {@link SpotifyAPI} unique id
+     * @param listener  listener to be notified
      */
-    public void requestData(RequestManager.OnRequestFinishListener listener) {
-        final RequestManager manager = MusicApp.getRequestManager();
-        manager.execute(listener);
+    public void createDataBySpotifyId(String spotifyId,
+                                      RequestManager.OnRequestFinishListener listener) {
+        mSpotifyId = spotifyId;
+        mListener = listener;
+        getMusicBrainzId();
+    }
+
+    /**
+     * Method to get the {@link MusicBrainzAPI} id from the {@link SpotifyAPI} item using the {@link
+     * EchoNestAPI}.
+     */
+    private void getMusicBrainzId() {
+        SavelApp.getEchoNestAPI().searchArtistBySpotifyId(SPOTIFY_QUERY_PREFIX + mSpotifyId,
+                new Callback<EchoNestResponse>() {
+                    @Override
+                    public void success(EchoNestResponse echoNestResponse, Response response) {
+                        final String mbid = echoNestResponse.getResponse().getArtist()
+                                .getMusicBrainzId();
+                        requestData(mbid);
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        System.out.println("FALHA!");
+                    }
+                });
+    }
+
+    /**
+     * Method to request all the data using the {@link RequestManager}.
+     *
+     * @param mbid {@link MusicBrainzAPI} id.
+     */
+    private void requestData(String mbid) {
+        final RequestManager manager = SavelApp.getRequestManager();
+        manager.add(new LastFmRequest(mbid));
+        manager.add(new MusicBrainzRequest(mbid));
+        manager.execute(mListener);
     }
 }

@@ -9,8 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.escodro.savel.MusicApp;
 import com.escodro.savel.R;
+import com.escodro.savel.SavelApp;
 import com.escodro.savel.activities.ArtistProfileActivity;
 import com.escodro.savel.fragments.ArtistSearchFragment;
 import com.escodro.savel.interfaces.OnItemClickListener;
@@ -71,7 +71,7 @@ public class ArtistSearchAdapter extends RecyclerView.Adapter<ArtistSearchAdapte
     private void loadArtistImage(Item artist, final ViewHolder holder) {
         if (!artist.getImages().isEmpty()) {
             holder.progressBar.setVisibility(View.VISIBLE);
-            Picasso.with(MusicApp.getContext())
+            Picasso.with(SavelApp.getContext())
                     .load(artist.getImages().get(1).getUrl())
                     .fit()
                     .centerCrop()
@@ -88,7 +88,7 @@ public class ArtistSearchAdapter extends RecyclerView.Adapter<ArtistSearchAdapte
                     });
         } else {
             holder.progressBar.setVisibility(View.GONE);
-            Picasso.with(MusicApp.getContext()).load(R.drawable.artist_placeholder)
+            Picasso.with(SavelApp.getContext()).load(R.drawable.artist_placeholder)
                     .fit()
                     .centerCrop()
                     .transform(new BlurTransformation())

@@ -2,8 +2,9 @@ package com.escodro.savel.network.lastfm;
 
 import com.escodro.savel.network.lastfm.model.Artist;
 import com.escodro.savel.network.lastfm.model.LastFmResponse;
+import com.escodro.savel.network.musicbrainz.MusicBrainzAPI;
+import com.escodro.savel.requests.CustomCallback;
 
-import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -19,12 +20,12 @@ public interface LastFmAPI {
     /**
      * {@link LastFmAPI} request to get information about an {@link Artist} by the MusicBrainz ID.
      *
-     * @param mbid     MusicBrainz ID
-     * @param callback {@link Callback} to be implemented to handle request response
+     * @param mbid     {@link MusicBrainzAPI} id
+     * @param callback {@link CustomCallback} to be implemented to handle request response
      *
      * @see <a href="http://www.lastfm.com.br/api/show/album.getInfo">Last.fm Web Services -
      * album.getInfo</a>
      */
     @GET(LastFmClient.PROFILE_URL)
-    void getArtistInfoByMBID(@Query("mbid") String mbid, Callback<LastFmResponse> callback);
+    void getArtistInfoByMBID(@Query("mbid") String mbid, CustomCallback<LastFmResponse> callback);
 }

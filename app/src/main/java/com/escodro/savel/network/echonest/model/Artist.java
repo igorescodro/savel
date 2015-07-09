@@ -1,6 +1,7 @@
 package com.escodro.savel.network.echonest.model;
 
 import com.escodro.savel.network.echonest.EchoNestAPI;
+import com.escodro.savel.network.echonest.enums.EchoNestCatalog;
 
 import java.util.List;
 
@@ -42,5 +43,22 @@ public class Artist {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Get the {@link Artist}'s MusicBrainz id.
+     *
+     * @return MusicBrainz id.
+     */
+    public String getMusicBrainzId() {
+        String mbid = null;
+        for (ForeignId id : foreign_ids) {
+            if (id.getCatalog().equals(EchoNestCatalog.MUSICBRAINZ.toString())) {
+                mbid = id.getForeign_id();
+                mbid = mbid.substring(mbid.lastIndexOf(":") + 1, mbid.length());
+                break;
+            }
+        }
+        return mbid;
     }
 }

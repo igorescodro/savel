@@ -1,7 +1,7 @@
 package com.escodro.savel.network.lastfm;
 
-import com.escodro.savel.MusicApp;
 import com.escodro.savel.R;
+import com.escodro.savel.SavelApp;
 import com.escodro.savel.network.lastfm.model.Artist;
 
 import retrofit.RequestInterceptor;
@@ -31,7 +31,7 @@ public class LastFmClient implements RequestInterceptor {
     /**
      * Developer API Key provided by LastFM to request the data.
      */
-    private static final String API_KEY = MusicApp.getContext()
+    private static final String API_KEY = SavelApp.getContext()
             .getString(R.string.api_lastfm_key);
 
     /**
@@ -43,7 +43,7 @@ public class LastFmClient implements RequestInterceptor {
      * Create a new instance of {@link LastFmClient}.
      */
     public LastFmClient() {
-        RestAdapter restAdapter = new RestAdapter.Builder()
+        final RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(BASE_URL)
                 .setRequestInterceptor(this)
                 .setLogLevel(RestAdapter.LogLevel.FULL)

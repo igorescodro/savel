@@ -29,7 +29,7 @@ public class SpotifyClient {
      * Create a new instance of {@link SpotifyClient}.
      */
     public SpotifyClient() {
-        RestAdapter restAdapter = new RestAdapter.Builder()
+        final RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(BASE_URL)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setLog(new AndroidLog(SpotifyAPI.class.getSimpleName()))

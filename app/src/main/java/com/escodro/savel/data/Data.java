@@ -2,6 +2,7 @@ package com.escodro.savel.data;
 
 import com.escodro.savel.network.echonest.model.EchoNestResponse;
 import com.escodro.savel.network.lastfm.model.LastFmResponse;
+import com.escodro.savel.network.musicbrainz.model.MusicBrainzResponse;
 import com.escodro.savel.network.spotify.model.SpotifyResponse;
 
 /**
@@ -26,6 +27,11 @@ public class Data {
      * {@link LastFmResponse} reference.
      */
     private LastFmResponse lastFmResponse;
+
+    /**
+     * {@link MusicBrainzResponse} reference.
+     */
+    private MusicBrainzResponse musicBrainzResponse;
 
     public SpotifyResponse getSpotifyResponse() {
         return spotifyResponse;
@@ -52,5 +58,14 @@ public class Data {
     public void setLastFmResponse(
             LastFmResponse lastFmResponse) {
         this.lastFmResponse = lastFmResponse;
+    }
+
+    public MusicBrainzResponse getMusicBrainzResponse() {
+        return musicBrainzResponse;
+    }
+
+    public void setMusicBrainzResponse(
+            MusicBrainzResponse musicBrainzResponse) {
+        this.musicBrainzResponse = musicBrainzResponse;
     }
 }

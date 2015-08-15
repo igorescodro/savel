@@ -12,8 +12,8 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.escodro.savel.MusicApp;
 import com.escodro.savel.R;
+import com.escodro.savel.SavelApp;
 import com.escodro.savel.activities.ArtistSearchActivity;
 import com.escodro.savel.adapters.ArtistSearchAdapter;
 import com.escodro.savel.network.echonest.EchoNestAPI;
@@ -92,7 +92,7 @@ public class ArtistSearchFragment extends Fragment implements Callback<SpotifyRe
     private void initComponents(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.artist_list);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(MusicApp.getContext()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(SavelApp.getContext()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mProgressBarLoading = (ProgressBar) view.findViewById(R.id.progress_bar_loading);
         mTextViewLoading = (TextView) view.findViewById(R.id.text_view_loading);
@@ -121,7 +121,7 @@ public class ArtistSearchFragment extends Fragment implements Callback<SpotifyRe
      * @param query {@link Artist} name
      */
     private void createRequest(String query) {
-        MusicApp.getSpotifyAPI().searchItemByName("*" + query + "*", Type.ARTIST.toString(), this);
+        SavelApp.getSpotifyAPI().searchItemByName("*" + query + "*", Type.ARTIST.toString(), this);
     }
 
     @Override

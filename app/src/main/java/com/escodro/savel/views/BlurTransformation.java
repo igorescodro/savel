@@ -6,7 +6,7 @@ import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 
-import com.escodro.savel.MusicApp;
+import com.escodro.savel.SavelApp;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -27,7 +27,7 @@ public class BlurTransformation implements Transformation {
     @Override
     public Bitmap transform(Bitmap source) {
         final Bitmap outBitmap = Bitmap.createBitmap(source);
-        final RenderScript rs = RenderScript.create(MusicApp.getContext());
+        final RenderScript rs = RenderScript.create(SavelApp.getContext());
         final Allocation input = Allocation.createFromBitmap(rs, source, Allocation
                 .MipmapControl.MIPMAP_FULL, Allocation.USAGE_SCRIPT);
         final Allocation output = Allocation.createTyped(rs, input.getType());

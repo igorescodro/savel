@@ -1,7 +1,7 @@
 package com.escodro.savel.network.echonest;
 
-import com.escodro.savel.MusicApp;
 import com.escodro.savel.R;
+import com.escodro.savel.SavelApp;
 import com.escodro.savel.network.echonest.model.Artist;
 import com.escodro.savel.network.spotify.SpotifyAPI;
 
@@ -31,7 +31,7 @@ public class EchoNestClient implements RequestInterceptor {
     /**
      * Developer API Key provided by EchoNest to request the data.
      */
-    private static final String API_KEY = MusicApp.getContext()
+    private static final String API_KEY = SavelApp.getContext()
             .getString(R.string.api_echonest_key);
 
     /**
@@ -48,7 +48,7 @@ public class EchoNestClient implements RequestInterceptor {
      * Create a new instance of {@link EchoNestClient}.
      */
     public EchoNestClient() {
-        RestAdapter restAdapter = new RestAdapter.Builder()
+        final RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(BASE_URL)
                 .setRequestInterceptor(this)
                 .setLogLevel(RestAdapter.LogLevel.FULL)

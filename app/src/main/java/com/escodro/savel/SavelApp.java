@@ -7,6 +7,8 @@ import com.escodro.savel.network.echonest.EchoNestAPI;
 import com.escodro.savel.network.echonest.EchoNestClient;
 import com.escodro.savel.network.lastfm.LastFmAPI;
 import com.escodro.savel.network.lastfm.LastFmClient;
+import com.escodro.savel.network.musicbrainz.MusicBrainzAPI;
+import com.escodro.savel.network.musicbrainz.MusicBrainzClient;
 import com.escodro.savel.network.spotify.SpotifyAPI;
 import com.escodro.savel.network.spotify.SpotifyClient;
 import com.escodro.savel.requests.RequestManager;
@@ -16,13 +18,16 @@ import com.escodro.savel.requests.RequestManager;
  * <p/>
  * Created by IgorEscodro on 23/05/15.
  */
-public class MusicApp extends Application {
+public class SavelApp extends Application {
 
     /**
      * {@link Context} reference.
      */
     private static Context mContext;
 
+    /**
+     * {@link RequestManager} reference.
+     */
     private static RequestManager mRequestManager;
 
     /**
@@ -41,9 +46,14 @@ public class MusicApp extends Application {
     private static LastFmAPI mLastFmAPI;
 
     /**
-     * Get {@link MusicApp} instance.
+     * {@link MusicBrainzAPI} reference.
+     */
+    private static MusicBrainzAPI mMusicBrainzAPI;
+
+    /**
+     * Get {@link SavelApp} instance.
      *
-     * @return {@link MusicApp} instance
+     * @return {@link SavelApp} instance
      */
     public static Context getContext() {
         return mContext;
@@ -85,6 +95,23 @@ public class MusicApp extends Application {
         return mLastFmAPI;
     }
 
+    /**
+     * Singleton to get {@link MusicBrainzAPI} instance.
+     *
+     * @return {@link LastFmAPI} instance
+     */
+    public static MusicBrainzAPI getMusicBrainzAPI() {
+        if (mMusicBrainzAPI == null) {
+            mMusicBrainzAPI = new MusicBrainzClient().getMusicBrainzAPI();
+        }
+        return mMusicBrainzAPI;
+    }
+
+    /**
+     * Singleton to get {@link RequestManager} instance.
+     *
+     * @return {@link RequestManager} instance
+     */
     public static RequestManager getRequestManager() {
         if (mRequestManager == null) {
             mRequestManager = new RequestManager();

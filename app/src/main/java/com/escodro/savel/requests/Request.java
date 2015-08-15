@@ -101,14 +101,6 @@ public abstract class Request<T> implements CustomCallback.OnFinishListener {
     protected abstract String getRequestId();
 
     /**
-     * Method responsible to set the result in the {@link Data} instance. Each API request is
-     * responsible to do it in this method.
-     *
-     * @param data {@link Data} instance to set the result
-     */
-    protected abstract void setResult(Data data);
-
-    /**
      * Method responsible to handle the RetroFit successfully response.
      *
      * @param t        request response
@@ -122,4 +114,12 @@ public abstract class Request<T> implements CustomCallback.OnFinishListener {
      * @param error {@link RetrofitError} instance
      */
     protected abstract void onRequestFailure(RetrofitError error);
+
+    /**
+     * Method responsible to set the result in the {@link Data} instance. Each API request is
+     * responsible to do it in this method.
+     *
+     * @param data {@link Data} instance to set the result
+     */
+    protected abstract void setResult(Data data);
 }

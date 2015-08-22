@@ -13,7 +13,7 @@ import com.escodro.savel.network.spotify.model.Item;
 public enum Type {
 
     /**
-     * Represent that the {@link Item} type is an Album.
+     * Represent that the {@link Item} type is an Release.
      */
     ALBUM("album"),
 

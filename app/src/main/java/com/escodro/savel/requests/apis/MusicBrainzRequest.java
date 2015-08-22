@@ -1,7 +1,7 @@
 package com.escodro.savel.requests.apis;
 
 import com.escodro.savel.SavelApp;
-import com.escodro.savel.data.Data;
+import com.escodro.savel.model.Artist;
 import com.escodro.savel.network.musicbrainz.MusicBrainzAPI;
 import com.escodro.savel.network.musicbrainz.model.MusicBrainzResponse;
 import com.escodro.savel.requests.CustomCallback;
@@ -58,7 +58,6 @@ public class MusicBrainzRequest extends Request<MusicBrainzResponse> {
     }
 
     @Override
-    protected void setResult(Data data) {
-        data.setMusicBrainzResponse(mResult);
+    protected void setResult(Artist artist) {
     }
 }

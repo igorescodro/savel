@@ -1,7 +1,7 @@
 package com.escodro.savel.requests.apis;
 
 import com.escodro.savel.SavelApp;
-import com.escodro.savel.data.Data;
+import com.escodro.savel.model.Artist;
 import com.escodro.savel.network.lastfm.LastFmAPI;
 import com.escodro.savel.network.lastfm.model.LastFmResponse;
 import com.escodro.savel.network.musicbrainz.MusicBrainzAPI;
@@ -59,7 +59,6 @@ public class LastFmRequest extends Request<LastFmResponse> {
     }
 
     @Override
-    protected void setResult(Data data) {
-        data.setLastFmResponse(mResult);
+    protected void setResult(Artist artist) {
     }
 }

@@ -2,7 +2,7 @@ package com.escodro.savel.requests;
 
 import android.os.AsyncTask;
 
-import com.escodro.savel.data.Data;
+import com.escodro.savel.model.Artist;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,16 +32,16 @@ public class RequestManager {
     private OnRequestFinishListener mListener;
 
     /**
-     * {@link Data} reference to be created with all the responses from the APIs.
+     * {@link Artist} reference to be created with all the responses from the APIs.
      */
-    private Data mData;
+    private Artist mArtist;
 
     /**
      * Create a new instance of {@link RequestManager}.
      */
     public RequestManager() {
         mRequestHashMap = new HashMap<>();
-        mData = new Data();
+        mArtist = new Artist();
     }
 
     /**
@@ -72,12 +72,12 @@ public class RequestManager {
     public interface OnRequestFinishListener {
 
         /**
-         * Method notified with he {@link Data} object created when every {@link Request} in the
+         * Method notified with he {@link Artist} object created when every {@link Request} in the
          * {@link RequestManager} list is finished.
          *
-         * @param data {@link Data} instance
+         * @param artist {@link Artist} instance
          */
-        void onResponseCreated(Data data);
+        void onResponseCreated(Artist artist);
     }
 
     /**
@@ -98,7 +98,7 @@ public class RequestManager {
         protected Void doInBackground(Void... voids) {
             for (Map.Entry<String, Request> entry : mRequestHashMap.entrySet()) {
                 final Request request = mRequestHashMap.get(entry.getKey());
-                request.startRequest(mSemaphore, mData);
+                request.startRequest(mSemaphore, mArtist);
             }
 
             for (int i = 0; i < mRequestHashMap.size(); i++) {
@@ -118,7 +118,7 @@ public class RequestManager {
          */
         @Override
         protected void onPostExecute(Void aVoid) {
-            mListener.onResponseCreated(mData);
+            mListener.onResponseCreated(mArtist);
         }
     }
 }

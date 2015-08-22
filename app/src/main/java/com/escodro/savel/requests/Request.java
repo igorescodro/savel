@@ -1,6 +1,6 @@
 package com.escodro.savel.requests;
 
-import com.escodro.savel.data.Data;
+import com.escodro.savel.model.Artist;
 
 import java.util.concurrent.Semaphore;
 
@@ -20,9 +20,9 @@ public abstract class Request<T> implements CustomCallback.OnFinishListener {
     private Semaphore mSemaphore;
 
     /**
-     * {@link Data} reference to be updated when the request finish.
+     * {@link Artist} reference to be updated when the request finish.
      */
-    private Data mData;
+    private Artist mArtist;
 
     /**
      * {@link RequestState} reference to hold the state.
@@ -56,23 +56,23 @@ public abstract class Request<T> implements CustomCallback.OnFinishListener {
      * Starts the request.
      *
      * @param semaphore {@link Semaphore} reference to handle the permit
-     * @param data      {@link Data} to be updated after the request data
+     * @param artist      {@link Artist} to be updated after the request artist
      */
-    public void startRequest(Semaphore semaphore, Data data) {
+    public void startRequest(Semaphore semaphore, Artist artist) {
         mSemaphore = semaphore;
-        mData = data;
+        mArtist = artist;
         onCreateRequest(mCallback);
         mState = RequestState.STARTED;
     }
 
     /**
      * When the {@link Request} finishes, it releases the {@link Semaphore} permit and set the
-     * result in {@link Data} instance.
+     * result in {@link Artist} instance.
      */
     @Override
     public void onFinish() {
         mState = RequestState.FINISHED;
-        setResult(mData);
+        setResult(mArtist);
         mSemaphore.release();
     }
 
@@ -116,10 +116,10 @@ public abstract class Request<T> implements CustomCallback.OnFinishListener {
     protected abstract void onRequestFailure(RetrofitError error);
 
     /**
-     * Method responsible to set the result in the {@link Data} instance. Each API request is
+     * Method responsible to set the result in the {@link Artist} instance. Each API request is
      * responsible to do it in this method.
      *
-     * @param data {@link Data} instance to set the result
+     * @param artist {@link Artist} instance to set the result
      */
-    protected abstract void setResult(Data data);
+    protected abstract void setResult(Artist artist);
 }

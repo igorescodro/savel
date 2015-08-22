@@ -1,6 +1,7 @@
-package com.escodro.savel.data;
+package com.escodro.savel.factory;
 
 import com.escodro.savel.SavelApp;
+import com.escodro.savel.model.Artist;
 import com.escodro.savel.network.echonest.EchoNestAPI;
 import com.escodro.savel.network.echonest.model.EchoNestResponse;
 import com.escodro.savel.network.musicbrainz.MusicBrainzAPI;
@@ -14,13 +15,13 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Class responsible to create a {@link Data} object. Because of the creation of the object is not
+ * Class responsible to create a {@link Artist} object. Because of the creation of the object is not
  * synchronous due dependence of the server response, it notifies the {@link
  * RequestManager.OnRequestFinishListener} with the object created when everything is finished.
  * <p/>
  * Created by IgorEscodro on 03/07/15.
  */
-public class DataFactory {
+public class ArtistFactory {
 
     /**
      * Constant do represent the {@link SpotifyAPI} prefix to be used in the {@link EchoNestAPI}
@@ -39,7 +40,7 @@ public class DataFactory {
     private RequestManager.OnRequestFinishListener mListener;
 
     /**
-     * Request the creation of a {@link Data} object. When it is created, the listener will be
+     * Request the creation of a {@link Artist} object. When it is created, the listener will be
      * notified.
      *
      * @param spotifyId {@link SpotifyAPI} unique id

@@ -7,7 +7,7 @@ import timber.log.Timber.DebugTree;
 
 /**
  * Savel {@link Application} class.
- * <p>
+ * <p/>
  * Created by Igor Escodro on 17/04/17.
  */
 

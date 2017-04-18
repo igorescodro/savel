@@ -11,6 +11,15 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/application.name"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name="com.escodro.savel.ui.activity.ArtistActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

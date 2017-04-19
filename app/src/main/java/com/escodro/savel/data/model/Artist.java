@@ -1,30 +1,26 @@
 package com.escodro.savel.data.model;
 
+import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
+
 /**
  * Object containing the consolidated information about the artist.
  * <p/>
  * Created by Igor Escodro on 17/04/17.
  */
-
 public class Artist {
 
-    private String mName;
+    private MusicBrainzArtist mMusicBrainzArtist;
 
-    private String mBio;
-
-    public String getName() {
-        return mName;
+    public Artist(MusicBrainzArtist musicBrainzArtist) {
+        mMusicBrainzArtist = musicBrainzArtist;
     }
 
-    public void setName(String name) {
-        mName = name;
+    public String getName() {
+        return mMusicBrainzArtist.getName();
     }
 
     public String getBio() {
-        return mBio;
+        return mMusicBrainzArtist.getCountry();
     }
 
-    public void setBio(String bio) {
-        mBio = bio;
-    }
 }

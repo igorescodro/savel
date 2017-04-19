@@ -16,14 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{viewModel.name}"
+            android:text="@{viewModel.artist.name}"
             android:textSize="@dimen/font_huge"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{viewModel.bio}"
+            android:text="@{viewModel.artist.bio}"
             android:textSize="@dimen/font_normal"/>
 
     </LinearLayout>

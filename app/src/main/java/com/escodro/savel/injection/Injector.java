@@ -4,6 +4,9 @@ import com.escodro.savel.SavelApplication;
 import com.escodro.savel.injection.component.ApplicationComponent;
 import com.escodro.savel.injection.component.DaggerApplicationComponent;
 import com.escodro.savel.injection.module.ApplicationModule;
+import com.escodro.savel.injection.module.GsonModule;
+import com.escodro.savel.injection.module.NetworkModule;
+import com.escodro.savel.injection.module.OkHttpInterceptorModule;
 
 import java.util.Objects;
 
@@ -32,6 +35,9 @@ public class Injector {
     public static void initializeApplicationComponent(SavelApplication app) {
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(app))
+                .gsonModule(new GsonModule())
+                .networkModule(new NetworkModule())
+                .okHttpInterceptorModule(new OkHttpInterceptorModule())
                 .build();
     }
 

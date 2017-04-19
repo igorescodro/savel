@@ -25,6 +25,9 @@ android {
         }
     }
     buildTypes {
+        all {
+            buildConfigField 'String', 'API_MUSICBRAINZ_ENDPOINT', "\"http://musicbrainz.org/ws/2/\""
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

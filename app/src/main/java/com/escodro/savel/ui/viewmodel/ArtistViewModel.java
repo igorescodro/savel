@@ -3,7 +3,7 @@ package com.escodro.savel.ui.viewmodel;
 import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
 
-import com.escodro.savel.data.local.ArtistContract;
+import com.escodro.savel.data.local.contract.ArtistContract;
 import com.escodro.savel.data.model.Artist;
 
 import javax.inject.Inject;
@@ -38,7 +38,7 @@ public class ArtistViewModel extends BaseObservable {
      * {@link com.escodro.savel.data.remote.service.MusicBrainzService}
      * id.
      *
-     * @param artistId artist mbid
+     * @param artistId artist MBID
      */
     public void loadData(String artistId) {
         final Observable<Artist> artistObservable = mContract.getArtist(artistId);
@@ -52,5 +52,20 @@ public class ArtistViewModel extends BaseObservable {
 
     public Artist getArtist() {
         return mArtist.get();
+    }
+
+    /**
+     * Method to expose the {@link Artist#getImage()} method to the view, once Android Data Binding
+     * does not work very well with {@link android.databinding.BindingAdapter}s.
+     *
+     * @return image url from Artist object
+     */
+    public String getImageUrl() {
+        String result = null;
+        final Artist artist = mArtist.get();
+        if (artist != null) {
+            result = artist.getImage();
+        }
+        return result;
     }
 }

@@ -1,7 +1,9 @@
 package com.escodro.savel.data.local.repository;
 
 import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.remote.repository.DiscogsRepository;
 import com.escodro.savel.data.remote.repository.MusicBrainzRepository;
+import com.escodro.savel.util.UrlParser;
 
 import javax.inject.Inject;
 
@@ -18,17 +20,23 @@ public class SavelRepository {
     MusicBrainzRepository mMusicBrainzRepository;
 
     @Inject
+    DiscogsRepository mDiscogsRepository;
+
+    @Inject
     public SavelRepository() {
     }
 
     /**
      * Get the wrapped {@link Artist} from every music service.
      *
-     * @param artistId artist mbid
+     * @param artistId artist MBID
      * @return artist wrapper
      */
     public Observable<Artist> getArtist(String artistId) {
-        return mMusicBrainzRepository.getArtistInfo(artistId).map(
-                Artist::new);
+        return mMusicBrainzRepository.getArtistInfo(artistId).
+                flatMap(result -> Observable.zip(
+                        Observable.just(result),
+                        mDiscogsRepository.getArtist(UrlParser.getDiscogsId(result.getRelations())),
+                        Artist::new));
     }
 }

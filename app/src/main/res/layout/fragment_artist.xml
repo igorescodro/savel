@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -7,25 +8,36 @@
             type="com.escodro.savel.ui.viewmodel.ArtistViewModel"/>
     </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@{viewModel.artist.name}"
-            android:textSize="@dimen/font_huge"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@{viewModel.artist.bio}"
-            android:textSize="@dimen/font_normal"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:image="@{viewModel.getImageUrl()}"/>
 
-    </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{viewModel.artist.name}"
+                android:textSize="@dimen/font_huge"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{viewModel.artist.bio}"
+                android:textSize="@dimen/font_normal"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </layout>

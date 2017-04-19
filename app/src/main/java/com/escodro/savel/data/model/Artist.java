@@ -1,5 +1,6 @@
 package com.escodro.savel.data.model;
 
+import com.escodro.savel.data.model.discogs.DiscogsArtist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 
 /**
@@ -11,8 +12,11 @@ public class Artist {
 
     private MusicBrainzArtist mMusicBrainzArtist;
 
-    public Artist(MusicBrainzArtist musicBrainzArtist) {
+    private DiscogsArtist mDiscogsArtist;
+
+    public Artist(MusicBrainzArtist musicBrainzArtist, DiscogsArtist discogsArtist) {
         mMusicBrainzArtist = musicBrainzArtist;
+        mDiscogsArtist = discogsArtist;
     }
 
     public String getName() {
@@ -20,7 +24,10 @@ public class Artist {
     }
 
     public String getBio() {
-        return mMusicBrainzArtist.getCountry();
+        return mDiscogsArtist.getProfile();
     }
 
+    public String getImage() {
+        return mDiscogsArtist.getImages().get(0).getResourceUrl();
+    }
 }

@@ -2,6 +2,7 @@ package com.escodro.savel.data.remote.repository;
 
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.remote.service.MusicBrainzService;
+import com.escodro.savel.injection.qualifier.MusicBrainz;
 
 import javax.inject.Inject;
 
@@ -18,14 +19,14 @@ public class MusicBrainzRepository {
     private final MusicBrainzService mService;
 
     @Inject
-    public MusicBrainzRepository(Retrofit retrofit) {
+    public MusicBrainzRepository(@MusicBrainz Retrofit retrofit) {
         mService = retrofit.create(MusicBrainzService.class);
     }
 
     /**
      * Get a {@link MusicBrainzArtist} entity from {@link MusicBrainzService} server.
      *
-     * @param artistId artist mbid
+     * @param artistId artist MBID
      * @return observable of MusicBrainz Artist entity
      */
     public Observable<MusicBrainzArtist> getArtistInfo(String artistId) {

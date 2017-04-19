@@ -1,4 +1,4 @@
-package com.escodro.savel.data.local;
+package com.escodro.savel.data.local.contract;
 
 import com.escodro.savel.data.local.repository.SavelRepository;
 import com.escodro.savel.data.model.Artist;
@@ -26,7 +26,7 @@ public class ArtistContract extends BaseContract {
      * Get the artist from the {@link SavelRepository} and apply the {@link
      * io.reactivex.Scheduler}s.
      *
-     * @param artistId artist mbid
+     * @param artistId artist MBID
      * @return observable of artist
      */
     public Observable<Artist> getArtist(String artistId) {

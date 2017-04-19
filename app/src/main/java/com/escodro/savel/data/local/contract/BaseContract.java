@@ -1,4 +1,4 @@
-package com.escodro.savel.data.local;
+package com.escodro.savel.data.local.contract;
 
 import io.reactivex.ObservableTransformer;
 import io.reactivex.Scheduler;

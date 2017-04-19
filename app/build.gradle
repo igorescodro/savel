@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -27,6 +31,9 @@ android {
     buildTypes {
         all {
             buildConfigField 'String', 'API_MUSICBRAINZ_ENDPOINT', "\"http://musicbrainz.org/ws/2/\""
+            buildConfigField 'String', 'API_DISCOGS_ENDPOINT', "\"https://api.discogs.com/\""
+
+            buildConfigField 'String', 'KEY_DISCOGS_API', keystoreProperties['DiscogsApiKey']
         }
         release {
             minifyEnabled false

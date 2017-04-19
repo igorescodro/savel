@@ -2,6 +2,10 @@ package com.escodro.savel.injection.module;
 
 import android.support.annotation.NonNull;
 
+import com.escodro.savel.BuildConfig;
+import com.escodro.savel.injection.qualifier.Discogs;
+import com.escodro.savel.injection.qualifier.MusicBrainz;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,10 +38,11 @@ public class OkHttpInterceptorModule {
         return interceptor;
     }
 
+    @MusicBrainz
     @Provides
     @Singleton
     @NonNull
-    public Interceptor provideMusicBrainzInteceptor() {
+    public Interceptor provideMusicBrainzInterceptor() {
         return chain -> {
             Request request = chain.request();
             final HttpUrl url = request.url().newBuilder().addQueryParameter("fmt", "json").build();
@@ -46,11 +51,35 @@ public class OkHttpInterceptorModule {
         };
     }
 
+    @MusicBrainz
     @Provides
     @Singleton
     @NonNull
     public List<Interceptor> provideMusicBrainzInterceptors(
-            @NonNull HttpLoggingInterceptor logInterceptor, @NonNull Interceptor interceptor) {
+            @NonNull HttpLoggingInterceptor logInterceptor,
+            @MusicBrainz @NonNull Interceptor interceptor) {
+        return Arrays.asList(logInterceptor, interceptor);
+    }
+
+    @Discogs
+    @Provides
+    @Singleton
+    @NonNull
+    public Interceptor provideDiscogsInterceptor() {
+        return chain -> {
+            final Request request = chain.request().newBuilder().addHeader("Authorization",
+                    "Discogs token=" + BuildConfig.KEY_DISCOGS_API).build();
+            return chain.proceed(request);
+        };
+    }
+
+    @Discogs
+    @Provides
+    @Singleton
+    @NonNull
+    public List<Interceptor> provideDiscogsInterceptors(
+            @NonNull HttpLoggingInterceptor logInterceptor,
+            @Discogs @NonNull Interceptor interceptor) {
         return Arrays.asList(logInterceptor, interceptor);
     }
 }

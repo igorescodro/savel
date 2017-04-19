@@ -2,7 +2,7 @@
 Sävel is a an open source application for music lovers.<br>
 It aggregates several music services to bring all information in one place.
 
-#License
+# License
     Copyright 2015 Igor Escodro
     
     Licensed under the Apache License, Version 2.0 (the "License");

@@ -2,6 +2,7 @@ package com.escodro.savel.ui.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
+import android.view.View;
 
 import com.escodro.savel.data.local.contract.ArtistContract;
 import com.escodro.savel.data.model.Artist;
@@ -20,10 +21,22 @@ import timber.log.Timber;
 
 public class ArtistViewModel extends BaseObservable {
 
+    /**
+     * {@link ObservableField} to represent if the network error screen should be show.
+     * <h1>This attribute must only be used to Data Binding.</h1>
+     */
+    public final ObservableField<Integer> networkErrorVisibility;
+
+    /**
+     * {@link ObservableField} to represent the {@link Artist}.
+     * <h1>This attribute must only be used to Data Binding.</h1>
+     */
+    public final ObservableField<Artist> artist;
+
     @Inject
     ArtistContract mContract;
 
-    private final ObservableField<Artist> mArtist;
+    private String mArtistRequestId;
 
     /**
      * Default injectable constructor to be used in
@@ -31,7 +44,8 @@ public class ArtistViewModel extends BaseObservable {
      */
     @Inject
     public ArtistViewModel() {
-        mArtist = new ObservableField<>();
+        artist = new ObservableField<>();
+        networkErrorVisibility = new ObservableField<>(View.INVISIBLE);
     }
 
     /**
@@ -42,19 +56,21 @@ public class ArtistViewModel extends BaseObservable {
      * @param artistId artist MBID
      */
     public void loadData(String artistId) {
+        networkErrorVisibility.set(View.INVISIBLE);
+        mArtistRequestId = artistId;
         final Observable<Artist> artistObservable = mContract.getArtist(artistId);
-        artistObservable.subscribe(
-                this::setArtist,
-                throwable -> Timber.e(throwable.getMessage(), throwable));
+        artistObservable.subscribe(this::setArtist, this::handleError);
     }
 
-    private void setArtist(Artist artist) {
-        mArtist.set(artist);
+    private void setArtist(Artist value) {
+        networkErrorVisibility.set(View.INVISIBLE);
+        artist.set(value);
         notifyChange();
     }
 
-    public Artist getArtist() {
-        return mArtist.get();
+    private void handleError(Throwable throwable) {
+        networkErrorVisibility.set(View.VISIBLE);
+        Timber.e(throwable.getMessage(), throwable);
     }
 
     /**
@@ -65,10 +81,20 @@ public class ArtistViewModel extends BaseObservable {
      */
     public String getImageUrl() {
         String result = null;
-        final Artist artist = mArtist.get();
-        if (artist != null) {
-            result = artist.getImage();
+        final Artist temp = artist.get();
+        if (temp != null) {
+            result = temp.getImage();
         }
         return result;
+    }
+
+    /**
+     * Returns the default action when user clicks in the "Retry" button after showing network
+     * error screen.
+     *
+     * @return onClickListener to reload artist
+     */
+    public View.OnClickListener getRetryClickListener() {
+        return view -> loadData(mArtistRequestId);
     }
 }

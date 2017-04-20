@@ -1,3 +1,8 @@
 <resources>
-  <string name="application.name">Sävel</string>
+    <string name="application.name">Sävel</string>
+
+    <string name="network.error.title">Network error</string>
+    <string name="network.error.connection.failure">Please check your internet connection and try again</string>
+    <string name="network.error.retry">Retry</string>
+
 </resources>

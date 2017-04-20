@@ -9,6 +9,7 @@ import com.escodro.savel.data.model.Artist;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 /**
  * ViewModel responsible to provide {@link Artist} information to {@link
@@ -42,7 +43,9 @@ public class ArtistViewModel extends BaseObservable {
      */
     public void loadData(String artistId) {
         final Observable<Artist> artistObservable = mContract.getArtist(artistId);
-        artistObservable.subscribe(this::setArtist);
+        artistObservable.subscribe(
+                this::setArtist,
+                throwable -> Timber.e(throwable.getMessage(), throwable));
     }
 
     private void setArtist(Artist artist) {

@@ -28,6 +28,12 @@ public class ArtistViewModel extends BaseObservable {
     public final ObservableField<Integer> networkErrorVisibility;
 
     /**
+     * {@link ObservableField} to represent if the loading screen should be show.
+     * <h1>This attribute must only be used to Data Binding.</h1>
+     */
+    public final ObservableField<Integer> loadingVisibility;
+
+    /**
      * {@link ObservableField} to represent the {@link Artist}.
      * <h1>This attribute must only be used to Data Binding.</h1>
      */
@@ -46,6 +52,7 @@ public class ArtistViewModel extends BaseObservable {
     public ArtistViewModel() {
         artist = new ObservableField<>();
         networkErrorVisibility = new ObservableField<>(View.INVISIBLE);
+        loadingVisibility = new ObservableField<>(View.INVISIBLE);
     }
 
     /**
@@ -56,6 +63,7 @@ public class ArtistViewModel extends BaseObservable {
      * @param artistId artist MBID
      */
     public void loadData(String artistId) {
+        loadingVisibility.set(View.VISIBLE);
         networkErrorVisibility.set(View.INVISIBLE);
         mArtistRequestId = artistId;
         final Observable<Artist> artistObservable = mContract.getArtist(artistId);
@@ -63,12 +71,14 @@ public class ArtistViewModel extends BaseObservable {
     }
 
     private void setArtist(Artist value) {
+        loadingVisibility.set(View.INVISIBLE);
         networkErrorVisibility.set(View.INVISIBLE);
         artist.set(value);
         notifyChange();
     }
 
     private void handleError(Throwable throwable) {
+        loadingVisibility.set(View.INVISIBLE);
         networkErrorVisibility.set(View.VISIBLE);
         Timber.e(throwable.getMessage(), throwable);
     }

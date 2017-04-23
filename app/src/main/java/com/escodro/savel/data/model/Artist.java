@@ -1,5 +1,7 @@
 package com.escodro.savel.data.model;
 
+import android.support.annotation.Nullable;
+
 import com.escodro.savel.data.model.discogs.DiscogsArtist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 
@@ -19,15 +21,34 @@ public class Artist {
         mDiscogsArtist = discogsArtist;
     }
 
+    public Artist(MusicBrainzArtist musicBrainzArtist) {
+        mMusicBrainzArtist = musicBrainzArtist;
+    }
+
+    @Nullable
     public String getName() {
-        return mMusicBrainzArtist.getName();
+        String name = null;
+        if (mMusicBrainzArtist != null) {
+            name = mMusicBrainzArtist.getName();
+        }
+        return name;
     }
 
+    @Nullable
     public String getBio() {
-        return mDiscogsArtist.getProfile();
+        String bio = null;
+        if (mDiscogsArtist != null) {
+            bio = mDiscogsArtist.getProfile();
+        }
+        return bio;
     }
 
+    @Nullable
     public String getImage() {
-        return mDiscogsArtist.getImages().get(0).getResourceUrl();
+        String image = null;
+        if (mDiscogsArtist != null && mDiscogsArtist.getImages() != null) {
+            image = mDiscogsArtist.getImages().get(0).getResourceUrl();
+        }
+        return image;
     }
 }

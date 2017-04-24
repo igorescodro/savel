@@ -26,6 +26,15 @@ public class Artist {
     }
 
     @Nullable
+    public String getId() {
+        String id = null;
+        if (mMusicBrainzArtist != null) {
+            id = mMusicBrainzArtist.getId();
+        }
+        return id;
+    }
+
+    @Nullable
     public String getName() {
         String name = null;
         if (mMusicBrainzArtist != null) {

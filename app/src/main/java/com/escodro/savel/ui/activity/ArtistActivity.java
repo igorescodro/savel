@@ -19,6 +19,8 @@ import javax.inject.Inject;
 
 public class ArtistActivity extends AppCompatActivity {
 
+    public static final String EXTRA_ARTIST_ID = "artist_id";
+
     @Inject
     ArtistFragment mArtistFragment;
 
@@ -27,10 +29,18 @@ public class ArtistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist);
         Injector.getApplicationComponent().inject(this);
-        addArtistFragment();
+
+        final Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            addArtistFragment(bundle.getString(EXTRA_ARTIST_ID));
+        }
     }
 
-    private void addArtistFragment() {
+    private void addArtistFragment(String artistId) {
+        final Bundle bundle = new Bundle();
+        bundle.putString(EXTRA_ARTIST_ID, artistId);
+        mArtistFragment.setArguments(bundle);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fl_container, mArtistFragment)

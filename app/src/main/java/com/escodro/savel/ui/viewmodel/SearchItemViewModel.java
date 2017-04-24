@@ -1,8 +1,12 @@
 package com.escodro.savel.ui.viewmodel;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.ui.activity.ArtistActivity;
 
 import javax.inject.Inject;
 
@@ -18,6 +22,9 @@ public class SearchItemViewModel {
     private Artist mArtist;
 
     @Inject
+    Context mContext;
+
+    @Inject
     public SearchItemViewModel() {
     }
 
@@ -27,5 +34,13 @@ public class SearchItemViewModel {
 
     public String getName() {
         return mArtist.getName();
+    }
+
+    public View.OnClickListener onItemClick() {
+        return view -> {
+            final Intent intent = new Intent(mContext, ArtistActivity.class);
+            intent.putExtra(ArtistActivity.EXTRA_ARTIST_ID, mArtist.getId());
+            mContext.startActivity(intent);
+        };
     }
 }

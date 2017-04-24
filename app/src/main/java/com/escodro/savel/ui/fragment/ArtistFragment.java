@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.escodro.savel.R;
 import com.escodro.savel.databinding.FragmentArtistBinding;
+import com.escodro.savel.ui.activity.ArtistActivity;
 import com.escodro.savel.ui.viewmodel.ArtistViewModel;
 
 import javax.inject.Inject;
@@ -22,6 +23,8 @@ import javax.inject.Inject;
 
 public class ArtistFragment extends Fragment {
 
+    private String mArtistId;
+
     @Inject
     ArtistViewModel mArtistViewModel;
 
@@ -32,15 +35,25 @@ public class ArtistFragment extends Fragment {
     public ArtistFragment() {
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        final Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            mArtistId = bundle.getString(ArtistActivity.EXTRA_ARTIST_ID, null);
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
 
         final FragmentArtistBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_artist, container, false);
         binding.setViewModel(mArtistViewModel);
-        mArtistViewModel.loadData("b7539c32-53e7-4908-bda3-81449c367da6");
+        mArtistViewModel.loadData(mArtistId);
         return binding.getRoot();
     }
 }

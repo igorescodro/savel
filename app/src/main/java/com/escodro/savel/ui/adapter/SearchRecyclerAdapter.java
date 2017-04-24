@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.escodro.savel.R;
 import com.escodro.savel.data.model.Artist;
 import com.escodro.savel.databinding.ItemArtistSearchBinding;
-import com.escodro.savel.ui.viewholder.SearchBindingHolder;
+import com.escodro.savel.util.viewholder.BindingHolder;
 import com.escodro.savel.ui.viewmodel.SearchItemViewModel;
 
 import java.util.ArrayList;
@@ -23,7 +23,8 @@ import javax.inject.Inject;
  * <p/>
  * Created by Igor Escodro on 24/04/17.
  */
-public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchBindingHolder> {
+public class SearchRecyclerAdapter extends
+        RecyclerView.Adapter<BindingHolder<ItemArtistSearchBinding>> {
 
     private final List<Artist> mArtistList;
 
@@ -39,18 +40,19 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchBindingHol
     }
 
     @Override
-    public SearchBindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BindingHolder<ItemArtistSearchBinding> onCreateViewHolder(ViewGroup parent,
+                                                                     int viewType) {
         final ItemArtistSearchBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(mContext),
                 R.layout.item_artist_search,
                 parent,
                 false);
 
-        return new SearchBindingHolder(binding);
+        return new BindingHolder<>(binding);
     }
 
     @Override
-    public void onBindViewHolder(SearchBindingHolder holder, int position) {
+    public void onBindViewHolder(BindingHolder<ItemArtistSearchBinding> holder, int position) {
         final ItemArtistSearchBinding binding = holder.binding;
         binding.setViewModel(mViewModel);
         mViewModel.setArtist(mArtistList.get(position));

@@ -7,8 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.escodro.savel.data.local.contract.SearchContract;
+import com.escodro.savel.databinding.ItemArtistSearchBinding;
 import com.escodro.savel.ui.adapter.SearchRecyclerAdapter;
-import com.escodro.savel.ui.viewholder.SearchBindingHolder;
+import com.escodro.savel.util.viewholder.BindingHolder;
 
 import javax.inject.Inject;
 
@@ -46,7 +47,7 @@ public class SearchViewModel {
         return view -> searchAndUpdateList(mQuery.get());
     }
 
-    public RecyclerView.Adapter<SearchBindingHolder> getRecyclerViewAdapter() {
+    public RecyclerView.Adapter<BindingHolder<ItemArtistSearchBinding>> getRecyclerViewAdapter() {
         return mAdapter;
     }
 

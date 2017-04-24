@@ -3,8 +3,6 @@ package com.escodro.savel.data.local.contract;
 import com.escodro.savel.data.local.repository.SavelRepository;
 import com.escodro.savel.data.model.Artist;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -34,17 +32,5 @@ public class ArtistContract extends BaseContract {
      */
     public Observable<Artist> getArtist(String artistId) {
         return mSavelRepository.getArtist(artistId).compose(applySchedulers());
-    }
-
-    /**
-     * Search the artist from the {@link SavelRepository} and apply the {@link
-     * io.reactivex.Scheduler}s.
-     *
-     * @param artistName artist name
-     *
-     * @return observable of artist list
-     */
-    public Observable<List<Artist>> searchArtist(String artistName) {
-        return mSavelRepository.searchArtist(artistName).compose(applySchedulers());
     }
 }

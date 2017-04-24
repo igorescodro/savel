@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.escodro.savel.ui.viewmodel.SearchViewModel"/>
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="24dp"
+            android:layout_toStartOf="@+id/bt_search"
+            android:text="@={viewModel.mQuery}"/>
+
+        <Button
+            android:id="@+id/bt_search"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="24dp"
+            android:onClick="@{viewModel.searchClickListener}"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/bt_search"
+            bind:adapter="@{viewModel.recyclerViewAdapter}"
+            bind:item_decoration="@{viewModel.itemDecoration}"
+            bind:layout_manager="@{viewModel.linearLayoutManager}"/>
+
+    </RelativeLayout>
+
+</layout>

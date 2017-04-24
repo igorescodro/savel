@@ -2,6 +2,8 @@ package com.escodro.savel.injection.module;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.escodro.savel.SavelApplication;
 
@@ -34,5 +36,18 @@ public class ApplicationModule {
     @Singleton
     public Context provideContext() {
         return mApplication.getApplicationContext();
+    }
+
+    @Provides
+    @Singleton
+    public LinearLayoutManager provideLinearLayoutManager(Context context) {
+        return new LinearLayoutManager(context);
+    }
+
+    @Provides
+    @Singleton
+    public DividerItemDecoration provideDividerItemDecoration(Context context,
+                                                              LinearLayoutManager layoutManager) {
+        return new DividerItemDecoration(context, layoutManager.getOrientation());
     }
 }

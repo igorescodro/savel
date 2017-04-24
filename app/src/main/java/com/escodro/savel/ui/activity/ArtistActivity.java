@@ -11,8 +11,8 @@ import com.escodro.savel.ui.fragment.ArtistFragment;
 import javax.inject.Inject;
 
 /**
- * {@link AppCompatActivity} with the flow to search and display information about {@link
- * com.escodro.savel.data.model.Artist}.
+ * {@link AppCompatActivity} with the display information about
+ * {@link com.escodro.savel.data.model.Artist}.
  * <p/>
  * Created by Igor Escodro on 17/04/17.
  */

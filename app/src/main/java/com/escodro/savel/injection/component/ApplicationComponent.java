@@ -6,6 +6,7 @@ import com.escodro.savel.injection.module.GsonModule;
 import com.escodro.savel.injection.module.NetworkModule;
 import com.escodro.savel.injection.module.OkHttpInterceptorModule;
 import com.escodro.savel.ui.activity.ArtistActivity;
+import com.escodro.savel.ui.activity.SearchActivity;
 
 import javax.inject.Singleton;
 
@@ -27,4 +28,6 @@ public interface ApplicationComponent {
     void inject(SavelApplication savelApplication);
 
     void inject(ArtistActivity artistActivity);
+
+    void inject(SearchActivity searchActivity);
 }

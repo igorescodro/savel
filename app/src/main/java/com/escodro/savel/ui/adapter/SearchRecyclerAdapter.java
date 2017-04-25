@@ -9,13 +9,14 @@ import android.view.ViewGroup;
 import com.escodro.savel.R;
 import com.escodro.savel.data.model.Artist;
 import com.escodro.savel.databinding.ItemArtistSearchBinding;
-import com.escodro.savel.util.viewholder.BindingHolder;
 import com.escodro.savel.ui.viewmodel.SearchItemViewModel;
+import com.escodro.savel.util.viewholder.BindingHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * {@link RecyclerView.Adapter} to handle the data on
@@ -31,8 +32,11 @@ public class SearchRecyclerAdapter extends
     @Inject
     Context mContext;
 
+    /**
+     * {@link Provider} of {@link SearchItemViewModel} to return new instances for each row.
+     */
     @Inject
-    SearchItemViewModel mViewModel;
+    Provider<SearchItemViewModel> mViewModelProvider;
 
     @Inject
     public SearchRecyclerAdapter() {
@@ -54,8 +58,9 @@ public class SearchRecyclerAdapter extends
     @Override
     public void onBindViewHolder(BindingHolder<ItemArtistSearchBinding> holder, int position) {
         final ItemArtistSearchBinding binding = holder.binding;
-        binding.setViewModel(mViewModel);
-        mViewModel.setArtist(mArtistList.get(position));
+        final SearchItemViewModel viewModel = mViewModelProvider.get();
+        binding.setViewModel(viewModel);
+        viewModel.setArtist(mArtistList.get(position));
     }
 
     @Override

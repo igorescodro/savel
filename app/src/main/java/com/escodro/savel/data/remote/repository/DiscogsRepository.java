@@ -24,12 +24,14 @@ public class DiscogsRepository {
     }
 
     /**
-     * Get a {@link DiscogsArtist} entity from {@link DiscogsService} server.
+     * Get a {@link DiscogsArtist} entity from {@link DiscogsService} server. If an error occurs
+     * during the request, a new empty {@link DiscogsArtist} will be returned.
      *
      * @param artistId artist Discogs id
+     *
      * @return observable of Discogs Artist entity
      */
     public Observable<DiscogsArtist> getArtist(String artistId) {
-        return mService.getArtist(artistId);
+        return mService.getArtist(artistId).onErrorReturnItem(new DiscogsArtist());
     }
 }

@@ -38,8 +38,8 @@ public class SavelRepository {
      * @return artist wrapper
      */
     public Observable<Artist> getArtist(String artistId) {
-        return mMusicBrainzRepository.getArtistInfo(artistId).
-                flatMap(result -> Observable.zip(
+        return mMusicBrainzRepository.getArtistInfo(artistId)
+                .flatMap(result -> Observable.zip(
                         Observable.just(result),
                         mDiscogsRepository.getArtist(UrlParser.getDiscogsId(result.getRelations())),
                         Artist::new));

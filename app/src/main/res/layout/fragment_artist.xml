@@ -28,7 +28,7 @@
             android:id="@+id/iv_artist_picture"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:image="@{viewModel.getImageUrl()}"/>
+            app:image="@{viewModel.artist.image}"/>
 
         <TextView
             android:id="@+id/tv_artist_name"

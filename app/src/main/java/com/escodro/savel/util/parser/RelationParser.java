@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import dagger.Reusable;
 import timber.log.Timber;
 
 /**
@@ -20,7 +19,6 @@ import timber.log.Timber;
  * <p>
  * Created by Igor Escodro on 26/04/17.
  */
-@Reusable
 public class RelationParser {
 
     /**

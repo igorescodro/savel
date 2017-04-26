@@ -84,21 +84,6 @@ public class ArtistViewModel extends BaseObservable {
     }
 
     /**
-     * Method to expose the {@link Artist#getImage()} method to the view, once Android Data Binding
-     * does not work very well with {@link android.databinding.BindingAdapter}s.
-     *
-     * @return image url from Artist object
-     */
-    public String getImageUrl() {
-        String result = null;
-        final Artist temp = artist.get();
-        if (temp != null) {
-            result = temp.getImage();
-        }
-        return result;
-    }
-
-    /**
      * Returns the default action when user clicks in the "Retry" button after showing network
      * error screen.
      *

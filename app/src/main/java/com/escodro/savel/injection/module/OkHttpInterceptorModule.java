@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.escodro.savel.BuildConfig;
 import com.escodro.savel.injection.qualifier.Discogs;
 import com.escodro.savel.injection.qualifier.MusicBrainz;
+import com.escodro.savel.injection.qualifier.Twitter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -80,6 +81,36 @@ public class OkHttpInterceptorModule {
     public List<Interceptor> provideDiscogsInterceptors(
             @NonNull HttpLoggingInterceptor logInterceptor,
             @Discogs @NonNull Interceptor interceptor) {
+        return Arrays.asList(logInterceptor, interceptor);
+    }
+
+    @Twitter
+    @Provides
+    @Singleton
+    @NonNull
+    public Interceptor provideTwitterInterceptor() {
+        return chain -> {
+            Request request = chain.request();
+            final HttpUrl url = request.url().newBuilder()
+                    .addQueryParameter("exclude_replies", "true")
+                    .build();
+
+            request = request.newBuilder()
+                    .addHeader("Authorization",
+                            "Bearer " + BuildConfig.KEY_TWITTER_API)
+                    .url(url)
+                    .build();
+            return chain.proceed(request);
+        };
+    }
+
+    @Twitter
+    @Provides
+    @Singleton
+    @NonNull
+    public List<Interceptor> provideTwitterInterceptors(
+            @NonNull HttpLoggingInterceptor logInterceptor,
+            @Twitter @NonNull Interceptor interceptor) {
         return Arrays.asList(logInterceptor, interceptor);
     }
 }

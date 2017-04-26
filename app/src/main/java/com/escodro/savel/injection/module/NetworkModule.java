@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import com.escodro.savel.BuildConfig;
 import com.escodro.savel.injection.qualifier.Discogs;
 import com.escodro.savel.injection.qualifier.MusicBrainz;
+import com.escodro.savel.injection.qualifier.Twitter;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -40,8 +41,9 @@ public class NetworkModule {
     @Provides
     @Singleton
     public OkHttpClient provideMusicBrainzClient(Context app,
-            @MusicBrainz @NonNull List<Interceptor> interceptors) {
-        final File cacheDir = new File(app.getCacheDir(), "mbcache");
+                                                 @MusicBrainz @NonNull List<Interceptor>
+                                                         interceptors) {
+        final File cacheDir = new File(app.getCacheDir(), "musicbrainz");
         final Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
         final OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
 
@@ -59,7 +61,7 @@ public class NetworkModule {
     @Provides
     @Singleton
     public Retrofit provideMusicBrainzApi(@MusicBrainz @NonNull OkHttpClient okHttpClient,
-            @NonNull Gson gson) {
+                                          @NonNull Gson gson) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_MUSICBRAINZ_ENDPOINT)
                 .client(okHttpClient)
@@ -72,8 +74,8 @@ public class NetworkModule {
     @Provides
     @Singleton
     public OkHttpClient provideDiscogsClient(Context app,
-            @Discogs @NonNull List<Interceptor> interceptors) {
-        final File cacheDir = new File(app.getCacheDir(), "dscache");
+                                             @Discogs @NonNull List<Interceptor> interceptors) {
+        final File cacheDir = new File(app.getCacheDir(), "discogs");
         final Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
         final OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
 
@@ -91,9 +93,41 @@ public class NetworkModule {
     @Provides
     @Singleton
     public Retrofit provideDiscogsApi(@Discogs @NonNull OkHttpClient okHttpClient,
-            @NonNull Gson gson) {
+                                      @NonNull Gson gson) {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_DISCOGS_ENDPOINT)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+    }
+
+    @Twitter
+    @Provides
+    @Singleton
+    public OkHttpClient provideTwitterClient(Context app,
+                                             @Twitter @NonNull List<Interceptor> interceptors) {
+        final File cacheDir = new File(app.getCacheDir(), "twitter");
+        final Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
+        final OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
+
+        interceptors.forEach(okHttpBuilder::addInterceptor);
+
+        okHttpBuilder.cache(cache);
+        okHttpBuilder.readTimeout(30, TimeUnit.SECONDS);
+        okHttpBuilder.writeTimeout(30, TimeUnit.SECONDS);
+        okHttpBuilder.connectTimeout(30, TimeUnit.SECONDS);
+
+        return okHttpBuilder.build();
+    }
+
+    @Twitter
+    @Provides
+    @Singleton
+    public Retrofit provideTwitterApi(@Twitter @NonNull OkHttpClient okHttpClient,
+                                      @NonNull Gson gson) {
+        return new Retrofit.Builder()
+                .baseUrl(BuildConfig.API_TWITTER_ENDPOINT)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

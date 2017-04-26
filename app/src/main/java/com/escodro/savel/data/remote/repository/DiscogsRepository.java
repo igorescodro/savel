@@ -7,6 +7,7 @@ import com.escodro.savel.injection.qualifier.Discogs;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 /**
@@ -32,6 +33,7 @@ public class DiscogsRepository {
      * @return observable of Discogs Artist entity
      */
     public Observable<DiscogsArtist> getArtist(String artistId) {
-        return mService.getArtist(artistId).onErrorReturnItem(new DiscogsArtist());
+        return mService.getArtist(artistId).onErrorReturnItem(new DiscogsArtist()).subscribeOn(
+                Schedulers.newThread());
     }
 }

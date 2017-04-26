@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 /**
@@ -35,6 +36,7 @@ public class TwitterRepository {
      * @return observable of Tweets List entity
      */
     public Observable<List<TwitterTweet>> getArtistTimeline(String username) {
-        return mService.getArtistTimeline(username).onErrorReturnItem(new ArrayList<>());
+        return mService.getArtistTimeline(username).onErrorReturnItem(new ArrayList<>())
+                .subscribeOn(Schedulers.newThread());
     }
 }

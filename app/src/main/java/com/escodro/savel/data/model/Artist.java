@@ -4,6 +4,9 @@ import android.support.annotation.Nullable;
 
 import com.escodro.savel.data.model.discogs.DiscogsArtist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
+import com.escodro.savel.data.model.twitter.TwitterTweet;
+
+import java.util.List;
 
 /**
  * Object containing the consolidated information about the artist.
@@ -12,17 +15,21 @@ import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
  */
 public class Artist {
 
-    private MusicBrainzArtist mMusicBrainzArtist;
+    private final MusicBrainzArtist mMusicBrainzArtist;
 
-    private DiscogsArtist mDiscogsArtist;
+    private final DiscogsArtist mDiscogsArtist;
 
-    public Artist(MusicBrainzArtist musicBrainzArtist, DiscogsArtist discogsArtist) {
+    private final List<TwitterTweet> mTweetList;
+
+    public Artist(MusicBrainzArtist musicBrainzArtist, DiscogsArtist discogsArtist,
+                  List<TwitterTweet> tweetList) {
         mMusicBrainzArtist = musicBrainzArtist;
         mDiscogsArtist = discogsArtist;
+        mTweetList = tweetList;
     }
 
     public Artist(MusicBrainzArtist musicBrainzArtist) {
-        mMusicBrainzArtist = musicBrainzArtist;
+        this(musicBrainzArtist, null, null);
     }
 
     @Nullable
@@ -59,5 +66,9 @@ public class Artist {
             image = mDiscogsArtist.getImages().get(0).getResourceUrl();
         }
         return image;
+    }
+
+    public List<TwitterTweet> getTweetList() {
+        return mTweetList;
     }
 }

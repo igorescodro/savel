@@ -4,7 +4,8 @@ import com.escodro.savel.data.model.Artist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.remote.repository.DiscogsRepository;
 import com.escodro.savel.data.remote.repository.MusicBrainzRepository;
-import com.escodro.savel.util.UrlParser;
+import com.escodro.savel.data.remote.repository.TwitterRepository;
+import com.escodro.savel.util.parser.RelationParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,12 @@ public class SavelRepository {
     DiscogsRepository mDiscogsRepository;
 
     @Inject
+    TwitterRepository mTwitterRepository;
+
+    @Inject
+    RelationParser mRelationParser;
+
+    @Inject
     public SavelRepository() {
     }
 
@@ -39,10 +46,14 @@ public class SavelRepository {
      */
     public Observable<Artist> getArtist(String artistId) {
         return mMusicBrainzRepository.getArtistInfo(artistId)
-                .flatMap(result -> Observable.zip(
-                        Observable.just(result),
-                        mDiscogsRepository.getArtist(UrlParser.getDiscogsId(result.getRelations())),
-                        Artist::new));
+                .flatMap(result -> {
+                    mRelationParser.setRelationList(result.getRelations());
+                    return Observable.zip(
+                            Observable.just(result),
+                            mDiscogsRepository.getArtist(mRelationParser.getDiscogsId()),
+                            mTwitterRepository.getArtistTimeline(mRelationParser.getTwitterId()),
+                            Artist::new);
+                });
     }
 
     /**

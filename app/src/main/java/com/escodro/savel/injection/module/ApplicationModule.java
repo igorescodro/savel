@@ -39,13 +39,11 @@ public class ApplicationModule {
     }
 
     @Provides
-    @Singleton
     public LinearLayoutManager provideLinearLayoutManager(Context context) {
         return new LinearLayoutManager(context);
     }
 
     @Provides
-    @Singleton
     public DividerItemDecoration provideDividerItemDecoration(Context context,
                                                               LinearLayoutManager layoutManager) {
         return new DividerItemDecoration(context, layoutManager.getOrientation());

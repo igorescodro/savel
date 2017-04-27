@@ -43,18 +43,7 @@ public class NetworkModule {
     public OkHttpClient provideMusicBrainzClient(Context app,
                                                  @MusicBrainz @NonNull List<Interceptor>
                                                          interceptors) {
-        final File cacheDir = new File(app.getCacheDir(), "musicbrainz");
-        final Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
-        final OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
-
-        interceptors.forEach(okHttpBuilder::addInterceptor);
-
-        okHttpBuilder.cache(cache);
-        okHttpBuilder.readTimeout(30, TimeUnit.SECONDS);
-        okHttpBuilder.writeTimeout(30, TimeUnit.SECONDS);
-        okHttpBuilder.connectTimeout(30, TimeUnit.SECONDS);
-
-        return okHttpBuilder.build();
+        return getOkHttpClient(app, interceptors, "musicbrainz");
     }
 
     @MusicBrainz
@@ -62,12 +51,7 @@ public class NetworkModule {
     @Singleton
     public Retrofit provideMusicBrainzApi(@MusicBrainz @NonNull OkHttpClient okHttpClient,
                                           @NonNull Gson gson) {
-        return new Retrofit.Builder()
-                .baseUrl(BuildConfig.API_MUSICBRAINZ_ENDPOINT)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
+        return getRetrofit(okHttpClient, gson, BuildConfig.API_MUSICBRAINZ_ENDPOINT);
     }
 
     @Discogs
@@ -75,18 +59,7 @@ public class NetworkModule {
     @Singleton
     public OkHttpClient provideDiscogsClient(Context app,
                                              @Discogs @NonNull List<Interceptor> interceptors) {
-        final File cacheDir = new File(app.getCacheDir(), "discogs");
-        final Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
-        final OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
-
-        interceptors.forEach(okHttpBuilder::addInterceptor);
-
-        okHttpBuilder.cache(cache);
-        okHttpBuilder.readTimeout(30, TimeUnit.SECONDS);
-        okHttpBuilder.writeTimeout(30, TimeUnit.SECONDS);
-        okHttpBuilder.connectTimeout(30, TimeUnit.SECONDS);
-
-        return okHttpBuilder.build();
+        return getOkHttpClient(app, interceptors, "discogs");
     }
 
     @Discogs
@@ -94,12 +67,7 @@ public class NetworkModule {
     @Singleton
     public Retrofit provideDiscogsApi(@Discogs @NonNull OkHttpClient okHttpClient,
                                       @NonNull Gson gson) {
-        return new Retrofit.Builder()
-                .baseUrl(BuildConfig.API_DISCOGS_ENDPOINT)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
+        return getRetrofit(okHttpClient, gson, BuildConfig.API_DISCOGS_ENDPOINT);
     }
 
     @Twitter
@@ -107,7 +75,22 @@ public class NetworkModule {
     @Singleton
     public OkHttpClient provideTwitterClient(Context app,
                                              @Twitter @NonNull List<Interceptor> interceptors) {
-        final File cacheDir = new File(app.getCacheDir(), "twitter");
+        return getOkHttpClient(app, interceptors, "twitter");
+    }
+
+    @Twitter
+    @Provides
+    @Singleton
+    public Retrofit provideTwitterApi(@Twitter @NonNull OkHttpClient okHttpClient,
+                                      @NonNull Gson gson) {
+        return getRetrofit(okHttpClient, gson, BuildConfig.API_TWITTER_ENDPOINT);
+    }
+
+    @NonNull
+    private OkHttpClient getOkHttpClient(Context app,
+                                         @NonNull List<Interceptor> interceptors,
+                                         @NonNull String cacheName) {
+        final File cacheDir = new File(app.getCacheDir(), cacheName);
         final Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
         final OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
 
@@ -121,13 +104,11 @@ public class NetworkModule {
         return okHttpBuilder.build();
     }
 
-    @Twitter
-    @Provides
-    @Singleton
-    public Retrofit provideTwitterApi(@Twitter @NonNull OkHttpClient okHttpClient,
-                                      @NonNull Gson gson) {
+    @NonNull
+    private Retrofit getRetrofit(@NonNull OkHttpClient okHttpClient,
+                                 @NonNull Gson gson, @NonNull String endpoint) {
         return new Retrofit.Builder()
-                .baseUrl(BuildConfig.API_TWITTER_ENDPOINT)
+                .baseUrl(endpoint)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

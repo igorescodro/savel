@@ -40,6 +40,7 @@ public class SearchItemViewModel {
         return view -> {
             final Intent intent = new Intent(mContext, ArtistActivity.class);
             intent.putExtra(ArtistActivity.EXTRA_ARTIST_ID, mArtist.getId());
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(intent);
         };
     }

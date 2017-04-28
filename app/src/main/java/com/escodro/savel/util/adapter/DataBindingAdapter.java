@@ -70,4 +70,15 @@ public class DataBindingAdapter {
                                                     RecyclerView.ItemDecoration decoration) {
         recyclerView.addItemDecoration(decoration);
     }
+
+    /**
+     * Custom attribute to set a drawable resource in a {@link ImageView}.
+     *
+     * @param imageView ImageView to receive the drawable resource
+     * @param resource  drawable resource id
+     */
+    @BindingAdapter({"android:src"})
+    public static void setImageViewResource(ImageView imageView, int resource) {
+        imageView.setImageResource(resource);
+    }
 }

@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.escodro.savel.data.local.contract.ArtistContract;
 import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.model.NetworkError;
+import com.escodro.savel.util.adapter.NetworkErrorAdapter;
 
 import javax.inject.Inject;
 
@@ -39,8 +41,18 @@ public class ArtistViewModel extends BaseObservable {
      */
     public final ObservableField<Artist> artist;
 
+    /**
+     * {@link ObservableField} to represent the {@link NetworkError} message to be displayed at
+     * Network Error screen.
+     * <h1>This attribute must only be used to Data Binding.</h1>
+     */
+    public final ObservableField<NetworkError> networkError;
+
     @Inject
     ArtistContract mContract;
+
+    @Inject
+    NetworkErrorAdapter mNetworkErrorAdapter;
 
     private String mArtistRequestId;
 
@@ -53,6 +65,7 @@ public class ArtistViewModel extends BaseObservable {
         artist = new ObservableField<>();
         networkErrorVisibility = new ObservableField<>(View.INVISIBLE);
         loadingVisibility = new ObservableField<>(View.INVISIBLE);
+        networkError = new ObservableField<>();
     }
 
     /**
@@ -75,11 +88,14 @@ public class ArtistViewModel extends BaseObservable {
         networkErrorVisibility.set(View.INVISIBLE);
         artist.set(value);
         notifyChange();
+        Timber.i("Artist received: " + value.getName());
     }
 
     private void handleError(Throwable throwable) {
         loadingVisibility.set(View.INVISIBLE);
         networkErrorVisibility.set(View.VISIBLE);
+        networkError.set(mNetworkErrorAdapter.handleError(throwable));
+        notifyChange();
         Timber.e(throwable.getMessage(), throwable);
     }
 

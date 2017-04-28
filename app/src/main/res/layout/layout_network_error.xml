@@ -10,8 +10,13 @@
             type="Integer"/>
 
         <variable
+            name="networkError"
+            type="com.escodro.savel.data.model.NetworkError"/>
+
+        <variable
             name="onClick"
             type="android.view.View.OnClickListener"/>
+
     </data>
 
     <LinearLayout
@@ -25,20 +30,20 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
-            android:src="@android:drawable/presence_busy"/>
+            android:src="@{networkError.iconResource}"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/network.error.title"
+            android:text="@{networkError.title}"
             android:textSize="@dimen/font_large"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/network.error.connection.failure"
+            android:text="@{networkError.description}"
             android:textSize="@dimen/font_small"/>
 
         <Button

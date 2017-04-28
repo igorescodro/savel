@@ -40,49 +40,49 @@ public class NetworkModule {
     @MusicBrainz
     @Provides
     @Singleton
-    public OkHttpClient provideMusicBrainzClient(Context app,
-                                                 @MusicBrainz @NonNull List<Interceptor>
-                                                         interceptors) {
+    OkHttpClient provideMusicBrainzClient(Context app,
+                                          @MusicBrainz @NonNull List<Interceptor>
+                                                  interceptors) {
         return getOkHttpClient(app, interceptors, "musicbrainz");
     }
 
     @MusicBrainz
     @Provides
     @Singleton
-    public Retrofit provideMusicBrainzApi(@MusicBrainz @NonNull OkHttpClient okHttpClient,
-                                          @NonNull Gson gson) {
+    Retrofit provideMusicBrainzApi(@MusicBrainz @NonNull OkHttpClient okHttpClient,
+                                   @NonNull Gson gson) {
         return getRetrofit(okHttpClient, gson, BuildConfig.API_MUSICBRAINZ_ENDPOINT);
     }
 
     @Discogs
     @Provides
     @Singleton
-    public OkHttpClient provideDiscogsClient(Context app,
-                                             @Discogs @NonNull List<Interceptor> interceptors) {
+    OkHttpClient provideDiscogsClient(Context app,
+                                      @Discogs @NonNull List<Interceptor> interceptors) {
         return getOkHttpClient(app, interceptors, "discogs");
     }
 
     @Discogs
     @Provides
     @Singleton
-    public Retrofit provideDiscogsApi(@Discogs @NonNull OkHttpClient okHttpClient,
-                                      @NonNull Gson gson) {
+    Retrofit provideDiscogsApi(@Discogs @NonNull OkHttpClient okHttpClient,
+                               @NonNull Gson gson) {
         return getRetrofit(okHttpClient, gson, BuildConfig.API_DISCOGS_ENDPOINT);
     }
 
     @Twitter
     @Provides
     @Singleton
-    public OkHttpClient provideTwitterClient(Context app,
-                                             @Twitter @NonNull List<Interceptor> interceptors) {
+    OkHttpClient provideTwitterClient(Context app,
+                                      @Twitter @NonNull List<Interceptor> interceptors) {
         return getOkHttpClient(app, interceptors, "twitter");
     }
 
     @Twitter
     @Provides
     @Singleton
-    public Retrofit provideTwitterApi(@Twitter @NonNull OkHttpClient okHttpClient,
-                                      @NonNull Gson gson) {
+    Retrofit provideTwitterApi(@Twitter @NonNull OkHttpClient okHttpClient,
+                               @NonNull Gson gson) {
         return getRetrofit(okHttpClient, gson, BuildConfig.API_TWITTER_ENDPOINT);
     }
 

@@ -21,7 +21,7 @@ public class GsonModule {
 
     @Provides
     @Singleton
-    public GsonBuilder provideDefaultGsonBuilder() {
+    GsonBuilder provideDefaultGsonBuilder() {
         final GsonBuilder builder = new GsonBuilder();
         builder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
         builder.setDateFormat(DateFormat.FULL);
@@ -30,7 +30,7 @@ public class GsonModule {
 
     @Provides
     @Singleton
-    public Gson provideGson(GsonBuilder builder) {
+    Gson provideGson(GsonBuilder builder) {
         return builder.create();
     }
 }

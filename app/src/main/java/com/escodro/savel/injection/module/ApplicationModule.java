@@ -28,24 +28,24 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public Application provideApplication() {
+    Application provideApplication() {
         return mApplication;
     }
 
     @Provides
     @Singleton
-    public Context provideContext() {
+    Context provideContext() {
         return mApplication.getApplicationContext();
     }
 
     @Provides
-    public LinearLayoutManager provideLinearLayoutManager(Context context) {
+    LinearLayoutManager provideLinearLayoutManager(Context context) {
         return new LinearLayoutManager(context);
     }
 
     @Provides
-    public DividerItemDecoration provideDividerItemDecoration(Context context,
-                                                              LinearLayoutManager layoutManager) {
+    DividerItemDecoration provideDividerItemDecoration(Context context,
+                                                       LinearLayoutManager layoutManager) {
         return new DividerItemDecoration(context, layoutManager.getOrientation());
     }
 }

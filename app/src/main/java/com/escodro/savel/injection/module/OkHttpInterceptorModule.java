@@ -32,7 +32,7 @@ public class OkHttpInterceptorModule {
     @Provides
     @Singleton
     @NonNull
-    public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
+    HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(
                 message -> Timber.tag("OkHttp").d(message));
         interceptor.setLevel(Level.BODY);
@@ -43,7 +43,7 @@ public class OkHttpInterceptorModule {
     @Provides
     @Singleton
     @NonNull
-    public Interceptor provideMusicBrainzInterceptor() {
+    Interceptor provideMusicBrainzInterceptor() {
         return chain -> {
             Request request = chain.request();
             final HttpUrl url = request.url().newBuilder().addQueryParameter("fmt", "json").build();
@@ -56,7 +56,7 @@ public class OkHttpInterceptorModule {
     @Provides
     @Singleton
     @NonNull
-    public List<Interceptor> provideMusicBrainzInterceptors(
+    List<Interceptor> provideMusicBrainzInterceptors(
             @NonNull HttpLoggingInterceptor logInterceptor,
             @MusicBrainz @NonNull Interceptor interceptor) {
         return Arrays.asList(logInterceptor, interceptor);
@@ -66,7 +66,7 @@ public class OkHttpInterceptorModule {
     @Provides
     @Singleton
     @NonNull
-    public Interceptor provideDiscogsInterceptor() {
+    Interceptor provideDiscogsInterceptor() {
         return chain -> {
             final Request request = chain.request().newBuilder().addHeader("Authorization",
                     "Discogs token=" + BuildConfig.KEY_DISCOGS_API).build();
@@ -78,7 +78,7 @@ public class OkHttpInterceptorModule {
     @Provides
     @Singleton
     @NonNull
-    public List<Interceptor> provideDiscogsInterceptors(
+    List<Interceptor> provideDiscogsInterceptors(
             @NonNull HttpLoggingInterceptor logInterceptor,
             @Discogs @NonNull Interceptor interceptor) {
         return Arrays.asList(logInterceptor, interceptor);
@@ -88,7 +88,7 @@ public class OkHttpInterceptorModule {
     @Provides
     @Singleton
     @NonNull
-    public Interceptor provideTwitterInterceptor() {
+    Interceptor provideTwitterInterceptor() {
         return chain -> {
             Request request = chain.request();
             final HttpUrl url = request.url().newBuilder()
@@ -108,7 +108,7 @@ public class OkHttpInterceptorModule {
     @Provides
     @Singleton
     @NonNull
-    public List<Interceptor> provideTwitterInterceptors(
+    List<Interceptor> provideTwitterInterceptors(
             @NonNull HttpLoggingInterceptor logInterceptor,
             @Twitter @NonNull Interceptor interceptor) {
         return Arrays.asList(logInterceptor, interceptor);

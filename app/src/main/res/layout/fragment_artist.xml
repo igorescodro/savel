@@ -18,7 +18,7 @@
         <include
             layout="@layout/layout_network_error"
             app:networkError="@{viewModel.networkError}"
-            app:onClick="@{viewModel.retryClickListener}"
+            app:onClick="@{viewModel.onClickRetryButton}"
             app:visibility="@{viewModel.networkErrorVisibility}"/>
 
         <include

@@ -53,7 +53,7 @@ public class ArtistFragment extends Fragment {
         final FragmentArtistBinding binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_artist, container, false);
         binding.setViewModel(mArtistViewModel);
-        mArtistViewModel.loadData(mArtistId);
+        mArtistViewModel.loadArtist(mArtistId);
         return binding.getRoot();
     }
 }

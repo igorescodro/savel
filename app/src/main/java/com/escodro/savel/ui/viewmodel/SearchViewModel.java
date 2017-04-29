@@ -7,11 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.escodro.savel.data.local.contract.SearchContract;
+import com.escodro.savel.data.model.Artist;
 import com.escodro.savel.databinding.ItemArtistSearchBinding;
 import com.escodro.savel.ui.adapter.SearchRecyclerAdapter;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
+import io.reactivex.Observable;
 
 /**
  * ViewModel responsible to provide information and {@link RecyclerView}-related methods to
@@ -19,12 +24,18 @@ import javax.inject.Inject;
  * <p/>
  * Created by Igor Escodro on 24/04/17.
  */
-public class SearchViewModel {
+public class SearchViewModel extends NetworkViewModel<List<Artist>> {
 
     /**
      * Two-way binding {@link ObservableField} to handle user input query.
      */
     public final ObservableField<String> mQuery;
+
+    /**
+     * {@link ObservableField} to provide the {@link RecyclerView} visibility. This field is
+     * needed once the {@link RecyclerView} will appear in front of included layout every time.
+     */
+    public final ObservableField<Integer> mRecyclerViewVisibility;
 
     @Inject
     SearchContract mContract;
@@ -41,10 +52,25 @@ public class SearchViewModel {
     @Inject
     public SearchViewModel() {
         mQuery = new ObservableField<>();
+        mRecyclerViewVisibility = new ObservableField<>(View.INVISIBLE);
+    }
+
+    @Override
+    public Observable<List<Artist>> getObservable() {
+        return mContract.searchArtist(mQuery.get());
+    }
+
+    @Override
+    public void onResult(List<Artist> result) {
+        mRecyclerViewVisibility.set(View.VISIBLE);
+        mAdapter.updateSearchList(result);
     }
 
     public View.OnClickListener getSearchClickListener() {
-        return view -> searchAndUpdateList(mQuery.get());
+        return view -> {
+            loadData();
+            mRecyclerViewVisibility.set(View.INVISIBLE);
+        };
     }
 
     public RecyclerView.Adapter<BindingHolder<ItemArtistSearchBinding>> getRecyclerViewAdapter() {
@@ -57,9 +83,5 @@ public class SearchViewModel {
 
     public DividerItemDecoration getItemDecoration() {
         return mItemDecoration;
-    }
-
-    private void searchAndUpdateList(String artistName) {
-        mContract.searchArtist(artistName).subscribe(artists -> mAdapter.updateSearchList(artists));
     }
 }

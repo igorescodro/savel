@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:bind="http://schemas.android.com/tools">
 
     <data>
@@ -14,6 +15,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <include
+            layout="@layout/layout_network_error"
+            app:networkError="@{viewModel.networkError}"
+            app:onClick="@{viewModel.onClickRetryButton}"
+            app:visibility="@{viewModel.networkErrorVisibility}"/>
+
+        <include
+            layout="@layout/layout_loading"
+            app:visibility="@{viewModel.loadingVisibility}"/>
 
         <EditText
             android:id="@+id/tv_search"
@@ -36,6 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/bt_search"
+            android:visibility="@{viewModel.mRecyclerViewVisibility}"
             bind:adapter="@{viewModel.recyclerViewAdapter}"
             bind:item_decoration="@{viewModel.itemDecoration}"
             bind:layout_manager="@{viewModel.linearLayoutManager}"/>

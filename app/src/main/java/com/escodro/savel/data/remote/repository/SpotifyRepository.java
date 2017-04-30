@@ -1,6 +1,7 @@
 package com.escodro.savel.data.remote.repository;
 
 import com.escodro.savel.data.model.spotify.SpotifyArtist;
+import com.escodro.savel.data.model.spotify.SpotifySearch;
 import com.escodro.savel.data.remote.service.SpotifyService;
 import com.escodro.savel.injection.qualifier.Spotify;
 
@@ -32,5 +33,17 @@ public class SpotifyRepository {
      */
     public Observable<SpotifyArtist> getArtistInfo(String artistId) {
         return mService.getArtistById(artistId);
+    }
+
+    /**
+     * Get a list of {@link SpotifyArtist} entity from {@link SpotifyService} server to be used
+     * as predicted artist when the user is typing.
+     *
+     * @param artistName artist name
+     *
+     * @return observable of Spotify Search entity
+     */
+    public Observable<SpotifySearch> getPrediction(String artistName) {
+        return mService.getPrediction(artistName);
     }
 }

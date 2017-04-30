@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import com.escodro.savel.BuildConfig;
 import com.escodro.savel.injection.qualifier.Discogs;
 import com.escodro.savel.injection.qualifier.MusicBrainz;
+import com.escodro.savel.injection.qualifier.Spotify;
 import com.escodro.savel.injection.qualifier.Twitter;
 import com.google.gson.Gson;
 
@@ -84,6 +85,22 @@ public class NetworkModule {
     Retrofit provideTwitterApi(@Twitter @NonNull OkHttpClient okHttpClient,
                                @NonNull Gson gson) {
         return getRetrofit(okHttpClient, gson, BuildConfig.API_TWITTER_ENDPOINT);
+    }
+
+    @Spotify
+    @Provides
+    @Singleton
+    OkHttpClient provideSpotifyClient(Context app,
+                                      @Spotify @NonNull List<Interceptor> interceptors) {
+        return getOkHttpClient(app, interceptors, "spotify");
+    }
+
+    @Spotify
+    @Provides
+    @Singleton
+    Retrofit provideSpotifyApi(@Spotify @NonNull OkHttpClient okHttpClient,
+                               @NonNull Gson gson) {
+        return getRetrofit(okHttpClient, gson, BuildConfig.API_SPOTIFY_ENDPOINT);
     }
 
     @NonNull

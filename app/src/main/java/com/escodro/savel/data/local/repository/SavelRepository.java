@@ -4,8 +4,9 @@ import com.escodro.savel.data.model.Artist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.remote.repository.DiscogsRepository;
 import com.escodro.savel.data.remote.repository.MusicBrainzRepository;
+import com.escodro.savel.data.remote.repository.SpotifyRepository;
 import com.escodro.savel.data.remote.repository.TwitterRepository;
-import com.escodro.savel.util.parser.RelationParser;
+import com.escodro.savel.util.adapter.RelationParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,9 @@ public class SavelRepository {
     TwitterRepository mTwitterRepository;
 
     @Inject
+    SpotifyRepository mSpotifyRepository;
+
+    @Inject
     RelationParser mRelationParser;
 
     @Inject
@@ -52,6 +56,7 @@ public class SavelRepository {
                             Observable.just(result),
                             mDiscogsRepository.getArtist(mRelationParser.getDiscogsId()),
                             mTwitterRepository.getArtistTimeline(mRelationParser.getTwitterId()),
+                            mSpotifyRepository.getArtistInfo(mRelationParser.getSpotifyId()),
                             Artist::new);
                 });
     }

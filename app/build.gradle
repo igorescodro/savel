@@ -30,6 +30,7 @@ android {
             buildConfigField 'String', 'API_MUSICBRAINZ_ENDPOINT', "\"http://musicbrainz.org/ws/2/\""
             buildConfigField 'String', 'API_DISCOGS_ENDPOINT', "\"https://api.discogs.com/\""
             buildConfigField 'String', 'API_TWITTER_ENDPOINT', "\"https://api.twitter.com/1.1/\""
+            buildConfigField 'String', 'API_SPOTIFY_ENDPOINT', "\"https://api.spotify.com/v1/\""
 
             buildConfigField 'String', 'KEY_DISCOGS_API', keystoreProperties['DiscogsApiKey']
             buildConfigField 'String', 'KEY_TWITTER_API', keystoreProperties['TwitterApiKey']

@@ -2,7 +2,6 @@ package com.escodro.savel.util.adapter;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
-import android.text.TextUtils;
 
 import com.escodro.savel.R;
 import com.escodro.savel.data.model.NetworkError;
@@ -41,13 +40,14 @@ public class NetworkErrorAdapter {
      * Error layout.
      *
      * @param throwable throwable returned in the request
+     *
      * @return NetworkError object
      */
     public NetworkError handleError(Throwable throwable) {
         if (throwable instanceof UnknownHostException) {
             getUnknownHostError();
         } else if (throwable instanceof HttpException) {
-            if (TextUtils.equals(throwable.getMessage(), SERVICE_UNAVAILABLE)) {
+            if (throwable.getMessage().contains(SERVICE_UNAVAILABLE)) {
                 getServiceUnavailableError();
             }
         }

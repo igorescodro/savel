@@ -29,14 +29,21 @@ public class TwitterRepository {
 
     /**
      * Get a {@link List} of {@link TwitterTweet}(Timeline) from {@link TwitterService}. If an
-     * error occur during the request, a empty {@link ArrayList} will be returned.
+     * error occur during the request, a empty {@link ArrayList} will be returned.<br>
+     * If the <code>username</code> is empty, it only returns an {@link Observable} of
+     * {@link List} of {@link TwitterTweet}, saving one call to {@link TwitterService} because
+     * <code>username</code> is an optional parameter in this endpoint.
      *
      * @param username artist Twitter username
      *
      * @return observable of Tweets List entity
      */
     public Observable<List<TwitterTweet>> getArtistTimeline(String username) {
-        return mService.getArtistTimeline(username).onErrorReturnItem(new ArrayList<>())
-                .subscribeOn(Schedulers.newThread());
+        Observable<List<TwitterTweet>> observable = Observable.just(new ArrayList<>());
+        if (username != null) {
+            observable = mService.getArtistTimeline(username).onErrorReturnItem(new ArrayList<>())
+                    .subscribeOn(Schedulers.newThread());
+        }
+        return observable;
     }
 }

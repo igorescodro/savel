@@ -32,7 +32,7 @@ public class SpotifyRepository {
      * @return observable of Spotify Artist entity
      */
     public Observable<SpotifyArtist> getArtistInfo(String artistId) {
-        return mService.getArtistById(artistId);
+        return mService.getArtistById(artistId).onErrorReturnItem(new SpotifyArtist());
     }
 
     /**

@@ -23,7 +23,7 @@ public class NetworkErrorAdapter {
     /**
      * Message to represent that the webservice is not available at the time.
      */
-    private static final String SERVICE_UNAVAILABLE = "Service Unavailable";
+    private static final String SERVICE_UNAVAILABLE = "Unavailable";
 
     @Inject
     public NetworkErrorAdapter() {

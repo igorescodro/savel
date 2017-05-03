@@ -44,6 +44,6 @@ public interface MusicBrainzService {
      * <a href="https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2/Search#Artist">MusicBrainz
      * API Documentation | Artists</a>
      */
-    @GET("artist/")
+    @GET("artist")
     Observable<MusicBrainzArtistList> searchArtist(@Query("query") String artistName);
 }

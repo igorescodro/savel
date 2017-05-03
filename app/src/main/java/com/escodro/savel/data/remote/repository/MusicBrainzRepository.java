@@ -49,7 +49,6 @@ public class MusicBrainzRepository {
      * @return observable of MusicBrainz Artist List entity
      */
     public Observable<MusicBrainzArtistList> searchArtist(String artistName) {
-        artistName = "sortname:" + artistName;
         return mService.searchArtist(artistName);
     }
 }

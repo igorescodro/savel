@@ -5,6 +5,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 
 import com.escodro.savel.data.local.contract.SearchContract;
 import com.escodro.savel.data.model.Artist;
@@ -66,10 +68,13 @@ public class SearchViewModel extends NetworkViewModel<List<Artist>> {
         mAdapter.updateSearchList(result);
     }
 
-    public View.OnClickListener getSearchClickListener() {
-        return view -> {
-            loadData();
-            mRecyclerViewVisibility.set(View.INVISIBLE);
+    public TextView.OnEditorActionListener getOnSearchClicked() {
+        return (textView, action, keyEvent) -> {
+            if (action == EditorInfo.IME_ACTION_SEARCH) {
+                loadData();
+                mRecyclerViewVisibility.set(View.INVISIBLE);
+            }
+            return false;
         };
     }
 

@@ -4,7 +4,9 @@ import android.databinding.BindingAdapter;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -80,5 +82,17 @@ public class DataBindingAdapter {
     @BindingAdapter({"android:src"})
     public static void setImageViewResource(ImageView imageView, int resource) {
         imageView.setImageResource(resource);
+    }
+
+    /**
+     * Custom attribute to set an {@link TextView.OnEditorActionListener} in a {@link EditText}.
+     *
+     * @param editText EditText to receive the listener
+     * @param listener listener to be set
+     */
+    @BindingAdapter({"bind:editor_action"})
+    public static void setEditorAction(EditText editText,
+                                       TextView.OnEditorActionListener listener) {
+        editText.setOnEditorActionListener(listener);
     }
 }

@@ -44,7 +44,12 @@ public class RelationParser {
     /**
      * Host indicating the resource is from Spotify.
      */
-    private static final String SPOIFY_HOST = "open.spotify.com";
+    private static final String SPOTIFY_HOST = "open.spotify.com";
+
+    /**
+     * Host indicating the resource is from Instagram.
+     */
+    private static final String INSTAGRAM_HOST = "instagram.com";
 
     private List<MusicBrainzRelation> mRelationList;
 
@@ -53,6 +58,8 @@ public class RelationParser {
     private String mTwitterId;
 
     private String mSpotifyId;
+
+    private String mInstagramId;
 
     @Inject
     public RelationParser() {
@@ -96,12 +103,15 @@ public class RelationParser {
      * @param urlString url to be processed
      */
     private void processSocialNetwork(String urlString) {
-        final URL url = getHost(urlString);
-        if (url == null) return;
+        final String host = getHostWithoutPrefix(urlString);
+        if (host == null) return;
 
-        switch (url.getHost()) {
+        switch (host) {
             case TWITTER_HOST:
                 mTwitterId = extractIdFromLastPath(urlString);
+                break;
+            case INSTAGRAM_HOST:
+                mInstagramId = extractIdFromLastPath(urlString);
                 break;
         }
     }
@@ -117,7 +127,7 @@ public class RelationParser {
         if (url == null) return;
 
         switch (url.getHost()) {
-            case SPOIFY_HOST:
+            case SPOTIFY_HOST:
                 mSpotifyId = extractIdFromLastPath(urlString);
                 break;
         }
@@ -142,8 +152,35 @@ public class RelationParser {
         return url;
     }
 
+    /**
+     * Extract the last segment from a url path.<br>
+     * E.g. url <code>http://github.com/igorescodro</code> will return <code>igorescodro</code>
+     *
+     * @param url url to be parsed
+     *
+     * @return last path segment from url
+     */
+    @Nullable
     private String extractIdFromLastPath(String url) {
         return url.replaceFirst(".*/([^/?]+).*", "$1");
+    }
+
+    /**
+     * Get the host from a url, ignoring the <i>www.</i> prefix on it.
+     * E.g. url <code>http://www.github.com/igorescodro</code> will return <code>github.com</code>
+     *
+     * @param stringUrl url to be parsed
+     *
+     * @return formatted host from url
+     */
+    @Nullable
+    private String getHostWithoutPrefix(@NonNull String stringUrl) {
+        String result = null;
+        final URL url = getHost(stringUrl);
+        if (url != null) {
+            result = url.getHost().replaceFirst("^(http://www\\.|http://|www\\.)", "");
+        }
+        return result;
     }
 
     @Nullable
@@ -156,7 +193,13 @@ public class RelationParser {
         return mTwitterId;
     }
 
+    @Nullable
     public String getSpotifyId() {
         return mSpotifyId;
+    }
+
+    @Nullable
+    public String getInstagramId() {
+        return mInstagramId;
     }
 }

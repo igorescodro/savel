@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.escodro.savel.BuildConfig;
 import com.escodro.savel.injection.qualifier.Discogs;
+import com.escodro.savel.injection.qualifier.Instagram;
 import com.escodro.savel.injection.qualifier.MusicBrainz;
 import com.escodro.savel.injection.qualifier.Spotify;
 import com.escodro.savel.injection.qualifier.Twitter;
@@ -128,6 +129,24 @@ public class OkHttpInterceptorModule {
     @Singleton
     @NonNull
     List<Interceptor> provideSpotifyInterceptors(
+            @NonNull HttpLoggingInterceptor logInterceptor,
+            @Spotify @NonNull Interceptor interceptor) {
+        return Arrays.asList(logInterceptor, interceptor);
+    }
+
+    @Instagram
+    @Provides
+    @Singleton
+    @NonNull
+    Interceptor provideInstagramInterceptor() {
+        return new HttpLoggingInterceptor();
+    }
+
+    @Instagram
+    @Provides
+    @Singleton
+    @NonNull
+    List<Interceptor> provideInstagramInterceptors(
             @NonNull HttpLoggingInterceptor logInterceptor,
             @Spotify @NonNull Interceptor interceptor) {
         return Arrays.asList(logInterceptor, interceptor);

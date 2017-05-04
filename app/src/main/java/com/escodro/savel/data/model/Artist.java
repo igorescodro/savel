@@ -3,6 +3,7 @@ package com.escodro.savel.data.model;
 import android.support.annotation.Nullable;
 
 import com.escodro.savel.data.model.discogs.DiscogsArtist;
+import com.escodro.savel.data.model.instagram.InstagramTimeline;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.model.spotify.SpotifyArtist;
 import com.escodro.savel.data.model.twitter.TwitterTweet;
@@ -24,18 +25,22 @@ public class Artist {
 
     private final SpotifyArtist mSpotifyArtist;
 
+    private final InstagramTimeline mInstaTimeline;
+
     public Artist(MusicBrainzArtist musicBrainzArtist,
                   DiscogsArtist discogsArtist,
                   List<TwitterTweet> tweetList,
-                  SpotifyArtist spotifyArtist) {
+                  SpotifyArtist spotifyArtist,
+                  InstagramTimeline instaTimeline) {
         mMusicBrainzArtist = musicBrainzArtist;
         mDiscogsArtist = discogsArtist;
         mTweetList = tweetList;
         mSpotifyArtist = spotifyArtist;
+        mInstaTimeline = instaTimeline;
     }
 
     public Artist(MusicBrainzArtist musicBrainzArtist) {
-        this(musicBrainzArtist, null, null, null);
+        this(musicBrainzArtist, null, null, null, null);
     }
 
     @Nullable
@@ -85,7 +90,13 @@ public class Artist {
         return image;
     }
 
+    @Nullable
     public List<TwitterTweet> getTweetList() {
         return mTweetList;
+    }
+
+    @Nullable
+    public InstagramTimeline getInstagramTimeline() {
+        return mInstaTimeline;
     }
 }

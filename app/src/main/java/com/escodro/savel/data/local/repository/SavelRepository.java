@@ -3,6 +3,7 @@ package com.escodro.savel.data.local.repository;
 import com.escodro.savel.data.model.Artist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.remote.repository.DiscogsRepository;
+import com.escodro.savel.data.remote.repository.InstagramRepository;
 import com.escodro.savel.data.remote.repository.MusicBrainzRepository;
 import com.escodro.savel.data.remote.repository.SpotifyRepository;
 import com.escodro.savel.data.remote.repository.TwitterRepository;
@@ -35,6 +36,9 @@ public class SavelRepository {
     SpotifyRepository mSpotifyRepository;
 
     @Inject
+    InstagramRepository mInstaRepository;
+
+    @Inject
     RelationParser mRelationParser;
 
     @Inject
@@ -57,6 +61,7 @@ public class SavelRepository {
                             mDiscogsRepository.getArtist(mRelationParser.getDiscogsId()),
                             mTwitterRepository.getArtistTimeline(mRelationParser.getTwitterId()),
                             mSpotifyRepository.getArtistInfo(mRelationParser.getSpotifyId()),
+                            mInstaRepository.getArtistTimeline(mRelationParser.getInstagramId()),
                             Artist::new);
                 });
     }

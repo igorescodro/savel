@@ -1,56 +1,86 @@
 package com.escodro.savel.ui.viewmodel;
 
-import android.databinding.ObservableField;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
+import com.escodro.savel.R;
 import com.escodro.savel.data.local.contract.ArtistContract;
+import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.ui.fragment.ProfileFragment;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
 /**
- * ViewModel responsible to provide {@link Artist} information to {@link
- * com.escodro.savel.ui.fragment.ArtistFragment}.
- * <p/>
- * Created by Igor Escodro on 17/04/17.
+ * Created by Igor Escodro on 05/05/17.
  */
 
 public class ArtistViewModel extends NetworkViewModel<Artist> {
 
-    /**
-     * {@link ObservableField} to represent the {@link Artist}.
-     * <h1>This attribute must only be used to Data Binding.</h1>
-     */
-    public final ObservableField<Artist> artist;
+    @Inject
+    ProfileFragment mArtistFragment;
 
     @Inject
     ArtistContract mContract;
 
-    private String mArtistRequestId;
+    @Inject
+    ArtistProvider mProvider;
 
-    /**
-     * Default injectable constructor to be used in
-     * {@link com.escodro.savel.ui.fragment.ArtistFragment}.
-     */
+    private FragmentManager mFragmentManager;
+
+    private String mArtistId;
+
     @Inject
     public ArtistViewModel() {
-        artist = new ObservableField<>();
     }
 
     public void loadArtist(String artistId) {
-        mArtistRequestId = artistId;
+        mArtistId = artistId;
         loadData();
     }
 
     @Override
     public Observable<Artist> getObservable() {
-        return mContract.getArtist(mArtistRequestId);
+        return mContract.getArtist(mArtistId);
     }
 
     @Override
     public void onResult(Artist result) {
-        artist.set(result);
-        notifyChange();
+        mProvider.storeData(result);
+    }
+
+    public BottomNavigationView.OnNavigationItemSelectedListener getNavigationListener() {
+        return item -> {
+            Fragment fragment = null;
+            switch (item.getItemId()) {
+                case R.id.menu_artist_profile:
+                    fragment = mArtistFragment;
+                    break;
+            }
+            replaceWithFragment(fragment);
+            return true;
+        };
+    }
+
+    public void setFragmentManager(FragmentManager fragmentManager) {
+        mFragmentManager = fragmentManager;
+        replaceWithFragment(mArtistFragment);
+    }
+
+    private void replaceWithFragment(Fragment fragment) {
+        if (mFragmentManager == null) {
+            throw new IllegalStateException("FragmentManager is null. Did you call " +
+                    "'setFragmentManager()'");
+        }
+
+        if (fragment != null) {
+            mFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fl_container, fragment)
+                    .commit();
+        }
     }
 }

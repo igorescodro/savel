@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.escodro.savel.ui.viewmodel.ArtistViewModel"/>
+            type="com.escodro.savel.ui.viewmodel.ProfileViewModel"/>
     </data>
 
 
@@ -14,16 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <include
-            layout="@layout/layout_network_error"
-            app:networkError="@{viewModel.networkError}"
-            app:onClick="@{viewModel.onClickRetryButton}"
-            app:visibility="@{viewModel.networkErrorVisibility}"/>
-
-        <include
-            layout="@layout/layout_loading"
-            app:visibility="@{viewModel.loadingVisibility}"/>
 
         <ImageView
             android:id="@+id/iv_artist_picture"

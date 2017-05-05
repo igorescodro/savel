@@ -5,9 +5,10 @@
     <string name="network.error.no.connection.description">Please check your internet connection and try again</string>
     <string name="network.error.service.unavailable.title">Service Unavailable</string>
     <string name="network.error.service.unavailable.description">The web service did not respond.Please try again.</string>
-
-
     <string name="network.error.retry">Retry</string>
 
     <string name="artist.loading">Loading…</string>
+
+    <string name="item.menu.artist.profile">Profile</string>
+    <string name="item.menu.artist.timeline">Timeline</string>
 </resources>

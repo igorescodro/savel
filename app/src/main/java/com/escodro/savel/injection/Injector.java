@@ -7,6 +7,7 @@ import com.escodro.savel.injection.module.ApplicationModule;
 import com.escodro.savel.injection.module.GsonModule;
 import com.escodro.savel.injection.module.NetworkModule;
 import com.escodro.savel.injection.module.OkHttpInterceptorModule;
+import com.escodro.savel.injection.module.ProviderModule;
 
 import java.util.Objects;
 
@@ -38,6 +39,7 @@ public class Injector {
                 .gsonModule(new GsonModule())
                 .networkModule(new NetworkModule())
                 .okHttpInterceptorModule(new OkHttpInterceptorModule())
+                .providerModule(new ProviderModule())
                 .build();
     }
 

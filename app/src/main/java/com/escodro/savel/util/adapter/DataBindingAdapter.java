@@ -1,6 +1,7 @@
 package com.escodro.savel.util.adapter;
 
 import android.databinding.BindingAdapter;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -94,5 +95,19 @@ public class DataBindingAdapter {
     public static void setEditorAction(EditText editText,
                                        TextView.OnEditorActionListener listener) {
         editText.setOnEditorActionListener(listener);
+    }
+
+    /**
+     * Custom attribute to set an {@link BottomNavigationView.OnNavigationItemSelectedListener}
+     * in a {@link BottomNavigationView}.
+     *
+     * @param view     BottomNavigationView to receive the listener
+     * @param listener listener to be set
+     */
+    @BindingAdapter({"bind:adapter"})
+    public static void setBottomViewListener(BottomNavigationView view,
+                                             BottomNavigationView
+                                                     .OnNavigationItemSelectedListener listener) {
+        view.setOnNavigationItemSelectedListener(listener);
     }
 }

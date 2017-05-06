@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/fl_container"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.escodro.savel.ui.viewmodel.ArtistViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/layout_network_error"
+            app:networkError="@{viewModel.networkError}"
+            app:onClick="@{viewModel.onClickRetryButton}"
+            app:visibility="@{viewModel.networkErrorVisibility}"/>
+
+        <include
+            layout="@layout/layout_loading"
+            app:visibility="@{viewModel.loadingVisibility}"/>
+
+        <FrameLayout
+            android:id="@+id/fl_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <android.support.design.widget.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:menu="@menu/items_artist_menu"
+            bind:adapter="@{viewModel.navigationListener}"/>
+
+    </LinearLayout>
+</layout>
+

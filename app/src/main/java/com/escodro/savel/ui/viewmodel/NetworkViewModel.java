@@ -44,8 +44,8 @@ public abstract class NetworkViewModel<T> extends BaseObservable {
     NetworkErrorAdapter mNetworkErrorAdapter;
 
     public NetworkViewModel() {
-        networkErrorVisibility = new ObservableField<>(View.INVISIBLE);
-        loadingVisibility = new ObservableField<>(View.INVISIBLE);
+        networkErrorVisibility = new ObservableField<>(View.GONE);
+        loadingVisibility = new ObservableField<>(View.GONE);
         networkError = new ObservableField<>();
     }
 
@@ -89,7 +89,7 @@ public abstract class NetworkViewModel<T> extends BaseObservable {
     private void showNetworkErrorScreen(Throwable throwable) {
         networkError.set(mNetworkErrorAdapter.handleError(throwable));
         networkErrorVisibility.set(View.VISIBLE);
-        loadingVisibility.set(View.INVISIBLE);
+        loadingVisibility.set(View.GONE);
     }
 
     /**
@@ -97,14 +97,14 @@ public abstract class NetworkViewModel<T> extends BaseObservable {
      */
     private void showLoadingScreen() {
         loadingVisibility.set(View.VISIBLE);
-        networkErrorVisibility.set(View.INVISIBLE);
+        networkErrorVisibility.set(View.GONE);
     }
 
     /**
      * Hide the loading screen.
      */
     private void hideLoadingScreen() {
-        loadingVisibility.set(View.INVISIBLE);
+        loadingVisibility.set(View.GONE);
     }
 
     /**

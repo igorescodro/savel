@@ -9,6 +9,7 @@ import com.escodro.savel.data.local.contract.ArtistContract;
 import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.model.Artist;
 import com.escodro.savel.ui.fragment.ProfileFragment;
+import com.escodro.savel.ui.fragment.TimelineFragment;
 
 import javax.inject.Inject;
 
@@ -25,6 +26,9 @@ public class ArtistViewModel extends NetworkViewModel<Artist> {
 
     @Inject
     ProfileFragment mArtistFragment;
+
+    @Inject
+    TimelineFragment mTimelineFragment;
 
     @Inject
     ArtistContract mContract;
@@ -61,6 +65,9 @@ public class ArtistViewModel extends NetworkViewModel<Artist> {
             switch (item.getItemId()) {
                 case R.id.menu_artist_profile:
                     fragment = mArtistFragment;
+                    break;
+                case R.id.menu_artist_timeline:
+                    fragment = mTimelineFragment;
                     break;
             }
             replaceWithFragment(fragment);

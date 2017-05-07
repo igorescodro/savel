@@ -18,8 +18,7 @@ public class ProfileViewModel {
     public final ObservableField<Artist> artist;
 
     /**
-     * Default injectable constructor to be used in
-     * {@link ProfileFragment}.
+     * Default injectable constructor to be used in {@link ProfileFragment}.
      */
     @Inject
     public ProfileViewModel(ArtistProvider provider) {

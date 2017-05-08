@@ -19,6 +19,9 @@ public class InstagramEntry implements TimelineEntryType {
     private InstagramItem mInstagramItem;
 
     @Inject
+    DateConverter mDateFormatter;
+
+    @Inject
     public InstagramEntry() {
     }
 
@@ -36,6 +39,17 @@ public class InstagramEntry implements TimelineEntryType {
         final InstagramItemViewModel viewModel = mViewModelProvider.get();
         binding.setViewModel(viewModel);
         viewModel.setInstagramItem(mInstagramItem);
+    }
+
+    /**
+     * Convert from Unix Timestamp used by
+     * {@link com.escodro.savel.data.remote.service.InstagramService} to milliseconds
+     *
+     * @return time in milliseconds
+     */
+    @Override
+    public long getEntryTimeInMillis() {
+        return mDateFormatter.unixTimestampToMillis(mInstagramItem.getCreatedTime());
     }
 
     /**

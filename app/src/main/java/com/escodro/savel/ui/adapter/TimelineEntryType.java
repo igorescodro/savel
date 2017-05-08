@@ -46,4 +46,11 @@ public interface TimelineEntryType {
      * @param holder the BindingHolder should be updated to represent the contents of the item
      */
     void onBindViewHolder(BindingHolder holder);
+
+    /**
+     * Method to provide the entry creation time in milliseconds.
+     *
+     * @return time in milliseconds
+     */
+    long getEntryTimeInMillis();
 }

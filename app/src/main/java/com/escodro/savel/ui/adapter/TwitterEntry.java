@@ -16,10 +16,15 @@ import javax.inject.Provider;
  */
 public class TwitterEntry implements TimelineEntryType {
 
+    private static final String TWITTER_DATE_FORMAT = "EEE MMM dd HH:mm:ss z yyyy";
+
     private TwitterTweet mTwitterTweet;
 
     @Inject
     Provider<TwitterItemViewModel> mViewModelProvider;
+
+    @Inject
+    DateConverter mDateFormatter;
 
     @Inject
     public TwitterEntry() {
@@ -36,6 +41,17 @@ public class TwitterEntry implements TimelineEntryType {
         final TwitterItemViewModel viewModel = mViewModelProvider.get();
         binding.setViewModel(viewModel);
         viewModel.setTweet(mTwitterTweet);
+    }
+
+    /**
+     * Convert from "{@value TwitterEntry#TWITTER_DATE_FORMAT}" format used by
+     * {@link com.escodro.savel.data.remote.service.TwitterService} to milliseconds
+     *
+     * @return time in milliseconds
+     */
+    @Override
+    public long getEntryTimeInMillis() {
+        return mDateFormatter.timeToMillis(mTwitterTweet.getCreatedAt(), TWITTER_DATE_FORMAT);
     }
 
     /**

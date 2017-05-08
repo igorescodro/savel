@@ -26,6 +26,9 @@ public class TimelineEntryAdapter {
     Provider<InstagramEntry> mInstagramProvider;
 
     @Inject
+    TimelineEntryComparator mComparator;
+
+    @Inject
     public TimelineEntryAdapter() {
     }
 
@@ -40,6 +43,8 @@ public class TimelineEntryAdapter {
         final List<TimelineEntryType> timeline = new ArrayList<>();
         timeline.addAll(getTwitterEntries(artist.getTweetList()));
         timeline.addAll(getInstagramEntries(artist.getInstagramTimeline()));
+
+        timeline.sort(mComparator);
 
         return timeline;
     }

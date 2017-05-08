@@ -3,6 +3,7 @@ package com.escodro.savel.data.model;
 import android.support.annotation.Nullable;
 
 import com.escodro.savel.data.model.discogs.DiscogsArtist;
+import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.data.model.instagram.InstagramTimeline;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.model.spotify.SpotifyArtist;
@@ -96,7 +97,11 @@ public class Artist {
     }
 
     @Nullable
-    public InstagramTimeline getInstagramTimeline() {
-        return mInstaTimeline;
+    public List<InstagramItem> getInstagramTimeline() {
+        List<InstagramItem> timeline = null;
+        if (mInstaTimeline != null) {
+            timeline = mInstaTimeline.getItems();
+        }
+        return timeline;
     }
 }

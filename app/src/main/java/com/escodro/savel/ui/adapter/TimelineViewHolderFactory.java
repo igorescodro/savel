@@ -34,6 +34,13 @@ public class TimelineViewHolderFactory {
                         parent,
                         false);
                 break;
+            case TimelineEntryType.INSTAGRAM_ROW_TYPE:
+                binding = DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.getContext()),
+                        R.layout.item_timeline_instagram,
+                        parent,
+                        false);
+                break;
         }
 
         return new BindingHolder<>(binding);

@@ -1,6 +1,7 @@
 package com.escodro.savel.injection.module;
 
 import com.escodro.savel.data.local.provider.ArtistProvider;
+import com.escodro.savel.data.local.provider.ObservableProvider;
 
 import javax.inject.Singleton;
 
@@ -8,6 +9,8 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
+ * {@link Module} to provide the {@link ObservableProvider}s.
+ * <p/>
  * Created by Igor Escodro on 05/05/17.
  */
 @Module

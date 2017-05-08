@@ -18,7 +18,6 @@ import javax.inject.Inject;
  * <p/>
  * Created by Igor Escodro on 17/04/17.
  */
-
 public class ArtistActivity extends AppCompatActivity {
 
     public static final String EXTRA_ARTIST_ID = "artist_id";

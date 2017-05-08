@@ -97,6 +97,13 @@ public class DataBindingAdapter {
         editText.setOnEditorActionListener(listener);
     }
 
+    /**
+     * Custom attribute to set an {@link BottomNavigationView.OnNavigationItemSelectedListener}
+     * in a {@link BottomNavigationView}.
+     *
+     * @param view     BottomNavigationView to receive the listener
+     * @param listener listener to be set
+     */
     @BindingAdapter({"bind:adapter"})
     public static void setBottomViewListener(BottomNavigationView view,
                                              BottomNavigationView

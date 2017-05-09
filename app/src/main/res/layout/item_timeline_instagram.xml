@@ -34,13 +34,23 @@
         <com.escodro.savel.ui.common.SquareImageView
             android:id="@+id/tv_insta_image"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="match_parent"
             android:layout_below="@id/iv_insta_profile"
             android:layout_marginBottom="32dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:textSize="@dimen/font_normal"
             app:image="@{viewModel.image}"/>
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignEnd="@+id/tv_insta_image"
+            android:layout_alignTop="@+id/tv_insta_image"
+            android:layout_margin="8dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="@{viewModel.videoIconVisibility}"
+            android:src="@android:drawable/ic_media_play"/>
 
     </RelativeLayout>
 </layout>

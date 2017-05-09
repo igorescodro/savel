@@ -1,5 +1,8 @@
 package com.escodro.savel.ui.artist.timeline.instagram;
 
+import android.text.TextUtils;
+import android.view.View;
+
 import com.escodro.savel.data.model.instagram.InstagramItem;
 
 import javax.inject.Inject;
@@ -10,6 +13,8 @@ import javax.inject.Inject;
  * Created by Igor Escodro on 08/05/17.
  */
 public class InstagramItemViewModel {
+
+    private static final String TYPE_VIDEO = "video";
 
     private InstagramItem mInstagramItem;
 
@@ -31,5 +36,13 @@ public class InstagramItemViewModel {
 
     public String getProfilePicture() {
         return mInstagramItem.getUser().getProfilePicture();
+    }
+
+    public int getVideoIconVisibility() {
+        int visibility = View.INVISIBLE;
+        if (TextUtils.equals(mInstagramItem.getType(), TYPE_VIDEO)) {
+            visibility = View.VISIBLE;
+        }
+        return visibility;
     }
 }

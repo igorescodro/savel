@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.escodro.savel.ui.viewmodel.SearchViewModel"/>
+            type="com.escodro.savel.ui.search.SearchViewModel"/>
     </data>
 
 

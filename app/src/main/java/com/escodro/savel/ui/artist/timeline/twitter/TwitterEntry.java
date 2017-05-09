@@ -1,8 +1,9 @@
-package com.escodro.savel.ui.adapter;
+package com.escodro.savel.ui.artist.timeline.twitter;
 
 import com.escodro.savel.data.model.twitter.TwitterTweet;
 import com.escodro.savel.databinding.ItemTimelineTwitterBinding;
-import com.escodro.savel.ui.viewmodel.TwitterItemViewModel;
+import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryType;
+import com.escodro.savel.util.adapter.DateConverter;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import javax.inject.Inject;

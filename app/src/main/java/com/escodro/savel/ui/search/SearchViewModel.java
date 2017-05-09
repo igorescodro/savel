@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.viewmodel;
+package com.escodro.savel.ui.search;
 
 import android.databinding.ObservableField;
 import android.support.v7.widget.DividerItemDecoration;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.escodro.savel.data.local.contract.SearchContract;
 import com.escodro.savel.data.model.Artist;
 import com.escodro.savel.databinding.ItemArtistSearchBinding;
-import com.escodro.savel.ui.adapter.SearchRecyclerAdapter;
+import com.escodro.savel.ui.base.NetworkViewModel;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import io.reactivex.Observable;
 
 /**
  * ViewModel responsible to provide information and {@link RecyclerView}-related methods to
- * {@link com.escodro.savel.ui.activity.SearchActivity}.
+ * {@link SearchActivity}.
  * <p/>
  * Created by Igor Escodro on 24/04/17.
  */

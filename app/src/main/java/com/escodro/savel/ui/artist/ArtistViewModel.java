@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.viewmodel;
+package com.escodro.savel.ui.artist;
 
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -8,8 +8,9 @@ import com.escodro.savel.R;
 import com.escodro.savel.data.local.contract.ArtistContract;
 import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.model.Artist;
-import com.escodro.savel.ui.fragment.ProfileFragment;
-import com.escodro.savel.ui.fragment.TimelineFragment;
+import com.escodro.savel.ui.artist.profile.ProfileFragment;
+import com.escodro.savel.ui.artist.timeline.TimelineFragment;
+import com.escodro.savel.ui.base.NetworkViewModel;
 
 import javax.inject.Inject;
 

@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.viewmodel;
+package com.escodro.savel.ui.search;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.escodro.savel.data.model.Artist;
-import com.escodro.savel.ui.activity.ArtistActivity;
+import com.escodro.savel.ui.artist.ArtistActivity;
 
 import javax.inject.Inject;
 

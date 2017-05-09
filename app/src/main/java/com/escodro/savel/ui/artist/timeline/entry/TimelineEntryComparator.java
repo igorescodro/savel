@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.adapter;
+package com.escodro.savel.ui.artist.timeline.entry;
 
 import java.util.Comparator;
 

@@ -1,10 +1,12 @@
-package com.escodro.savel.ui.adapter;
+package com.escodro.savel.ui.artist.timeline.entry;
 
 import android.support.annotation.NonNull;
 
 import com.escodro.savel.data.model.Artist;
 import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.data.model.twitter.TwitterTweet;
+import com.escodro.savel.ui.artist.timeline.instagram.InstagramEntry;
+import com.escodro.savel.ui.artist.timeline.twitter.TwitterEntry;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,9 @@
-package com.escodro.savel.ui.adapter;
+package com.escodro.savel.ui.artist.timeline;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryType;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import java.util.ArrayList;
@@ -11,10 +12,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * {@link RecyclerView.Adapter} to handle the data on
- * {@link com.escodro.savel.ui.fragment.TimelineFragment}'s {@link RecyclerView} to create an
- * social media timeline, loading different types of
- * {@link com.escodro.savel.ui.adapter.TimelineEntryType.EntryType} in the
+ * {@link RecyclerView.Adapter} to handle the data on {@link TimelineFragment}'s
+ * {@link RecyclerView} to create a social media timeline, loading different types of
+ * {@link TimelineEntryType.EntryType} in the
  * same list.
  * <p/>
  * Created by IgorEscodro on 06/05/17.

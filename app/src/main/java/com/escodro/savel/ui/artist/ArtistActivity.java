@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.activity;
+package com.escodro.savel.ui.artist;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.escodro.savel.R;
 import com.escodro.savel.databinding.ActivityArtistBinding;
 import com.escodro.savel.injection.Injector;
-import com.escodro.savel.ui.viewmodel.ArtistViewModel;
 
 import javax.inject.Inject;
 

@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.escodro.savel.ui.viewmodel.ProfileViewModel"/>
+            type="com.escodro.savel.ui.artist.profile.ProfileViewModel"/>
     </data>
 
 

@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.fragment;
+package com.escodro.savel.ui.artist.profile;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.escodro.savel.R;
 import com.escodro.savel.databinding.FragmentArtistProfileBinding;
-import com.escodro.savel.ui.viewmodel.ProfileViewModel;
 
 import javax.inject.Inject;
 

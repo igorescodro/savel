@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.viewmodel;
+package com.escodro.savel.ui.base;
 
 import android.databinding.BaseObservable;
 import android.databinding.ObservableField;

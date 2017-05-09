@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.adapter;
+package com.escodro.savel.ui.artist.timeline;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.escodro.savel.R;
+import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryType;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 /**

@@ -1,10 +1,9 @@
-package com.escodro.savel.ui.viewmodel;
+package com.escodro.savel.ui.artist.profile;
 
 import android.databinding.ObservableField;
 
 import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.model.Artist;
-import com.escodro.savel.ui.fragment.ProfileFragment;
 
 import javax.inject.Inject;
 

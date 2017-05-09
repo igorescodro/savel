@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.escodro.savel.ui.viewmodel.TimelineViewModel"/>
+            type="com.escodro.savel.ui.artist.timeline.TimelineViewModel"/>
     </data>
 
 

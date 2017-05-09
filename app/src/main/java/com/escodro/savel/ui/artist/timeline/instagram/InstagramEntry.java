@@ -1,8 +1,9 @@
-package com.escodro.savel.ui.adapter;
+package com.escodro.savel.ui.artist.timeline.instagram;
 
 import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.databinding.ItemTimelineInstagramBinding;
-import com.escodro.savel.ui.viewmodel.InstagramItemViewModel;
+import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryType;
+import com.escodro.savel.util.adapter.DateConverter;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import javax.inject.Inject;

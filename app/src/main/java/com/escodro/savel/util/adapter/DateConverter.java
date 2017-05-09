@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.adapter;
+package com.escodro.savel.util.adapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

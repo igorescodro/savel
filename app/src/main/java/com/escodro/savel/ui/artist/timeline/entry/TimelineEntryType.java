@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.adapter;
+package com.escodro.savel.ui.artist.timeline.entry;
 
 import android.support.annotation.IntDef;
 
@@ -27,6 +27,9 @@ public interface TimelineEntryType {
      */
     int TWITTER_ROW_TYPE = 0;
 
+    /**
+     * Value to represent that the row is from Instagram.
+     */
     int INSTAGRAM_ROW_TYPE = 1;
 
     /**

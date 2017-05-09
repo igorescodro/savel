@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.viewmodel;
+package com.escodro.savel.ui.artist.timeline.twitter;
 
 import com.escodro.savel.data.model.twitter.TwitterTweet;
 

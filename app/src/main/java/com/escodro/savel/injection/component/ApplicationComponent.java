@@ -6,8 +6,8 @@ import com.escodro.savel.injection.module.GsonModule;
 import com.escodro.savel.injection.module.NetworkModule;
 import com.escodro.savel.injection.module.OkHttpInterceptorModule;
 import com.escodro.savel.injection.module.ProviderModule;
-import com.escodro.savel.ui.activity.ArtistActivity;
-import com.escodro.savel.ui.activity.SearchActivity;
+import com.escodro.savel.ui.artist.ArtistActivity;
+import com.escodro.savel.ui.search.SearchActivity;
 
 import javax.inject.Singleton;
 

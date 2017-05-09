@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.escodro.savel.ui.viewmodel.SearchItemViewModel"/>
+            type="com.escodro.savel.ui.search.SearchItemViewModel"/>
     </data>
 
     <LinearLayout

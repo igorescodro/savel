@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.escodro.savel.ui.viewmodel.InstagramItemViewModel"/>
+            type="com.escodro.savel.ui.artist.timeline.instagram.InstagramItemViewModel"/>
     </data>
 
     <RelativeLayout

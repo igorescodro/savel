@@ -2,6 +2,7 @@ package com.escodro.savel.data.local.contract;
 
 import com.escodro.savel.data.local.repository.SavelRepository;
 import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.ui.search.SearchViewModel;
 
 import java.util.List;
 
@@ -10,8 +11,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 
 /**
- * Class containing the contract methods related to
- * {@link com.escodro.savel.ui.viewmodel.SearchViewModel}.
+ * Class containing the contract methods related to {@link SearchViewModel}.
  * <p>
  * Created by Igor Escodro on 24/04/17.
  */

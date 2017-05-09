@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.escodro.savel.ui.viewmodel.ArtistViewModel"/>
+            type="com.escodro.savel.ui.artist.ArtistViewModel"/>
     </data>
 
     <LinearLayout

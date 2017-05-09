@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.viewmodel;
+package com.escodro.savel.ui.artist.timeline;
 
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -6,9 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.model.Artist;
-import com.escodro.savel.ui.adapter.TimelineEntryAdapter;
-import com.escodro.savel.ui.adapter.TimelineRecyclerAdapter;
-import com.escodro.savel.ui.fragment.TimelineFragment;
+import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryAdapter;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import javax.inject.Inject;

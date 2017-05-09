@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.viewmodel;
+package com.escodro.savel.ui.artist.timeline.instagram;
 
 import com.escodro.savel.data.model.instagram.InstagramItem;
 

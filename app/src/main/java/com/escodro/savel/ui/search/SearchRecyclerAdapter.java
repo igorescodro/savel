@@ -1,4 +1,4 @@
-package com.escodro.savel.ui.adapter;
+package com.escodro.savel.ui.search;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.escodro.savel.R;
 import com.escodro.savel.data.model.Artist;
 import com.escodro.savel.databinding.ItemArtistSearchBinding;
-import com.escodro.savel.ui.viewmodel.SearchItemViewModel;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import java.util.ArrayList;
@@ -19,8 +18,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * {@link RecyclerView.Adapter} to handle the data on
- * {@link com.escodro.savel.ui.activity.SearchActivity}'s {@link RecyclerView}.
+ * {@link RecyclerView.Adapter} to handle the data on {@link SearchActivity}'s {@link RecyclerView}.
  * <p/>
  * Created by Igor Escodro on 24/04/17.
  */

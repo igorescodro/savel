@@ -2,14 +2,14 @@ package com.escodro.savel.data.local.contract;
 
 import com.escodro.savel.data.local.repository.SavelRepository;
 import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.ui.artist.ArtistViewModel;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
 /**
- * Class containing the contract methods related to
- * {@link com.escodro.savel.ui.viewmodel.ArtistViewModel}.
+ * Class containing the contract methods related to {@link ArtistViewModel}.
  * <p>
  * Created by Igor Escodro on 18/04/17.
  */

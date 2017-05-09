@@ -91,6 +91,15 @@ public class Artist {
         return image;
     }
 
+    public String getArea() {
+        String area = null;
+
+        if (mMusicBrainzArtist != null && mMusicBrainzArtist.getArea() != null) {
+            area = mMusicBrainzArtist.getArea().getName();
+        }
+        return area;
+    }
+
     @Nullable
     public List<TwitterTweet> getTweetList() {
         return mTweetList;

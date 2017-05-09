@@ -1,6 +1,7 @@
 package com.escodro.savel.ui.artist.timeline.twitter;
 
 import com.escodro.savel.data.model.twitter.TwitterTweet;
+import com.escodro.savel.ui.base.TimelineEntryViewModel;
 
 import javax.inject.Inject;
 
@@ -9,7 +10,11 @@ import javax.inject.Inject;
  * <p/>
  * Created by IgorEscodro on 06/05/17.
  */
-public class TwitterItemViewModel {
+public class TwitterItemViewModel extends TimelineEntryViewModel {
+
+    private static final String BASE_STATUS_URL = "http://twitter.com/";
+
+    private static final String STATUS_PATH = "/status/";
 
     private TwitterTweet mTweet;
 
@@ -31,5 +36,21 @@ public class TwitterItemViewModel {
 
     public String getProfilePicture() {
         return mTweet.getUser().getProfileImageUrl();
+    }
+
+    /**
+     * Builds the {@link com.escodro.savel.data.remote.service.TwitterService} status url once the
+     * endpoint does not provides it.<br>
+     * The status url is formed by the {@value TwitterItemViewModel#BASE_STATUS_URL} + USERNAME +
+     * {@value TwitterItemViewModel#STATUS_PATH} + TWEET ID,
+     * e.g. https://twitter.com/fosterthepeople/status/857640531354042368
+     *
+     * @return entry url
+     */
+    @Override
+    protected String getEntryUrl() {
+        final String username = mTweet.getUser().getScreenName();
+        final String tweetId = mTweet.getIdStr();
+        return BASE_STATUS_URL + username + STATUS_PATH + tweetId;
     }
 }

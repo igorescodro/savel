@@ -86,6 +86,9 @@ public class TwitterTweet {
     @SerializedName("possibly_sensitive")
     private Boolean possiblySensitive;
 
+    @SerializedName("retweeted_status")
+    private TwitterTweet retweetedStatus;
+
     @Nullable
     public String getCreatedAt() {
         return createdAt;
@@ -126,5 +129,14 @@ public class TwitterTweet {
     @Nullable
     public String getText() {
         return text;
+    }
+
+    public boolean isRetweet() {
+        return retweetedStatus != null;
+    }
+
+    @Nullable
+    public TwitterTweet getRetweet() {
+        return retweetedStatus;
     }
 }

@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 public class TwitterUser {
 
     @SerializedName("id")
-    private Integer id;
+    private String id;
 
     @SerializedName("id_str")
     private String idStr;

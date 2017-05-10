@@ -1,5 +1,8 @@
 package com.escodro.savel.ui.artist.timeline.twitter;
 
+import android.support.annotation.NonNull;
+import android.view.View;
+
 import com.escodro.savel.data.model.SavelTweet;
 import com.escodro.savel.data.model.twitter.TwitterTweet;
 import com.escodro.savel.ui.base.TimelineEntryViewModel;
@@ -19,12 +22,22 @@ public class TwitterItemViewModel extends TimelineEntryViewModel {
 
     private SavelTweet mTweet;
 
+    private boolean isRetweet;
+
+    private String mTimelineUser;
+
     @Inject
     public TwitterItemViewModel() {
     }
 
-    public void setTweet(SavelTweet tweet) {
-        mTweet = tweet;
+    public void setTweet(@NonNull SavelTweet tweet) {
+        if (tweet.isRetweet()) {
+            mTweet = tweet.getRetweet();
+            mTimelineUser = tweet.getUsername();
+            isRetweet = true;
+        } else {
+            mTweet = tweet;
+        }
     }
 
     public String getText() {
@@ -35,8 +48,20 @@ public class TwitterItemViewModel extends TimelineEntryViewModel {
         return mTweet.getUsername();
     }
 
+    public String getTimelineUser() {
+        return mTimelineUser;
+    }
+
     public String getProfilePicture() {
         return mTweet.getProfileImageUrl();
+    }
+
+    public int getRetweetVisibility() {
+        int visibility = View.GONE;
+        if (isRetweet) {
+            visibility = View.VISIBLE;
+        }
+        return visibility;
     }
 
     /**

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import com.escodro.savel.data.model.twitter.TwitterTweet;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * Object to represent the {@link com.escodro.savel.data.remote.service.TwitterService} tweet.
@@ -17,6 +18,9 @@ import javax.inject.Inject;
 public class SavelTweet {
 
     private TwitterTweet mTweetEntity;
+
+    @Inject
+    Provider<SavelTweet> mRetweetProvider;
 
     @Inject
     public SavelTweet() {
@@ -78,5 +82,22 @@ public class SavelTweet {
             username = mTweetEntity.getText();
         }
         return username;
+    }
+
+    public boolean isRetweet() {
+        boolean isRetweet = false;
+        if (mTweetEntity != null) {
+            isRetweet = mTweetEntity.isRetweet();
+        }
+        return isRetweet;
+    }
+
+    @Nullable
+    public SavelTweet getRetweet() {
+        final SavelTweet tweet = mRetweetProvider.get();
+        if (mTweetEntity != null && mTweetEntity.getRetweet() != null) {
+            tweet.setTweetEntity(mTweetEntity.getRetweet());
+        }
+        return tweet;
     }
 }

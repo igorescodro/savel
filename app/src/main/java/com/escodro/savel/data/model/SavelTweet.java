@@ -31,10 +31,10 @@ public class SavelTweet {
     }
 
     @Nullable
-    public String getCreatedAt() {
+    public String getCreatedTime() {
         String creationDate = null;
         if (mTweetEntity != null) {
-            creationDate = mTweetEntity.getCreatedAt();
+            creationDate = mTweetEntity.getCreatedTime();
         }
         return creationDate;
     }

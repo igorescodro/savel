@@ -3,8 +3,8 @@ package com.escodro.savel.ui.artist.timeline.entry;
 import android.support.annotation.NonNull;
 
 import com.escodro.savel.data.model.SavelArtist;
+import com.escodro.savel.data.model.SavelInstagram;
 import com.escodro.savel.data.model.SavelTweet;
-import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.ui.artist.timeline.instagram.InstagramEntry;
 import com.escodro.savel.ui.artist.timeline.twitter.TwitterEntry;
 
@@ -15,7 +15,8 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * Adapter to convert the {@link SavelArtist} attributes in a {@link List} of {@link TimelineEntryType}.
+ * Adapter to convert the {@link SavelArtist} attributes in a {@link List} of {@link
+ * TimelineEntryType}.
  * <p/>
  * Created by IgorEscodro on 06/05/17.
  */
@@ -65,11 +66,11 @@ public class TimelineEntryAdapter {
         return timeline;
     }
 
-    private List<TimelineEntryType> getInstagramEntries(List<InstagramItem> items) {
+    private List<TimelineEntryType> getInstagramEntries(List<SavelInstagram> items) {
         final List<TimelineEntryType> timeline = new ArrayList<>();
 
         if (items != null) {
-            for (InstagramItem item : items) {
+            for (SavelInstagram item : items) {
                 final InstagramEntry entry = mInstagramProvider.get();
                 entry.setInstagramItem(item);
                 timeline.add(entry);

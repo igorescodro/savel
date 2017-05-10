@@ -1,6 +1,8 @@
 
 package com.escodro.savel.data.model.instagram;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -18,28 +20,8 @@ public class InstagramResolution {
     @SerializedName("url")
     private String url;
 
-    public Integer getWidth() {
-        return width;
-    }
-
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public String getUrl() {
+    @Nullable
+    public String getImageUrl() {
         return url;
     }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
 }

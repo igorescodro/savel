@@ -1,6 +1,8 @@
 
 package com.escodro.savel.data.model.instagram;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -20,28 +22,8 @@ public class InstagramTimeline {
     @SerializedName("status")
     private String status;
 
+    @Nullable
     public List<InstagramItem> getItems() {
         return items;
     }
-
-    public void setItems(List<InstagramItem> items) {
-        this.items = items;
-    }
-
-    public Boolean getMoreAvailable() {
-        return moreAvailable;
-    }
-
-    public void setMoreAvailable(Boolean moreAvailable) {
-        this.moreAvailable = moreAvailable;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
 }

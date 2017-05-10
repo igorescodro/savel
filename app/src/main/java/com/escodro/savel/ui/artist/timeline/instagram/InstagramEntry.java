@@ -1,5 +1,6 @@
 package com.escodro.savel.ui.artist.timeline.instagram;
 
+import com.escodro.savel.data.model.SavelInstagram;
 import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.databinding.ItemTimelineInstagramBinding;
 import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryType;
@@ -17,7 +18,7 @@ import javax.inject.Provider;
  */
 public class InstagramEntry implements TimelineEntryType {
 
-    private InstagramItem mInstagramItem;
+    private SavelInstagram mInstagramItem;
 
     @Inject
     DateConverter mDateFormatter;
@@ -58,7 +59,7 @@ public class InstagramEntry implements TimelineEntryType {
      *
      * @param instagramItem the Instagram item to be set
      */
-    public void setInstagramItem(InstagramItem instagramItem) {
+    public void setInstagramItem(SavelInstagram instagramItem) {
         mInstagramItem = instagramItem;
     }
 }

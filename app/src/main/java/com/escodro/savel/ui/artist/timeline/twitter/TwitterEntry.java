@@ -53,7 +53,7 @@ public class TwitterEntry implements TimelineEntryType {
      */
     @Override
     public long getEntryTimeInMillis() {
-        return mDateFormatter.timeToMillis(mTweet.getCreatedAt(), TWITTER_DATE_FORMAT);
+        return mDateFormatter.timeToMillis(mTweet.getCreatedTime(), TWITTER_DATE_FORMAT);
     }
 
     /**

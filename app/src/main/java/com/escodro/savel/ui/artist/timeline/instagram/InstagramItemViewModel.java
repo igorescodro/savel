@@ -3,6 +3,7 @@ package com.escodro.savel.ui.artist.timeline.instagram;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.escodro.savel.data.model.SavelInstagram;
 import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.ui.base.TimelineEntryViewModel;
 
@@ -17,26 +18,26 @@ public class InstagramItemViewModel extends TimelineEntryViewModel {
 
     private static final String TYPE_VIDEO = "video";
 
-    private InstagramItem mInstagramItem;
+    private SavelInstagram mInstagramItem;
 
     @Inject
     public InstagramItemViewModel() {
     }
 
-    public void setInstagramItem(InstagramItem instagramItem) {
+    public void setInstagramItem(SavelInstagram instagramItem) {
         mInstagramItem = instagramItem;
     }
 
     public String getImage() {
-        return mInstagramItem.getImages().getStandardResolution().getUrl();
+        return mInstagramItem.getImageUrl();
     }
 
     public String getUsername() {
-        return mInstagramItem.getUser().getUsername();
+        return mInstagramItem.getUsername();
     }
 
     public String getProfilePicture() {
-        return mInstagramItem.getUser().getProfilePicture();
+        return mInstagramItem.getProfilePicture();
     }
 
     public int getVideoIconVisibility() {

@@ -17,29 +17,4 @@ public class InstagramVideo {
 
     @SerializedName("low_resolution")
     private InstagramResolution lowResolution;
-
-    public InstagramResolution getStandardResolution() {
-        return standardResolution;
-    }
-
-    public void setStandardResolution(InstagramResolution standardResolution) {
-        this.standardResolution = standardResolution;
-    }
-
-    public InstagramResolution getLowBandwidth() {
-        return lowBandwidth;
-    }
-
-    public void setLowBandwidth(InstagramResolution lowBandwidth) {
-        this.lowBandwidth = lowBandwidth;
-    }
-
-    public InstagramResolution getLowResolution() {
-        return lowResolution;
-    }
-
-    public void setLowResolution(InstagramResolution lowResolution) {
-        this.lowResolution = lowResolution;
-    }
-
 }

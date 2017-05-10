@@ -1,12 +1,21 @@
 package com.escodro.savel.data.remote.repository;
 
+import android.support.annotation.NonNull;
+
+import com.escodro.savel.data.model.SavelInstagram;
+import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.data.model.instagram.InstagramTimeline;
 import com.escodro.savel.data.remote.service.InstagramService;
 import com.escodro.savel.injection.qualifier.Instagram;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
@@ -18,6 +27,9 @@ import retrofit2.Retrofit;
 public class InstagramRepository {
 
     private final InstagramService mService;
+
+    @Inject
+    Provider<SavelInstagram> mInstagramProvider;
 
     @Inject
     public InstagramRepository(@Instagram Retrofit retrofit) {
@@ -32,8 +44,26 @@ public class InstagramRepository {
      *
      * @return observable of Instagram timeline
      */
-    public Observable<InstagramTimeline> getArtistTimeline(String username) {
-        return mService.getArtistTimeline(username).onErrorReturnItem(new InstagramTimeline())
+    public Observable<List<SavelInstagram>> getArtistTimeline(String username) {
+        return mService.getArtistTimeline(username)
+                .map(convertToInstagramList())
+                .onErrorReturnItem(new ArrayList<>())
                 .subscribeOn(Schedulers.newThread());
+    }
+
+    @NonNull
+    private Function<InstagramTimeline, List<SavelInstagram>> convertToInstagramList() {
+        return instagramTimeline -> {
+            final List<SavelInstagram> timeline = new ArrayList<>();
+            final List<InstagramItem> items = instagramTimeline.getItems();
+            if (items != null) {
+                for (InstagramItem item : items) {
+                    final SavelInstagram instagram = mInstagramProvider.get();
+                    instagram.setInstagramItem(item);
+                    timeline.add(instagram);
+                }
+            }
+            return timeline;
+        };
     }
 }

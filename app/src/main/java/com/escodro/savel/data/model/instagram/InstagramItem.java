@@ -1,6 +1,8 @@
 
 package com.escodro.savel.data.model.instagram;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -57,132 +59,45 @@ public class InstagramItem {
     @SerializedName("video_views")
     private Integer videoViews;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public InstagramUser getUser() {
-        return user;
-    }
-
-    public void setUser(InstagramUser user) {
-        this.user = user;
-    }
-
-    public InstagramImageList getImages() {
-        return images;
-    }
-
-    public void setImages(InstagramImageList images) {
-        this.images = images;
-    }
-
+    @Nullable
     public String getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime;
+    @Nullable
+    public String getImageUrl() {
+        String imageUrl = null;
+        if (images != null) {
+            imageUrl = images.getImageUrl();
+        }
+        return imageUrl;
     }
 
-    public InstagramCaption getCaption() {
-        return caption;
+    @Nullable
+    public String getUsername() {
+        String username = null;
+        if (user != null) {
+            username = user.getUsername();
+        }
+        return username;
     }
 
-    public void setCaption(InstagramCaption caption) {
-        this.caption = caption;
+    @Nullable
+    public String getProfilePicture() {
+        String profilePic = null;
+        if (user != null) {
+            profilePic = user.getProfilePicture();
+        }
+        return profilePic;
     }
 
-    public InstagramLike getLikes() {
-        return likes;
-    }
-
-    public void setLikes(InstagramLike likes) {
-        this.likes = likes;
-    }
-
-    public InstagramComments getComments() {
-        return comments;
-    }
-
-    public void setComments(InstagramComments comments) {
-        this.comments = comments;
-    }
-
-    public Boolean getCanViewComments() {
-        return canViewComments;
-    }
-
-    public void setCanViewComments(Boolean canViewComments) {
-        this.canViewComments = canViewComments;
-    }
-
-    public Boolean getCanDeleteComments() {
-        return canDeleteComments;
-    }
-
-    public void setCanDeleteComments(Boolean canDeleteComments) {
-        this.canDeleteComments = canDeleteComments;
-    }
-
+    @Nullable
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
+    @Nullable
     public String getLink() {
         return link;
     }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public Object getLocation() {
-        return location;
-    }
-
-    public void setLocation(Object location) {
-        this.location = location;
-    }
-
-    public String getAltMediaUrl() {
-        return altMediaUrl;
-    }
-
-    public void setAltMediaUrl(String altMediaUrl) {
-        this.altMediaUrl = altMediaUrl;
-    }
-
-    public InstagramVideo getVideos() {
-        return videos;
-    }
-
-    public void setVideos(InstagramVideo videos) {
-        this.videos = videos;
-    }
-
-    public Integer getVideoViews() {
-        return videoViews;
-    }
-
-    public void setVideoViews(Integer videoViews) {
-        this.videoViews = videoViews;
-    }
-
 }

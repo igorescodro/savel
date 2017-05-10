@@ -16,21 +16,4 @@ public class InstagramLike {
 
     @SerializedName("count")
     private Integer count;
-
-    public List<InstagramData> getData() {
-        return data;
-    }
-
-    public void setData(List<InstagramData> data) {
-        this.data = data;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
 }

@@ -90,7 +90,7 @@ public class TwitterTweet {
     private TwitterTweet retweetedStatus;
 
     @Nullable
-    public String getCreatedAt() {
+    public String getCreatedTime() {
         return createdAt;
     }
 

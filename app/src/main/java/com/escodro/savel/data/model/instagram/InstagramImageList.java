@@ -1,6 +1,8 @@
 
 package com.escodro.savel.data.model.instagram;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -17,29 +19,14 @@ public class InstagramImageList {
 
     @SerializedName("standard_resolution")
     private InstagramResolution standardResolution;
+    private String mImageUrl;
 
-    public InstagramResolution getThumbnail() {
-        return thumbnail;
+    @Nullable
+    public String getImageUrl() {
+        String imageUrl = null;
+        if (standardResolution != null) {
+            imageUrl = standardResolution.getImageUrl();
+        }
+        return imageUrl;
     }
-
-    public void setThumbnail(InstagramResolution thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
-    public InstagramResolution getLowResolution() {
-        return lowResolution;
-    }
-
-    public void setLowResolution(InstagramResolution lowResolution) {
-        this.lowResolution = lowResolution;
-    }
-
-    public InstagramResolution getStandardResolution() {
-        return standardResolution;
-    }
-
-    public void setStandardResolution(InstagramResolution standardResolution) {
-        this.standardResolution = standardResolution;
-    }
-
 }

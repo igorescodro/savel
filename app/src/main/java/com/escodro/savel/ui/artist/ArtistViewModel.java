@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import com.escodro.savel.R;
 import com.escodro.savel.data.local.contract.ArtistContract;
 import com.escodro.savel.data.local.provider.ArtistProvider;
-import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.ui.artist.profile.ProfileFragment;
 import com.escodro.savel.ui.artist.timeline.TimelineFragment;
 import com.escodro.savel.ui.base.NetworkViewModel;
@@ -17,13 +17,13 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 
 /**
- * ViewModel responsible to request and provide {@link Artist} information to the descendant
+ * ViewModel responsible to request and provide {@link SavelArtist} information to the descendant
  * fragments.
  * <p/>
  * Created by Igor Escodro on 05/05/17.
  */
 
-public class ArtistViewModel extends NetworkViewModel<Artist> {
+public class ArtistViewModel extends NetworkViewModel<SavelArtist> {
 
     @Inject
     ProfileFragment mArtistFragment;
@@ -51,12 +51,12 @@ public class ArtistViewModel extends NetworkViewModel<Artist> {
     }
 
     @Override
-    public Observable<Artist> getObservable() {
+    public Observable<SavelArtist> getObservable() {
         return mContract.getArtist(mArtistId);
     }
 
     @Override
-    public void onResult(Artist result) {
+    public void onResult(SavelArtist result) {
         mProvider.storeData(result);
     }
 

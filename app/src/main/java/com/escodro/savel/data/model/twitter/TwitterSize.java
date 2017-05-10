@@ -20,37 +20,4 @@ public class TwitterSize {
 
     @SerializedName("small")
     private TwitterMeasure small;
-
-    public TwitterMeasure getMedium() {
-        return medium;
-    }
-
-    public void setMedium(TwitterMeasure medium) {
-        this.medium = medium;
-    }
-
-    public TwitterMeasure getThumb() {
-        return thumb;
-    }
-
-    public void setThumb(TwitterMeasure thumb) {
-        this.thumb = thumb;
-    }
-
-    public TwitterMeasure getLarge() {
-        return large;
-    }
-
-    public void setLarge(TwitterMeasure large) {
-        this.large = large;
-    }
-
-    public TwitterMeasure getSmall() {
-        return small;
-    }
-
-    public void setSmall(TwitterMeasure small) {
-        this.small = small;
-    }
-
 }

@@ -1,6 +1,8 @@
 
 package com.escodro.savel.data.model.twitter;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -84,204 +86,45 @@ public class TwitterTweet {
     @SerializedName("possibly_sensitive")
     private Boolean possiblySensitive;
 
+    @Nullable
     public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
+    @Nullable
     public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getIdStr() {
         return idStr;
     }
 
-    public void setIdStr(String idStr) {
-        this.idStr = idStr;
+    @Nullable
+    public String getUserName() {
+        String username = null;
+        if (user != null) {
+            username = user.getName();
+        }
+        return username;
     }
 
+    @Nullable
+    public String getScreenName() {
+        String screenName = null;
+        if (user != null) {
+            screenName = user.getScreenName();
+        }
+        return screenName;
+    }
+
+    @Nullable
+    public String getProfileImageUrl() {
+        String profilePicture = null;
+        if (user != null) {
+            profilePicture = user.getProfileImageUrl();
+        }
+        return profilePicture;
+    }
+
+    @Nullable
     public String getText() {
         return text;
     }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Boolean getTruncated() {
-        return truncated;
-    }
-
-    public void setTruncated(Boolean truncated) {
-        this.truncated = truncated;
-    }
-
-    public TwitterEntity getEntities() {
-        return entities;
-    }
-
-    public void setEntities(TwitterEntity entities) {
-        this.entities = entities;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public Object getInReplyToStatusId() {
-        return inReplyToStatusId;
-    }
-
-    public void setInReplyToStatusId(Object inReplyToStatusId) {
-        this.inReplyToStatusId = inReplyToStatusId;
-    }
-
-    public Object getInReplyToStatusIdStr() {
-        return inReplyToStatusIdStr;
-    }
-
-    public void setInReplyToStatusIdStr(Object inReplyToStatusIdStr) {
-        this.inReplyToStatusIdStr = inReplyToStatusIdStr;
-    }
-
-    public Object getInReplyToUserId() {
-        return inReplyToUserId;
-    }
-
-    public void setInReplyToUserId(Object inReplyToUserId) {
-        this.inReplyToUserId = inReplyToUserId;
-    }
-
-    public Object getInReplyToUserIdStr() {
-        return inReplyToUserIdStr;
-    }
-
-    public void setInReplyToUserIdStr(Object inReplyToUserIdStr) {
-        this.inReplyToUserIdStr = inReplyToUserIdStr;
-    }
-
-    public Object getInReplyToScreenName() {
-        return inReplyToScreenName;
-    }
-
-    public void setInReplyToScreenName(Object inReplyToScreenName) {
-        this.inReplyToScreenName = inReplyToScreenName;
-    }
-
-    public TwitterUser getUser() {
-        return user;
-    }
-
-    public void setUser(TwitterUser user) {
-        this.user = user;
-    }
-
-    public Object getGeo() {
-        return geo;
-    }
-
-    public void setGeo(Object geo) {
-        this.geo = geo;
-    }
-
-    public Object getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(Object coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public Object getPlace() {
-        return place;
-    }
-
-    public void setPlace(Object place) {
-        this.place = place;
-    }
-
-    public Object getContributors() {
-        return contributors;
-    }
-
-    public void setContributors(Object contributors) {
-        this.contributors = contributors;
-    }
-
-    public Boolean getIsQuoteStatus() {
-        return isQuoteStatus;
-    }
-
-    public void setIsQuoteStatus(Boolean isQuoteStatus) {
-        this.isQuoteStatus = isQuoteStatus;
-    }
-
-    public Integer getRetweetCount() {
-        return retweetCount;
-    }
-
-    public void setRetweetCount(Integer retweetCount) {
-        this.retweetCount = retweetCount;
-    }
-
-    public Integer getFavoriteCount() {
-        return favoriteCount;
-    }
-
-    public void setFavoriteCount(Integer favoriteCount) {
-        this.favoriteCount = favoriteCount;
-    }
-
-    public Boolean getFavorited() {
-        return favorited;
-    }
-
-    public void setFavorited(Boolean favorited) {
-        this.favorited = favorited;
-    }
-
-    public Boolean getRetweeted() {
-        return retweeted;
-    }
-
-    public void setRetweeted(Boolean retweeted) {
-        this.retweeted = retweeted;
-    }
-
-    public String getLang() {
-        return lang;
-    }
-
-    public void setLang(String lang) {
-        this.lang = lang;
-    }
-
-    public TwitterExtendedEntity getExtendedEntities() {
-        return extendedEntities;
-    }
-
-    public void setExtendedEntities(TwitterExtendedEntity extendedEntities) {
-        this.extendedEntities = extendedEntities;
-    }
-
-    public Boolean getPossiblySensitive() {
-        return possiblySensitive;
-    }
-
-    public void setPossiblySensitive(Boolean possiblySensitive) {
-        this.possiblySensitive = possiblySensitive;
-    }
-
 }

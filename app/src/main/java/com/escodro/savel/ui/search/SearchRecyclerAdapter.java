@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.escodro.savel.R;
-import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.databinding.ItemArtistSearchBinding;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
@@ -25,7 +25,7 @@ import javax.inject.Provider;
 public class SearchRecyclerAdapter extends
         RecyclerView.Adapter<BindingHolder<ItemArtistSearchBinding>> {
 
-    private final List<Artist> mArtistList;
+    private final List<SavelArtist> mArtistList;
 
     @Inject
     Context mContext;
@@ -71,7 +71,7 @@ public class SearchRecyclerAdapter extends
      *
      * @param list list of Artists
      */
-    public void updateSearchList(List<Artist> list) {
+    public void updateSearchList(List<SavelArtist> list) {
         mArtistList.clear();
         mArtistList.addAll(list);
         notifyDataSetChanged();

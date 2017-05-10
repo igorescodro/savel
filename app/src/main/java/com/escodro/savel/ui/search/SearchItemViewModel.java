@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.ui.artist.ArtistActivity;
 
 import javax.inject.Inject;
 
 /**
- * ViewModel responsible to provide {@link Artist} information to
+ * ViewModel responsible to provide {@link SavelArtist} information to
  * {@link com.escodro.savel.databinding.ItemArtistSearchBinding}.
  * <p/>
  * Created by Igor Escodro on 24/04/17.
@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 public class SearchItemViewModel {
 
-    private Artist mArtist;
+    private SavelArtist mArtist;
 
     @Inject
     Context mContext;
@@ -28,7 +28,7 @@ public class SearchItemViewModel {
     public SearchItemViewModel() {
     }
 
-    public void setArtist(@NonNull Artist artist) {
+    public void setArtist(@NonNull SavelArtist artist) {
         mArtist = artist;
     }
 

@@ -13,13 +13,4 @@ public class TwitterDescription {
 
     @SerializedName("urls")
     private List<Object> urls = null;
-
-    public List<Object> getUrls() {
-        return urls;
-    }
-
-    public void setUrls(List<Object> urls) {
-        this.urls = urls;
-    }
-
 }

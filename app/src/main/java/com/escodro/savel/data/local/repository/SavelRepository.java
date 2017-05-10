@@ -1,6 +1,6 @@
 package com.escodro.savel.data.local.repository;
 
-import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.remote.repository.DiscogsRepository;
 import com.escodro.savel.data.remote.repository.InstagramRepository;
@@ -46,13 +46,13 @@ public class SavelRepository {
     }
 
     /**
-     * Get the wrapped {@link Artist} from every music service.
+     * Get the wrapped {@link SavelArtist} from every music service.
      *
      * @param artistId artist MBID
      *
      * @return artist wrapper
      */
-    public Observable<Artist> getArtist(String artistId) {
+    public Observable<SavelArtist> getArtist(String artistId) {
         return mMusicBrainzRepository.getArtistInfo(artistId)
                 .flatMap(result -> {
                     mRelationParser.setRelationList(result.getRelations());
@@ -62,24 +62,24 @@ public class SavelRepository {
                             mTwitterRepository.getArtistTimeline(mRelationParser.getTwitterId()),
                             mSpotifyRepository.getArtistInfo(mRelationParser.getSpotifyId()),
                             mInstaRepository.getArtistTimeline(mRelationParser.getInstagramId()),
-                            Artist::new);
+                            SavelArtist::new);
                 });
     }
 
     /**
-     * Get the wrapped {@link List} of {@link Artist} from
+     * Get the wrapped {@link List} of {@link SavelArtist} from
      * {@link com.escodro.savel.data.remote.service.MusicBrainzService}.
      *
      * @param artistName artist name
      *
      * @return artist wrapper
      */
-    public Observable<List<Artist>> searchArtist(String artistName) {
+    public Observable<List<SavelArtist>> searchArtist(String artistName) {
         return mMusicBrainzRepository.searchArtist(artistName).map(
                 musicBrainzArtistList -> {
-                    final List<Artist> artists = new ArrayList<>();
+                    final List<SavelArtist> artists = new ArrayList<>();
                     for (MusicBrainzArtist mbArtist : musicBrainzArtistList.getArtists()) {
-                        artists.add(new Artist(mbArtist));
+                        artists.add(new SavelArtist(mbArtist));
                     }
                     return artists;
                 });

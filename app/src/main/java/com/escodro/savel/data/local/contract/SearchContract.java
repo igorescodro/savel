@@ -1,7 +1,7 @@
 package com.escodro.savel.data.local.contract;
 
 import com.escodro.savel.data.local.repository.SavelRepository;
-import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.ui.search.SearchViewModel;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class SearchContract extends BaseContract {
      *
      * @return observable of artist list
      */
-    public Observable<List<Artist>> searchArtist(String artistName) {
+    public Observable<List<SavelArtist>> searchArtist(String artistName) {
         return mSavelRepository.searchArtist(artistName).compose(applySchedulers());
     }
 }

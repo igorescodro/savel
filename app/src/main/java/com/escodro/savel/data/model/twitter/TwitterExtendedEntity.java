@@ -13,13 +13,4 @@ public class TwitterExtendedEntity {
 
     @SerializedName("media")
     private List<TwitterMedia> media = null;
-
-    public List<TwitterMedia> getMedia() {
-        return media;
-    }
-
-    public void setMedia(List<TwitterMedia> media) {
-        this.media = media;
-    }
-
 }

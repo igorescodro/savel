@@ -6,14 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.escodro.savel.R;
+import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.databinding.ActivityArtistBinding;
 import com.escodro.savel.injection.Injector;
 
 import javax.inject.Inject;
 
 /**
- * {@link AppCompatActivity} with the display information about
- * {@link com.escodro.savel.data.model.Artist}.
+ * {@link AppCompatActivity} with the display information about {@link SavelArtist}.
  * <p/>
  * Created by Igor Escodro on 17/04/17.
  */

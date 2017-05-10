@@ -7,7 +7,6 @@ import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.data.model.instagram.InstagramTimeline;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.model.spotify.SpotifyArtist;
-import com.escodro.savel.data.model.twitter.TwitterTweet;
 
 import java.util.List;
 
@@ -16,23 +15,23 @@ import java.util.List;
  * <p/>
  * Created by Igor Escodro on 17/04/17.
  */
-public class Artist {
+public class SavelArtist {
 
     private final MusicBrainzArtist mMusicBrainzArtist;
 
     private final DiscogsArtist mDiscogsArtist;
 
-    private final List<TwitterTweet> mTweetList;
+    private final List<SavelTweet> mTweetList;
 
     private final SpotifyArtist mSpotifyArtist;
 
     private final InstagramTimeline mInstaTimeline;
 
-    public Artist(MusicBrainzArtist musicBrainzArtist,
-                  DiscogsArtist discogsArtist,
-                  List<TwitterTweet> tweetList,
-                  SpotifyArtist spotifyArtist,
-                  InstagramTimeline instaTimeline) {
+    public SavelArtist(MusicBrainzArtist musicBrainzArtist,
+                       DiscogsArtist discogsArtist,
+                       List<SavelTweet> tweetList,
+                       SpotifyArtist spotifyArtist,
+                       InstagramTimeline instaTimeline) {
         mMusicBrainzArtist = musicBrainzArtist;
         mDiscogsArtist = discogsArtist;
         mTweetList = tweetList;
@@ -40,7 +39,7 @@ public class Artist {
         mInstaTimeline = instaTimeline;
     }
 
-    public Artist(MusicBrainzArtist musicBrainzArtist) {
+    public SavelArtist(MusicBrainzArtist musicBrainzArtist) {
         this(musicBrainzArtist, null, null, null, null);
     }
 
@@ -101,7 +100,7 @@ public class Artist {
     }
 
     @Nullable
-    public List<TwitterTweet> getTweetList() {
+    public List<SavelTweet> getTweetList() {
         return mTweetList;
     }
 

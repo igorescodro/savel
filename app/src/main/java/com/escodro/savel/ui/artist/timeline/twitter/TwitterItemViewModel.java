@@ -1,5 +1,6 @@
 package com.escodro.savel.ui.artist.timeline.twitter;
 
+import com.escodro.savel.data.model.SavelTweet;
 import com.escodro.savel.data.model.twitter.TwitterTweet;
 import com.escodro.savel.ui.base.TimelineEntryViewModel;
 
@@ -16,13 +17,13 @@ public class TwitterItemViewModel extends TimelineEntryViewModel {
 
     private static final String STATUS_PATH = "/status/";
 
-    private TwitterTweet mTweet;
+    private SavelTweet mTweet;
 
     @Inject
     public TwitterItemViewModel() {
     }
 
-    public void setTweet(TwitterTweet tweet) {
+    public void setTweet(SavelTweet tweet) {
         mTweet = tweet;
     }
 
@@ -31,11 +32,11 @@ public class TwitterItemViewModel extends TimelineEntryViewModel {
     }
 
     public String getName() {
-        return mTweet.getUser().getName();
+        return mTweet.getUsername();
     }
 
     public String getProfilePicture() {
-        return mTweet.getUser().getProfileImageUrl();
+        return mTweet.getProfileImageUrl();
     }
 
     /**
@@ -49,8 +50,8 @@ public class TwitterItemViewModel extends TimelineEntryViewModel {
      */
     @Override
     protected String getEntryUrl() {
-        final String username = mTweet.getUser().getScreenName();
-        final String tweetId = mTweet.getIdStr();
+        final String username = mTweet.getScreenName();
+        final String tweetId = mTweet.getId();
         return BASE_STATUS_URL + username + STATUS_PATH + tweetId;
     }
 }

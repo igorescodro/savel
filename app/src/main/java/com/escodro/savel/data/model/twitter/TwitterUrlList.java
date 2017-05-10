@@ -13,13 +13,4 @@ public class TwitterUrlList {
 
     @SerializedName("urls")
     private List<TwitterProfileUrl> urls = null;
-
-    public List<TwitterProfileUrl> getUrls() {
-        return urls;
-    }
-
-    public void setUrls(List<TwitterProfileUrl> urls) {
-        this.urls = urls;
-    }
-
 }

@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.escodro.savel.data.local.provider.ArtistProvider;
-import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryAdapter;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * ViewModel responsible to provide {@link Artist} information to {@link TimelineFragment}.
+ * ViewModel responsible to provide {@link SavelArtist} information to {@link TimelineFragment}.
  * <p/>
  * Created by IgorEscodro on 06/05/17.
  */
@@ -39,7 +39,7 @@ public class TimelineViewModel {
         provider.getObservable().subscribe(this::updateTimelineList);
     }
 
-    private void updateTimelineList(Artist artist) {
+    private void updateTimelineList(SavelArtist artist) {
         mAdapter.updateTimelineList(mTimelineAdapter.extractTimeline(artist));
     }
 

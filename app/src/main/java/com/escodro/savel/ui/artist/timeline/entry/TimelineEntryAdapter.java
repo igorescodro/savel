@@ -2,9 +2,9 @@ package com.escodro.savel.ui.artist.timeline.entry;
 
 import android.support.annotation.NonNull;
 
-import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.model.SavelArtist;
+import com.escodro.savel.data.model.SavelTweet;
 import com.escodro.savel.data.model.instagram.InstagramItem;
-import com.escodro.savel.data.model.twitter.TwitterTweet;
 import com.escodro.savel.ui.artist.timeline.instagram.InstagramEntry;
 import com.escodro.savel.ui.artist.timeline.twitter.TwitterEntry;
 
@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 /**
- * Adapter to convert the {@link Artist} attributes in a {@link List} of {@link TimelineEntryType}.
+ * Adapter to convert the {@link SavelArtist} attributes in a {@link List} of {@link TimelineEntryType}.
  * <p/>
  * Created by IgorEscodro on 06/05/17.
  */
@@ -35,13 +35,13 @@ public class TimelineEntryAdapter {
     }
 
     /**
-     * Extract a {@link List} of {@link TimelineEntryType} from an {@link Artist}.
+     * Extract a {@link List} of {@link TimelineEntryType} from an {@link SavelArtist}.
      *
      * @param artist artist with timeline attributes
      *
      * @return list of timeline entries
      */
-    public List<TimelineEntryType> extractTimeline(@NonNull Artist artist) {
+    public List<TimelineEntryType> extractTimeline(@NonNull SavelArtist artist) {
         final List<TimelineEntryType> timeline = new ArrayList<>();
         timeline.addAll(getTwitterEntries(artist.getTweetList()));
         timeline.addAll(getInstagramEntries(artist.getInstagramTimeline()));
@@ -51,13 +51,13 @@ public class TimelineEntryAdapter {
         return timeline;
     }
 
-    private List<TimelineEntryType> getTwitterEntries(List<TwitterTweet> tweets) {
+    private List<TimelineEntryType> getTwitterEntries(List<SavelTweet> tweets) {
         final List<TimelineEntryType> timeline = new ArrayList<>();
 
         if (tweets != null) {
-            for (TwitterTweet tweet : tweets) {
+            for (SavelTweet tweet : tweets) {
                 final TwitterEntry entry = mTwitterProvider.get();
-                entry.setTwitterTweet(tweet);
+                entry.setTweet(tweet);
                 timeline.add(entry);
             }
         }

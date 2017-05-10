@@ -1,7 +1,7 @@
 package com.escodro.savel.data.local.contract;
 
 import com.escodro.savel.data.local.repository.SavelRepository;
-import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.ui.artist.ArtistViewModel;
 
 import javax.inject.Inject;
@@ -30,7 +30,7 @@ public class ArtistContract extends BaseContract {
      *
      * @return observable of artist
      */
-    public Observable<Artist> getArtist(String artistId) {
+    public Observable<SavelArtist> getArtist(String artistId) {
         return mSavelRepository.getArtist(artistId).compose(applySchedulers());
     }
 }

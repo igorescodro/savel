@@ -10,7 +10,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
 import com.escodro.savel.data.local.contract.SearchContract;
-import com.escodro.savel.data.model.Artist;
+import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.databinding.ItemArtistSearchBinding;
 import com.escodro.savel.ui.base.NetworkViewModel;
 import com.escodro.savel.util.viewholder.BindingHolder;
@@ -28,7 +28,8 @@ import io.reactivex.Observable;
  * <p/>
  * Created by Igor Escodro on 24/04/17.
  */
-public class SearchViewModel extends NetworkViewModel<List<Artist>> implements Comparator<Artist> {
+public class SearchViewModel extends NetworkViewModel<List<SavelArtist>> implements
+        Comparator<SavelArtist> {
 
     /**
      * Two-way binding {@link ObservableField} to handle user input query.
@@ -60,12 +61,12 @@ public class SearchViewModel extends NetworkViewModel<List<Artist>> implements C
     }
 
     @Override
-    public Observable<List<Artist>> getObservable() {
+    public Observable<List<SavelArtist>> getObservable() {
         return mContract.searchArtist(mQuery.get());
     }
 
     @Override
-    public void onResult(List<Artist> result) {
+    public void onResult(List<SavelArtist> result) {
         mRecyclerViewVisibility.set(View.VISIBLE);
         result.sort(this);
         mAdapter.updateSearchList(result);
@@ -94,19 +95,20 @@ public class SearchViewModel extends NetworkViewModel<List<Artist>> implements C
     }
 
     /**
-     * Custom comparator to send all the {@link Artist}s without {@link Artist#getArea()} to the
-     * bottom of the list. This is needed once
-     * {@link com.escodro.savel.data.remote.service.MusicBrainzService} does not have a nice
-     * implementation of popularity and less famous artists can appear on top. Usually more
-     * famous artists have a better description (like {@link Artist#getArea()}.
+     * Custom comparator to send all the {@link SavelArtist}s without {@link SavelArtist#getArea()}
+     * to the bottom of the list. This is needed once
+     * {@link com.escodro.savel.data.remote.service.MusicBrainzService}
+     * does not have a nice implementation of popularity and less famous artists can appear on top.
+     * Usually more famous artists have a better description (like {@link SavelArtist#getArea()}.
      *
      * @param t0 first artist to compare
      * @param t1 second artist to compare
      *
-     * @return relegation of {@link Artist} with <code>null</code> {@link Artist#getArea()}
+     * @return relegation of {@link SavelArtist} with <code>null</code> {@link
+     * SavelArtist#getArea()}
      */
     @Override
-    public int compare(Artist t0, Artist t1) {
+    public int compare(SavelArtist t0, SavelArtist t1) {
         if (TextUtils.equals(t0.getArea(), t1.getArea())) {
             return 0;
         }

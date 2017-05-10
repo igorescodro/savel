@@ -9,12 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.escodro.savel.R;
+import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.databinding.FragmentArtistTimelineBinding;
 
 import javax.inject.Inject;
 
 /**
- * {@link Fragment} containing the Timeline of {@link com.escodro.savel.data.model.Artist}.
+ * {@link Fragment} containing the Timeline of {@link SavelArtist}.
  * <p/>
  * Created by IgorEscodro on 06/05/17.
  */

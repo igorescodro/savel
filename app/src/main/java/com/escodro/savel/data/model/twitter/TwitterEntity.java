@@ -25,45 +25,4 @@ public class TwitterEntity {
 
     @SerializedName("media")
     private List<TwitterMedia> media = null;
-
-    public List<TwitterHashtag> getHashtags() {
-        return hashtags;
-    }
-
-    public void setHashtags(List<TwitterHashtag> hashtags) {
-        this.hashtags = hashtags;
-    }
-
-    public List<String> getSymbols() {
-        return symbols;
-    }
-
-    public void setSymbols(List<String> symbols) {
-        this.symbols = symbols;
-    }
-
-    public List<TwitterUserMention> getUserMentions() {
-        return userMentions;
-    }
-
-    public void setUserMentions(List<TwitterUserMention> userMentions) {
-        this.userMentions = userMentions;
-    }
-
-    public List<TwitterProfileUrl> getUrls() {
-        return urls;
-    }
-
-    public void setUrls(List<TwitterProfileUrl> urls) {
-        this.urls = urls;
-    }
-
-    public List<TwitterMedia> getMedia() {
-        return media;
-    }
-
-    public void setMedia(List<TwitterMedia> media) {
-        this.media = media;
-    }
-
 }

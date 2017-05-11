@@ -16,29 +16,4 @@ public class MusicBrainzLifeSpan {
 
     @SerializedName("begin")
     private String begin;
-
-    public Boolean getEnded() {
-        return ended;
-    }
-
-    public void setEnded(Boolean ended) {
-        this.ended = ended;
-    }
-
-    public Object getEnd() {
-        return end;
-    }
-
-    public void setEnd(Object end) {
-        this.end = end;
-    }
-
-    public String getBegin() {
-        return begin;
-    }
-
-    public void setBegin(String begin) {
-        this.begin = begin;
-    }
-
 }

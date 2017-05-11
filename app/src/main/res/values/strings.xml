@@ -11,6 +11,7 @@
 
     <string name="item.menu.artist.profile">Profile</string>
     <string name="item.menu.artist.timeline">Timeline</string>
+    <string name="item.menu.artist.releases">Releases</string>
 
     <string name="twitter.timeline.retweeted">%s retweeted</string>
 </resources>

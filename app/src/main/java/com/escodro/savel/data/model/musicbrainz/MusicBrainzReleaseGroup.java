@@ -1,5 +1,7 @@
 package com.escodro.savel.data.model.musicbrainz;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -34,68 +36,23 @@ public class MusicBrainzReleaseGroup {
     @SerializedName("secondary-types")
     private List<String> secondaryTypes = null;
 
-    public String getPrimaryTypeId() {
-        return primaryTypeId;
-    }
-
-    public void setPrimaryTypeId(String primaryTypeId) {
-        this.primaryTypeId = primaryTypeId;
-    }
-
+    @Nullable
     public String getPrimaryType() {
         return primaryType;
     }
 
-    public void setPrimaryType(String primaryType) {
-        this.primaryType = primaryType;
-    }
-
+    @Nullable
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDisambiguation() {
-        return disambiguation;
-    }
-
-    public void setDisambiguation(String disambiguation) {
-        this.disambiguation = disambiguation;
-    }
-
-    public List<String> getSecondaryTypeIds() {
-        return secondaryTypeIds;
-    }
-
-    public void setSecondaryTypeIds(List<String> secondaryTypeIds) {
-        this.secondaryTypeIds = secondaryTypeIds;
-    }
-
-    public String getFirstReleaseDate() {
-        return firstReleaseDate;
-    }
-
-    public void setFirstReleaseDate(String firstReleaseDate) {
-        this.firstReleaseDate = firstReleaseDate;
-    }
-
+    @Nullable
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    @Nullable
+    public String getReleaseDate() {
+        return firstReleaseDate;
     }
-
-    public List<String> getSecondaryTypes() {
-        return secondaryTypes;
-    }
-
-    public void setSecondaryTypes(List<String> secondaryTypes) {
-        this.secondaryTypes = secondaryTypes;
-    }
-
 }

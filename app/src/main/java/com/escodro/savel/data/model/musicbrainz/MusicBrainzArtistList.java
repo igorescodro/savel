@@ -1,7 +1,10 @@
 package com.escodro.savel.data.model.musicbrainz;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,36 +25,11 @@ public class MusicBrainzArtistList {
     @SerializedName("artists")
     private List<MusicBrainzArtist> artists = null;
 
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Integer offset) {
-        this.offset = offset;
-    }
-
+    @NonNull
     public List<MusicBrainzArtist> getArtists() {
+        if (artists == null) {
+            artists = new ArrayList<>();
+        }
         return artists;
     }
-
-    public void setArtists(List<MusicBrainzArtist> artists) {
-        this.artists = artists;
-    }
-
 }

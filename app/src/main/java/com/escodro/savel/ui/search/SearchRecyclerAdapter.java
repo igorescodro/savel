@@ -27,17 +27,14 @@ public class SearchRecyclerAdapter extends
 
     private final List<SavelArtist> mArtistList;
 
-    @Inject
-    Context mContext;
+    private Context mContext;
 
-    /**
-     * {@link Provider} of {@link SearchItemViewModel} to return new instances for each row.
-     */
     @Inject
     Provider<SearchItemViewModel> mViewModelProvider;
 
     @Inject
-    public SearchRecyclerAdapter() {
+    public SearchRecyclerAdapter(Context context) {
+        mContext = context;
         mArtistList = new ArrayList<>();
     }
 

@@ -81,8 +81,12 @@ public class RelationParser {
      */
     private void processList() {
         for (MusicBrainzRelation relation : mRelationList) {
-            final String url = relation.getUrl().getResource();
-            switch (relation.getType()) {
+            final String url = relation.getUrl();
+            final String type = relation.getType();
+
+            if (type == null) return;
+
+            switch (type) {
                 case DISCOGS:
                     mDiscogsId = extractIdFromLastPath(url);
                     break;

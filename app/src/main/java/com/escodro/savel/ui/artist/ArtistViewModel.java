@@ -9,6 +9,7 @@ import com.escodro.savel.data.local.contract.ArtistContract;
 import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.ui.artist.profile.ProfileFragment;
+import com.escodro.savel.ui.artist.releases.ReleaseFragment;
 import com.escodro.savel.ui.artist.timeline.TimelineFragment;
 import com.escodro.savel.ui.base.NetworkViewModel;
 
@@ -22,7 +23,6 @@ import io.reactivex.Observable;
  * <p/>
  * Created by Igor Escodro on 05/05/17.
  */
-
 public class ArtistViewModel extends NetworkViewModel<SavelArtist> {
 
     @Inject
@@ -30,6 +30,9 @@ public class ArtistViewModel extends NetworkViewModel<SavelArtist> {
 
     @Inject
     TimelineFragment mTimelineFragment;
+
+    @Inject
+    ReleaseFragment mReleaseFragment;
 
     @Inject
     ArtistContract mContract;
@@ -69,6 +72,9 @@ public class ArtistViewModel extends NetworkViewModel<SavelArtist> {
                     break;
                 case R.id.menu_artist_timeline:
                     fragment = mTimelineFragment;
+                    break;
+                case R.id.menu_artist_releases:
+                    fragment = mReleaseFragment;
                     break;
             }
             replaceWithFragment(fragment);

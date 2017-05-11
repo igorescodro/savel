@@ -11,4 +11,9 @@
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="@string/item.menu.artist.timeline"/>
 
+    <item
+        android:id="@+id/menu_artist_releases"
+        android:icon="@android:drawable/ic_menu_slideshow"
+        android:title="@string/item.menu.artist.releases"/>
+
 </menu>

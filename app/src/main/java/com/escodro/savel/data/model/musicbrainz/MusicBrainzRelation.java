@@ -1,6 +1,8 @@
 
 package com.escodro.savel.data.model.musicbrainz;
 
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -44,92 +46,17 @@ public class MusicBrainzRelation {
     @SerializedName("target-type")
     private String targetType;
 
-    public MusicBrainzUrl getUrl() {
-        return url;
+    @Nullable
+    public String getUrl() {
+        String urlStr = null;
+        if (url != null) {
+            urlStr = url.getUrl();
+        }
+        return urlStr;
     }
 
-    public void setUrl(MusicBrainzUrl url) {
-        this.url = url;
-    }
-
-    public String getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(String typeId) {
-        this.typeId = typeId;
-    }
-
-    public List<Object> getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(List<Object> attributes) {
-        this.attributes = attributes;
-    }
-
-    public String getTargetCredit() {
-        return targetCredit;
-    }
-
-    public void setTargetCredit(String targetCredit) {
-        this.targetCredit = targetCredit;
-    }
-
-    public Object getBegin() {
-        return begin;
-    }
-
-    public void setBegin(Object begin) {
-        this.begin = begin;
-    }
-
+    @Nullable
     public String getType() {
         return type;
     }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Object getEnd() {
-        return end;
-    }
-
-    public void setEnd(Object end) {
-        this.end = end;
-    }
-
-    public Boolean getEnded() {
-        return ended;
-    }
-
-    public void setEnded(Boolean ended) {
-        this.ended = ended;
-    }
-
-    public String getDirection() {
-        return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
-    }
-
-    public String getSourceCredit() {
-        return sourceCredit;
-    }
-
-    public void setSourceCredit(String sourceCredit) {
-        this.sourceCredit = sourceCredit;
-    }
-
-    public String getTargetType() {
-        return targetType;
-    }
-
-    public void setTargetType(String targetType) {
-        this.targetType = targetType;
-    }
-
 }

@@ -1,11 +1,14 @@
 package com.escodro.savel.data.model;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.escodro.savel.data.model.discogs.DiscogsArtist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
+import com.escodro.savel.data.model.musicbrainz.MusicBrainzReleaseGroup;
 import com.escodro.savel.data.model.spotify.SpotifyArtist;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,11 +22,13 @@ public class SavelArtist {
 
     private final DiscogsArtist mDiscogsArtist;
 
-    private final List<SavelTweet> mTweetList;
+    private List<SavelTweet> mTweetList;
 
     private final SpotifyArtist mSpotifyArtist;
 
-    private final List<SavelInstagram> mInstaTimeline;
+    private List<SavelInstagram> mInstaTimeline;
+
+    private List<SavelRelease> mReleases;
 
     public SavelArtist(MusicBrainzArtist musicBrainzArtist,
                        DiscogsArtist discogsArtist,
@@ -35,6 +40,7 @@ public class SavelArtist {
         mTweetList = tweetList;
         mSpotifyArtist = spotifyArtist;
         mInstaTimeline = instaTimeline;
+        mReleases = convertToReleases();
     }
 
     public SavelArtist(MusicBrainzArtist musicBrainzArtist) {
@@ -88,22 +94,49 @@ public class SavelArtist {
         return image;
     }
 
+    @Nullable
     public String getArea() {
         String area = null;
 
         if (mMusicBrainzArtist != null && mMusicBrainzArtist.getArea() != null) {
-            area = mMusicBrainzArtist.getArea().getName();
+            area = mMusicBrainzArtist.getArea();
         }
         return area;
     }
 
-    @Nullable
+    @NonNull
     public List<SavelTweet> getTweetList() {
+        if (mTweetList == null) {
+            mTweetList = new ArrayList<>();
+        }
         return mTweetList;
     }
 
-    @Nullable
+    @NonNull
     public List<SavelInstagram> getInstagramTimeline() {
+        if (mInstaTimeline == null) {
+            mInstaTimeline = new ArrayList<>();
+        }
         return mInstaTimeline;
+    }
+
+    @NonNull
+    public List<SavelRelease> getReleases() {
+        if (mReleases == null) {
+            mReleases = new ArrayList<>();
+        }
+        return mReleases;
+    }
+
+    @NonNull
+    private List<SavelRelease> convertToReleases() {
+        final List<SavelRelease> releases = new ArrayList<>();
+        final List<MusicBrainzReleaseGroup> mbReleases = mMusicBrainzArtist.getReleases();
+        for (MusicBrainzReleaseGroup releaseGroup : mbReleases) {
+            final SavelRelease release = new SavelRelease();
+            release.setReleaseGroup(releaseGroup);
+            releases.add(release);
+        }
+        return releases;
     }
 }

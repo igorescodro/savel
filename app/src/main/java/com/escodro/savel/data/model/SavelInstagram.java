@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.escodro.savel.data.model.instagram.InstagramItem;
+import com.escodro.savel.util.adapter.DateConverter;
 
 import javax.inject.Inject;
 
@@ -19,6 +20,9 @@ public class SavelInstagram {
     private InstagramItem mInstagramItem;
 
     @Inject
+    DateConverter mDateFormatter;
+
+    @Inject
     public SavelInstagram() {
     }
 
@@ -26,11 +30,10 @@ public class SavelInstagram {
         mInstagramItem = instagramItem;
     }
 
-    @Nullable
-    public String getCreatedTime() {
-        String creationDate = null;
-        if (mInstagramItem != null) {
-            creationDate = mInstagramItem.getCreatedTime();
+    public long getCreatedTime() {
+        long creationDate = 0;
+        if (mInstagramItem != null && mInstagramItem.getCreatedTime() != null) {
+            creationDate = mDateFormatter.unixTimestampToMillis(mInstagramItem.getCreatedTime());
         }
         return creationDate;
     }

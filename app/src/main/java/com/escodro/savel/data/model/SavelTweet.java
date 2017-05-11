@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.escodro.savel.data.model.twitter.TwitterTweet;
+import com.escodro.savel.util.adapter.DateConverter;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -17,10 +18,15 @@ import javax.inject.Provider;
  */
 public class SavelTweet {
 
+    private static final String TWITTER_DATE_FORMAT = "EEE MMM dd HH:mm:ss z yyyy";
+
     private TwitterTweet mTweetEntity;
 
     @Inject
     Provider<SavelTweet> mRetweetProvider;
+
+    @Inject
+    DateConverter mDateFormatter;
 
     @Inject
     public SavelTweet() {
@@ -30,11 +36,11 @@ public class SavelTweet {
         mTweetEntity = tweetEntity;
     }
 
-    @Nullable
-    public String getCreatedTime() {
-        String creationDate = null;
-        if (mTweetEntity != null) {
-            creationDate = mTweetEntity.getCreatedTime();
+    public long getCreatedTime() {
+        long creationDate = 0;
+        if (mTweetEntity != null && mTweetEntity.getCreatedTime() != null) {
+            creationDate = mDateFormatter
+                    .timeToMillis(mTweetEntity.getCreatedTime(), TWITTER_DATE_FORMAT);
         }
         return creationDate;
     }

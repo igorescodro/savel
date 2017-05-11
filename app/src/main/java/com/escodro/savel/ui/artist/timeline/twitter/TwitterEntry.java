@@ -4,7 +4,6 @@ import com.escodro.savel.data.model.SavelTweet;
 import com.escodro.savel.data.model.twitter.TwitterTweet;
 import com.escodro.savel.databinding.ItemTimelineTwitterBinding;
 import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryType;
-import com.escodro.savel.util.adapter.DateConverter;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import javax.inject.Inject;
@@ -18,15 +17,10 @@ import javax.inject.Provider;
  */
 public class TwitterEntry implements TimelineEntryType {
 
-    private static final String TWITTER_DATE_FORMAT = "EEE MMM dd HH:mm:ss z yyyy";
-
     private SavelTweet mTweet;
 
     @Inject
     Provider<TwitterItemViewModel> mViewModelProvider;
-
-    @Inject
-    DateConverter mDateFormatter;
 
     @Inject
     public TwitterEntry() {
@@ -45,15 +39,9 @@ public class TwitterEntry implements TimelineEntryType {
         viewModel.setTweet(mTweet);
     }
 
-    /**
-     * Convert from "{@value TwitterEntry#TWITTER_DATE_FORMAT}" format used by
-     * {@link com.escodro.savel.data.remote.service.TwitterService} to milliseconds
-     *
-     * @return time in milliseconds
-     */
     @Override
     public long getEntryTimeInMillis() {
-        return mDateFormatter.timeToMillis(mTweet.getCreatedTime(), TWITTER_DATE_FORMAT);
+        return mTweet.getCreatedTime();
     }
 
     /**

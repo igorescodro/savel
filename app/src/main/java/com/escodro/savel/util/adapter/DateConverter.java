@@ -1,5 +1,8 @@
 package com.escodro.savel.util.adapter;
 
+import android.content.Context;
+import android.text.format.DateUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,11 +20,14 @@ import timber.log.Timber;
  */
 public class DateConverter {
 
+    private final Context mContext;
+
     /**
      * Default injectable constructor.
      */
     @Inject
-    public DateConverter() {
+    public DateConverter(Context context) {
+        mContext = context;
     }
 
     /**
@@ -55,5 +61,20 @@ public class DateConverter {
      */
     public long unixTimestampToMillis(String formattedDate) {
         return Long.valueOf(formattedDate) * 1000;
+    }
+
+    /**
+     * Return the relative date based on the current date. E.g: "10:18AM" if the occurrence
+     * occurred today and "May 10" if occurred yesterday.
+     *
+     * @param timeInMillis time in milliseconds
+     *
+     * @return formatted relative date
+     */
+    public String getRelativeDateTimeString(long timeInMillis) {
+        return DateUtils.getRelativeTimeSpanString(
+                mContext,
+                timeInMillis,
+                false).toString();
     }
 }

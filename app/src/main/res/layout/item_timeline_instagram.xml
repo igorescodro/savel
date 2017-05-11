@@ -32,6 +32,18 @@
             android:textSize="18sp"
             android:textStyle="bold"/>
 
+        <TextView
+            android:id="@+id/tv_insta_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_insta_name"
+            android:layout_alignTop="@id/tv_insta_name"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/tv_insta_name"
+            android:gravity="top"
+            android:text="@{viewModel.creationTime}"
+            android:textSize="18sp"/>
+
         <com.escodro.savel.ui.common.SquareImageView
             android:id="@+id/tv_insta_image"
             android:layout_width="match_parent"

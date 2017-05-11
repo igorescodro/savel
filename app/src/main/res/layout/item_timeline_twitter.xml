@@ -55,6 +55,18 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:id="@+id/tv_tweet_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_tweet_name"
+            android:layout_alignTop="@id/tv_tweet_name"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/tv_tweet_name"
+            android:gravity="top"
+            android:text="@{viewModel.creationTime}"
+            android:textSize="18sp"/>
+
+        <TextView
             android:id="@+id/tv_tweet_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

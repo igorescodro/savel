@@ -32,7 +32,7 @@ public class MusicBrainzRepository {
      * @return observable of MusicBrainz Artist entity
      */
     public Observable<MusicBrainzArtist> getArtistInfo(String artistId) {
-        return mService.getArtistById(artistId);
+        return mService.getArtistById(artistId).retry();
     }
 
     /**
@@ -49,6 +49,6 @@ public class MusicBrainzRepository {
      * @return observable of MusicBrainz Artist List entity
      */
     public Observable<MusicBrainzArtistList> searchArtist(String artistName) {
-        return mService.searchArtist(artistName);
+        return mService.searchArtist(artistName).retry();
     }
 }

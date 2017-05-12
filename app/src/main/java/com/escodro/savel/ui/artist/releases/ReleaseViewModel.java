@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.databinding.ItemArtistReleaseBinding;
+import com.escodro.savel.injection.qualifier.LayoutHorizontal;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import javax.inject.Inject;
@@ -24,9 +25,11 @@ public class ReleaseViewModel {
     ReleaseRecyclerAdapter mAdapter;
 
     @Inject
+    @LayoutHorizontal
     Provider<LinearLayoutManager> mLayoutManagerProvider;
 
     @Inject
+    @LayoutHorizontal
     DividerItemDecoration mItemDecoration;
 
     /**

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.model.SavelArtist;
+import com.escodro.savel.injection.qualifier.LayoutVertical;
 import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryAdapter;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
@@ -23,9 +24,11 @@ public class TimelineViewModel {
     TimelineRecyclerAdapter mAdapter;
 
     @Inject
+    @LayoutVertical
     Provider<LinearLayoutManager> mLayoutManagerProvider;
 
     @Inject
+    @LayoutVertical
     DividerItemDecoration mItemDecoration;
 
     @Inject

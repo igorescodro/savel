@@ -6,6 +6,7 @@ import com.escodro.savel.injection.module.GsonModule;
 import com.escodro.savel.injection.module.NetworkModule;
 import com.escodro.savel.injection.module.OkHttpInterceptorModule;
 import com.escodro.savel.injection.module.ProviderModule;
+import com.escodro.savel.injection.module.ViewModule;
 import com.escodro.savel.ui.artist.ArtistActivity;
 import com.escodro.savel.ui.search.SearchActivity;
 
@@ -24,7 +25,8 @@ import dagger.Component;
         GsonModule.class,
         NetworkModule.class,
         OkHttpInterceptorModule.class,
-        ProviderModule.class})
+        ProviderModule.class,
+        ViewModule.class})
 public interface ApplicationComponent {
 
     void inject(SavelApplication savelApplication);

@@ -37,15 +37,4 @@ public class ApplicationModule {
     Context provideContext() {
         return mApplication.getApplicationContext();
     }
-
-    @Provides
-    LinearLayoutManager provideLinearLayoutManager(Context context) {
-        return new LinearLayoutManager(context);
-    }
-
-    @Provides
-    DividerItemDecoration provideDividerItemDecoration(Context context,
-                                                       LinearLayoutManager layoutManager) {
-        return new DividerItemDecoration(context, layoutManager.getOrientation());
-    }
 }

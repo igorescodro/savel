@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.escodro.savel.data.local.contract.SearchContract;
 import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.databinding.ItemArtistSearchBinding;
+import com.escodro.savel.injection.qualifier.LayoutVertical;
 import com.escodro.savel.ui.base.NetworkViewModel;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
@@ -49,9 +50,11 @@ public class SearchViewModel extends NetworkViewModel<List<SavelArtist>> impleme
     SearchRecyclerAdapter mAdapter;
 
     @Inject
+    @LayoutVertical
     LinearLayoutManager mLayoutManager;
 
     @Inject
+    @LayoutVertical
     DividerItemDecoration mItemDecoration;
 
     @Inject

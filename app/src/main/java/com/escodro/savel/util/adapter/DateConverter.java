@@ -41,7 +41,7 @@ public class DateConverter {
     public long timeToMillis(String formattedDate, String format) {
         long timeInMillis = 0;
         final Calendar cal = Calendar.getInstance();
-        final SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.getDefault());
+        final SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.ENGLISH);
         try {
             cal.setTime(sdf.parse(formattedDate));
             timeInMillis = cal.getTimeInMillis();

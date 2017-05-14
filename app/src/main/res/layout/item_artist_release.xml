@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,21 +9,31 @@
             type="com.escodro.savel.ui.artist.releases.ReleaseItemViewModel"/>
     </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
+    <RelativeLayout
+        android:layout_width="144dp"
+        android:layout_height="160dp"
         android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_release_cover"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            bind:image="@{viewModel.imageUrl}"/>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="24dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/iv_release_cover"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:ellipsize="end"
-            android:gravity="center_vertical"
             android:maxLines="1"
             android:text="@{viewModel.title}"
             android:textSize="@dimen/font_normal"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </layout>

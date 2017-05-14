@@ -18,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             bind:adapter="@{viewModel.recyclerViewAdapter}"
-            bind:item_decoration="@{viewModel.itemDecoration}"
             bind:layout_manager="@{viewModel.linearLayoutManager}"/>
 
     </LinearLayout>

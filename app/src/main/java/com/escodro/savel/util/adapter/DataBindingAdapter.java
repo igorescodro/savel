@@ -26,15 +26,16 @@ public class DataBindingAdapter {
      */
     @BindingAdapter("bind:image")
     public static void setImageResource(ImageView imageView, String resource) {
-        if (TextUtils.isEmpty(resource)) {
-            return;
-        }
+        if (!TextUtils.isEmpty(resource)) {
+            Picasso.with(imageView.getContext())
+                    .load(resource)
+                    .fit()
+                    .centerCrop()
+                    .into(imageView);
 
-        Picasso.with(imageView.getContext())
-                .load(resource)
-                .fit()
-                .centerCrop()
-                .into(imageView);
+        } else {
+            imageView.setImageDrawable(null);
+        }
     }
 
     /**

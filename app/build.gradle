@@ -33,6 +33,8 @@ android {
             buildConfigField 'String', 'API_SPOTIFY_ENDPOINT', "\"https://api.spotify.com/v1/\""
             buildConfigField 'String', 'API_INSTAGRAM_ENDPOINT', "\"https://www.instagram.com\""
 
+            buildConfigField 'String', 'API_COVER_ART_ENDPOINT', "\"https://coverartarchive.org/release-group/%s/front-250\""
+
             buildConfigField 'String', 'KEY_DISCOGS_API', keystoreProperties['DiscogsApiKey']
             buildConfigField 'String', 'KEY_TWITTER_API', keystoreProperties['TwitterApiKey']
         }

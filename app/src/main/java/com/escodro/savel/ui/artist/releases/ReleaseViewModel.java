@@ -1,6 +1,5 @@
 package com.escodro.savel.ui.artist.releases;
 
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -28,10 +27,6 @@ public class ReleaseViewModel {
     @LayoutHorizontal
     Provider<LinearLayoutManager> mLayoutManagerProvider;
 
-    @Inject
-    @LayoutHorizontal
-    DividerItemDecoration mItemDecoration;
-
     /**
      * Default injectable constructor to be used in {@link ReleaseFragment}.
      */
@@ -50,9 +45,5 @@ public class ReleaseViewModel {
 
     public LinearLayoutManager getLinearLayoutManager() {
         return mLayoutManagerProvider.get();
-    }
-
-    public DividerItemDecoration getItemDecoration() {
-        return mItemDecoration;
     }
 }

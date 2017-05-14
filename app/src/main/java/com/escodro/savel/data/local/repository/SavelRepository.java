@@ -1,7 +1,14 @@
 package com.escodro.savel.data.local.repository;
 
+import android.support.annotation.NonNull;
+
 import com.escodro.savel.data.model.SavelArtist;
+import com.escodro.savel.data.model.SavelInstagram;
+import com.escodro.savel.data.model.SavelTweet;
+import com.escodro.savel.data.model.instagram.InstagramItem;
+import com.escodro.savel.data.model.instagram.InstagramTimeline;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
+import com.escodro.savel.data.model.twitter.TwitterTweet;
 import com.escodro.savel.data.remote.repository.DiscogsRepository;
 import com.escodro.savel.data.remote.repository.InstagramRepository;
 import com.escodro.savel.data.remote.repository.MusicBrainzRepository;
@@ -13,8 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Function;
 
 /**
  * Local repository which wrap the content from every remote service used in the application.
@@ -39,6 +48,12 @@ public class SavelRepository {
     InstagramRepository mInstaRepository;
 
     @Inject
+    Provider<SavelInstagram> mInstagramProvider;
+
+    @Inject
+    Provider<SavelTweet> mTweetProvider;
+
+    @Inject
     RelationParser mRelationParser;
 
     @Inject
@@ -59,9 +74,11 @@ public class SavelRepository {
                     return Observable.zip(
                             Observable.just(result),
                             mDiscogsRepository.getArtist(mRelationParser.getDiscogsId()),
-                            mTwitterRepository.getArtistTimeline(mRelationParser.getTwitterId()),
+                            mTwitterRepository.getArtistTimeline(mRelationParser.getTwitterId())
+                                    .map(convertToTwitterList()),
                             mSpotifyRepository.getArtistInfo(mRelationParser.getSpotifyId()),
-                            mInstaRepository.getArtistTimeline(mRelationParser.getInstagramId()),
+                            mInstaRepository.getArtistTimeline(mRelationParser.getInstagramId())
+                                    .map(convertToInstagramList()),
                             SavelArtist::new);
                 });
     }
@@ -83,5 +100,34 @@ public class SavelRepository {
                     }
                     return artists;
                 });
+    }
+
+    @NonNull
+    private Function<InstagramTimeline, List<SavelInstagram>> convertToInstagramList() {
+        return instagramTimeline -> {
+            final List<SavelInstagram> timeline = new ArrayList<>();
+            final List<InstagramItem> items = instagramTimeline.getItems();
+            if (items != null) {
+                for (InstagramItem item : items) {
+                    final SavelInstagram instagram = mInstagramProvider.get();
+                    instagram.setInstagramItem(item);
+                    timeline.add(instagram);
+                }
+            }
+            return timeline;
+        };
+    }
+
+    @NonNull
+    private Function<List<TwitterTweet>, List<SavelTweet>> convertToTwitterList() {
+        return tweetList -> {
+            final List<SavelTweet> tweets = new ArrayList<>();
+            for (TwitterTweet tweetEntity : tweetList) {
+                final SavelTweet tweet = mTweetProvider.get();
+                tweet.setTweetEntity(tweetEntity);
+                tweets.add(tweet);
+            }
+            return tweets;
+        };
     }
 }

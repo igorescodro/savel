@@ -55,7 +55,7 @@ public abstract class ObservableProvider<T> {
     /**
      * Notifies the subscribers when a change ws made in the provider.
      */
-    protected void notifyChange() {
+    private void notifyChange() {
         mPublishSubject.onNext(retrieveData());
     }
 }

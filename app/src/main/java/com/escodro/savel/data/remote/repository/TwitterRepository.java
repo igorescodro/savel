@@ -1,7 +1,5 @@
 package com.escodro.savel.data.remote.repository;
 
-import android.support.annotation.NonNull;
-
 import com.escodro.savel.data.model.SavelTweet;
 import com.escodro.savel.data.model.twitter.TwitterTweet;
 import com.escodro.savel.data.remote.service.TwitterService;
@@ -11,10 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
@@ -26,9 +22,6 @@ import retrofit2.Retrofit;
 public class TwitterRepository {
 
     private final TwitterService mService;
-
-    @Inject
-    Provider<SavelTweet> mTweetProvider;
 
     @Inject
     public TwitterRepository(@Twitter Retrofit retrofit) {
@@ -46,27 +39,13 @@ public class TwitterRepository {
      *
      * @return observable of Tweets List entity
      */
-    public Observable<List<SavelTweet>> getArtistTimeline(String username) {
-        Observable<List<SavelTweet>> observable = Observable.just(new ArrayList<>());
+    public Observable<List<TwitterTweet>> getArtistTimeline(String username) {
+        Observable<List<TwitterTweet>> observable = Observable.just(new ArrayList<>());
         if (username != null) {
             observable = mService.getArtistTimeline(username)
-                    .map(convertToTwitterList())
                     .onErrorReturnItem(new ArrayList<>())
                     .subscribeOn(Schedulers.newThread());
         }
         return observable;
-    }
-
-    @NonNull
-    private Function<List<TwitterTweet>, List<SavelTweet>> convertToTwitterList() {
-        return tweetList -> {
-            final List<SavelTweet> tweets = new ArrayList<>();
-            for (TwitterTweet tweetEntity : tweetList) {
-                final SavelTweet tweet = mTweetProvider.get();
-                tweet.setTweetEntity(tweetEntity);
-                tweets.add(tweet);
-            }
-            return tweets;
-        };
     }
 }

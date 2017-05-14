@@ -5,7 +5,7 @@ import android.databinding.ObservableField;
 import android.view.View;
 
 import com.escodro.savel.data.model.NetworkError;
-import com.escodro.savel.util.adapter.NetworkErrorAdapter;
+import com.escodro.savel.util.adapter.NetworkErrorHandler;
 
 import javax.inject.Inject;
 
@@ -41,7 +41,7 @@ public abstract class NetworkViewModel<T> extends BaseObservable {
     public final ObservableField<NetworkError> networkError;
 
     @Inject
-    NetworkErrorAdapter mNetworkErrorAdapter;
+    NetworkErrorHandler mNetworkErrorHandler;
 
     public NetworkViewModel() {
         networkErrorVisibility = new ObservableField<>(View.GONE);
@@ -87,7 +87,7 @@ public abstract class NetworkViewModel<T> extends BaseObservable {
      * @param throwable error thrown by the observables
      */
     private void showNetworkErrorScreen(Throwable throwable) {
-        networkError.set(mNetworkErrorAdapter.handleError(throwable));
+        networkError.set(mNetworkErrorHandler.handleError(throwable));
         networkErrorVisibility.set(View.VISIBLE);
         loadingVisibility.set(View.GONE);
     }

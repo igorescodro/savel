@@ -13,20 +13,20 @@ import javax.inject.Inject;
 import retrofit2.HttpException;
 
 /**
- * Adapter to convert an {@link Throwable} in a {@link NetworkError} to be displayed in the
+ * Handler to convert an {@link Throwable} in a {@link NetworkError} to be displayed in the
  * Network Error layout.
  * <p/>
  * Created by Igor Escodro on 28/04/17.
  */
-public class NetworkErrorAdapter {
+public class NetworkErrorHandler {
 
     /**
      * Message to represent that the webservice is not available at the time.
      */
-    private static final String SERVICE_UNAVAILABLE = "Unavailable";
+    private static final String SERVICE_UNAVAILABLE = "HTTP 503";
 
     @Inject
-    public NetworkErrorAdapter() {
+    public NetworkErrorHandler() {
     }
 
     @Inject
@@ -46,10 +46,8 @@ public class NetworkErrorAdapter {
     public NetworkError handleError(Throwable throwable) {
         if (throwable instanceof UnknownHostException) {
             getUnknownHostError();
-        } else if (throwable instanceof HttpException) {
-            if (throwable.getMessage().contains(SERVICE_UNAVAILABLE)) {
-                getServiceUnavailableError();
-            }
+        } else if (isServerUnavailable(throwable)) {
+            getServiceUnavailableError();
         }
         return mNetworkErrorProvider;
     }
@@ -70,5 +68,24 @@ public class NetworkErrorAdapter {
 
     private String getStringFromResource(@StringRes int resId) {
         return mContext.getString(resId);
+    }
+
+    /**
+     * Verify if the server threw an HTTP 503, meaning the server is unavailable at the request
+     * time.
+     *
+     * @param throwable error
+     *
+     * @return <code>true</code> if the server is unavailable, <code>false</code> otherwise
+     */
+    public boolean isServerUnavailable(Throwable throwable) {
+        boolean result = false;
+        if (throwable instanceof HttpException) {
+            final String message = throwable.getMessage();
+            if (message != null && message.contains(SERVICE_UNAVAILABLE)) {
+                result = true;
+            }
+        }
+        return result;
     }
 }

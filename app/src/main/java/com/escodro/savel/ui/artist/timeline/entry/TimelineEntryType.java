@@ -18,7 +18,7 @@ public interface TimelineEntryType {
      * Annotation to represent the available entry types in the timeline.
      */
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({TWITTER_ROW_TYPE, INSTAGRAM_ROW_TYPE})
+    @IntDef({TWITTER_ROW_TYPE, INSTAGRAM_ROW_TYPE, FACEBOOK_ROW_TYPE})
     public @interface EntryType {
     }
 
@@ -31,6 +31,11 @@ public interface TimelineEntryType {
      * Value to represent that the row is from Instagram.
      */
     int INSTAGRAM_ROW_TYPE = 1;
+
+    /**
+     * Value to represent that the row is from Facebook.
+     */
+    int FACEBOOK_ROW_TYPE = 2;
 
     /**
      * Return the {@link EntryType} related to the row.

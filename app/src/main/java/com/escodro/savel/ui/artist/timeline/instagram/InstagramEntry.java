@@ -4,7 +4,6 @@ import com.escodro.savel.data.model.SavelInstagram;
 import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.databinding.ItemTimelineInstagramBinding;
 import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryType;
-import com.escodro.savel.util.adapter.DateConverter;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import javax.inject.Inject;
@@ -21,18 +20,15 @@ public class InstagramEntry implements TimelineEntryType {
     private SavelInstagram mInstagramItem;
 
     @Inject
-    DateConverter mDateFormatter;
+    Provider<InstagramItemViewModel> mViewModelProvider;
 
     @Inject
     public InstagramEntry() {
     }
 
-    @Inject
-    Provider<InstagramItemViewModel> mViewModelProvider;
-
     @Override
     public int getItemViewType() {
-        return TimelineEntryType.INSTAGRAM_ROW_TYPE;
+        return INSTAGRAM_ROW_TYPE;
     }
 
     @Override

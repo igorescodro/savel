@@ -26,7 +26,7 @@ public class InstagramRepository {
 
     /**
      * Get a {@link InstagramTimeline} from {@link InstagramService}. If an
-     * error occur during the request, a empty {@link InstagramTimeline} will be returned.<br>
+     * error occur during the request, an empty {@link InstagramTimeline} will be returned.
      *
      * @param username artist Instagram username
      *

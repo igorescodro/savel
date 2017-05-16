@@ -3,13 +3,17 @@ package com.escodro.savel.data.local.repository;
 import android.support.annotation.NonNull;
 
 import com.escodro.savel.data.model.SavelArtist;
+import com.escodro.savel.data.model.SavelFacebook;
 import com.escodro.savel.data.model.SavelInstagram;
 import com.escodro.savel.data.model.SavelTweet;
+import com.escodro.savel.data.model.facebook.FacebookPost;
+import com.escodro.savel.data.model.facebook.FacebookResponse;
 import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.data.model.instagram.InstagramTimeline;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.model.twitter.TwitterTweet;
 import com.escodro.savel.data.remote.repository.DiscogsRepository;
+import com.escodro.savel.data.remote.repository.FacebookRepository;
 import com.escodro.savel.data.remote.repository.InstagramRepository;
 import com.escodro.savel.data.remote.repository.MusicBrainzRepository;
 import com.escodro.savel.data.remote.repository.SpotifyRepository;
@@ -48,10 +52,16 @@ public class SavelRepository {
     InstagramRepository mInstaRepository;
 
     @Inject
-    Provider<SavelInstagram> mInstagramProvider;
+    FacebookRepository mFacebookRepository;
 
     @Inject
     Provider<SavelTweet> mTweetProvider;
+
+    @Inject
+    Provider<SavelInstagram> mInstagramProvider;
+
+    @Inject
+    Provider<SavelFacebook> mFacebookProvider;
 
     @Inject
     RelationParser mRelationParser;
@@ -79,6 +89,8 @@ public class SavelRepository {
                             mSpotifyRepository.getArtistInfo(mRelationParser.getSpotifyId()),
                             mInstaRepository.getArtistTimeline(mRelationParser.getInstagramId())
                                     .map(convertToInstagramList()),
+                            mFacebookRepository.getTimeline(mRelationParser.getFacebookId())
+                                    .map(convertToFacebookList()),
                             SavelArtist::new);
                 });
     }
@@ -128,6 +140,23 @@ public class SavelRepository {
                 tweets.add(tweet);
             }
             return tweets;
+        };
+    }
+
+    @NonNull
+    private Function<FacebookResponse, List<SavelFacebook>> convertToFacebookList() {
+        return facebookTimeline -> {
+            final List<SavelFacebook> timeline = new ArrayList<>();
+            final List<FacebookPost> items = facebookTimeline.getData();
+            if (items != null) {
+                for (FacebookPost fbPost : items) {
+                    final SavelFacebook facebook = mFacebookProvider.get();
+                    facebook.setFacebookItem(fbPost);
+                    facebook.setUserId(mRelationParser.getFacebookId());
+                    timeline.add(facebook);
+                }
+            }
+            return timeline;
         };
     }
 }

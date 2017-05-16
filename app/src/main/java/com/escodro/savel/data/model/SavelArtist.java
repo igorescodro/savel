@@ -28,23 +28,27 @@ public class SavelArtist {
 
     private List<SavelInstagram> mInstaTimeline;
 
+    private List<SavelFacebook> mFacebookTimeline;
+
     private List<SavelRelease> mReleases;
 
     public SavelArtist(MusicBrainzArtist musicBrainzArtist,
                        DiscogsArtist discogsArtist,
                        List<SavelTweet> tweetList,
                        SpotifyArtist spotifyArtist,
-                       List<SavelInstagram> instaTimeline) {
+                       List<SavelInstagram> instaTimeline,
+                       List<SavelFacebook> facebookTimeline) {
         mMusicBrainzArtist = musicBrainzArtist;
         mDiscogsArtist = discogsArtist;
         mTweetList = tweetList;
         mSpotifyArtist = spotifyArtist;
         mInstaTimeline = instaTimeline;
+        mFacebookTimeline = facebookTimeline;
         mReleases = convertToReleases();
     }
 
     public SavelArtist(MusicBrainzArtist musicBrainzArtist) {
-        this(musicBrainzArtist, null, null, null, null);
+        this(musicBrainzArtist, null, null, null, null, null);
     }
 
     @Nullable
@@ -118,6 +122,14 @@ public class SavelArtist {
             mInstaTimeline = new ArrayList<>();
         }
         return mInstaTimeline;
+    }
+
+    @NonNull
+    public List<SavelFacebook> getFacebookTimeline() {
+        if (mFacebookTimeline == null) {
+            mFacebookTimeline = new ArrayList<>();
+        }
+        return mFacebookTimeline;
     }
 
     @NonNull

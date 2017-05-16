@@ -26,23 +26,26 @@ public class TimelineViewHolderFactory {
      */
     public static BindingHolder create(ViewGroup parent,
                                        @TimelineEntryType.EntryType int viewType) {
-        ViewDataBinding binding = null;
+        final int layoutRes;
         switch (viewType) {
             case TimelineEntryType.TWITTER_ROW_TYPE:
-                binding = DataBindingUtil.inflate(
-                        LayoutInflater.from(parent.getContext()),
-                        R.layout.item_timeline_twitter,
-                        parent,
-                        false);
+                layoutRes = R.layout.item_timeline_twitter;
                 break;
             case TimelineEntryType.INSTAGRAM_ROW_TYPE:
-                binding = DataBindingUtil.inflate(
-                        LayoutInflater.from(parent.getContext()),
-                        R.layout.item_timeline_instagram,
-                        parent,
-                        false);
+                layoutRes = R.layout.item_timeline_instagram;
                 break;
+            case TimelineEntryType.FACEBOOK_ROW_TYPE:
+                layoutRes = R.layout.item_timeline_facebook;
+                break;
+            default:
+                layoutRes = android.R.layout.simple_list_item_1;
         }
+
+        final ViewDataBinding binding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                layoutRes,
+                parent,
+                false);
 
         return new BindingHolder<>(binding);
     }

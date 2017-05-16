@@ -28,7 +28,7 @@ public class TwitterEntry implements TimelineEntryType {
 
     @Override
     public int getItemViewType() {
-        return TimelineEntryType.TWITTER_ROW_TYPE;
+        return TWITTER_ROW_TYPE;
     }
 
     @Override

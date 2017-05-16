@@ -3,8 +3,10 @@ package com.escodro.savel.ui.artist.timeline.entry;
 import android.support.annotation.NonNull;
 
 import com.escodro.savel.data.model.SavelArtist;
+import com.escodro.savel.data.model.SavelFacebook;
 import com.escodro.savel.data.model.SavelInstagram;
 import com.escodro.savel.data.model.SavelTweet;
+import com.escodro.savel.ui.artist.timeline.facebook.FacebookEntry;
 import com.escodro.savel.ui.artist.timeline.instagram.InstagramEntry;
 import com.escodro.savel.ui.artist.timeline.twitter.TwitterEntry;
 
@@ -29,6 +31,9 @@ public class TimelineEntryAdapter {
     Provider<InstagramEntry> mInstagramProvider;
 
     @Inject
+    Provider<FacebookEntry> mFacebookProvider;
+
+    @Inject
     TimelineEntryComparator mComparator;
 
     @Inject
@@ -46,35 +51,47 @@ public class TimelineEntryAdapter {
         final List<TimelineEntryType> timeline = new ArrayList<>();
         timeline.addAll(getTwitterEntries(artist.getTweetList()));
         timeline.addAll(getInstagramEntries(artist.getInstagramTimeline()));
+        timeline.addAll(getFacebookEntries(artist.getFacebookTimeline()));
 
         timeline.sort(mComparator);
 
         return timeline;
     }
 
-    private List<TimelineEntryType> getTwitterEntries(List<SavelTweet> tweets) {
+    @NonNull
+    private List<TimelineEntryType> getTwitterEntries(@NonNull List<SavelTweet> tweets) {
         final List<TimelineEntryType> timeline = new ArrayList<>();
 
-        if (tweets != null) {
-            for (SavelTweet tweet : tweets) {
-                final TwitterEntry entry = mTwitterProvider.get();
-                entry.setTweet(tweet);
-                timeline.add(entry);
-            }
+        for (SavelTweet tweet : tweets) {
+            final TwitterEntry entry = mTwitterProvider.get();
+            entry.setTweet(tweet);
+            timeline.add(entry);
         }
 
         return timeline;
     }
 
-    private List<TimelineEntryType> getInstagramEntries(List<SavelInstagram> items) {
+    @NonNull
+    private List<TimelineEntryType> getInstagramEntries(@NonNull List<SavelInstagram> items) {
         final List<TimelineEntryType> timeline = new ArrayList<>();
 
-        if (items != null) {
-            for (SavelInstagram item : items) {
-                final InstagramEntry entry = mInstagramProvider.get();
-                entry.setInstagramItem(item);
-                timeline.add(entry);
-            }
+        for (SavelInstagram item : items) {
+            final InstagramEntry entry = mInstagramProvider.get();
+            entry.setInstagramItem(item);
+            timeline.add(entry);
+        }
+
+        return timeline;
+    }
+
+    @NonNull
+    private List<TimelineEntryType> getFacebookEntries(@NonNull List<SavelFacebook> items) {
+        final List<TimelineEntryType> timeline = new ArrayList<>();
+
+        for (SavelFacebook item : items) {
+            final FacebookEntry entry = mFacebookProvider.get();
+            entry.setFacebookItem(item);
+            timeline.add(entry);
         }
 
         return timeline;

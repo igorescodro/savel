@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.escodro.savel.BuildConfig;
 import com.escodro.savel.injection.qualifier.Discogs;
+import com.escodro.savel.injection.qualifier.Facebook;
 import com.escodro.savel.injection.qualifier.Instagram;
 import com.escodro.savel.injection.qualifier.MusicBrainz;
 import com.escodro.savel.injection.qualifier.Spotify;
@@ -118,6 +119,22 @@ public class NetworkModule {
     Retrofit provideInstagramApi(@Instagram @NonNull OkHttpClient okHttpClient,
                                  @NonNull Gson gson) {
         return getRetrofit(okHttpClient, gson, BuildConfig.API_INSTAGRAM_ENDPOINT);
+    }
+
+    @Facebook
+    @Provides
+    @Singleton
+    OkHttpClient provideFacebookClient(Context app,
+                                       @Facebook @NonNull List<Interceptor> interceptors) {
+        return getOkHttpClient(app, interceptors, "facebook");
+    }
+
+    @Facebook
+    @Provides
+    @Singleton
+    Retrofit provideFacebookApi(@Facebook @NonNull OkHttpClient okHttpClient,
+                                @NonNull Gson gson) {
+        return getRetrofit(okHttpClient, gson, BuildConfig.API_FACEBOOK_ENDPOINT);
     }
 
     @NonNull

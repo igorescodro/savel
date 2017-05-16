@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.escodro.savel.BuildConfig;
 import com.escodro.savel.injection.qualifier.Discogs;
+import com.escodro.savel.injection.qualifier.Facebook;
 import com.escodro.savel.injection.qualifier.Instagram;
 import com.escodro.savel.injection.qualifier.MusicBrainz;
 import com.escodro.savel.injection.qualifier.Spotify;
@@ -149,6 +150,31 @@ public class OkHttpInterceptorModule {
     List<Interceptor> provideInstagramInterceptors(
             @NonNull HttpLoggingInterceptor logInterceptor,
             @Spotify @NonNull Interceptor interceptor) {
+        return Arrays.asList(logInterceptor, interceptor);
+    }
+
+    @Facebook
+    @Provides
+    @Singleton
+    @NonNull
+    Interceptor provideFacebookInterceptor() {
+        return chain -> {
+            Request request = chain.request();
+            final HttpUrl url = request.url().newBuilder()
+                    .addQueryParameter("access_token", BuildConfig.KEY_FACEBOOK_API)
+                    .build();
+            request = request.newBuilder().url(url).build();
+            return chain.proceed(request);
+        };
+    }
+
+    @Facebook
+    @Provides
+    @Singleton
+    @NonNull
+    List<Interceptor> provideFacebookInterceptors(
+            @NonNull HttpLoggingInterceptor logInterceptor,
+            @Facebook @NonNull Interceptor interceptor) {
         return Arrays.asList(logInterceptor, interceptor);
     }
 }

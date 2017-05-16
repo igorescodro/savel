@@ -11,7 +11,7 @@ import com.escodro.savel.util.adapter.DateConverter;
 import javax.inject.Inject;
 
 /**
- * ViewModel to load information about a {@link InstagramItem} in the view.
+ * ViewModel to load information about a {@link SavelInstagram} in the view.
  * <p/>
  * Created by Igor Escodro on 08/05/17.
  */

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.escodro.savel.ui.artist.timeline.facebook.FacebookItemViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{viewModel.onItemClick()}"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_facebook_profile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            app:image="@{viewModel.profilePicture}"/>
+
+        <TextView
+            android:id="@+id/tv_facebook_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/iv_facebook_profile"
+            android:layout_toEndOf="@id/iv_facebook_profile"
+            android:text="@{viewModel.username}"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_facebook_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/tv_facebook_name"
+            android:layout_below="@id/tv_facebook_name"
+            android:gravity="top"
+            android:text="@{viewModel.creationTime}"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/tv_facebook_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/iv_facebook_profile"
+            android:layout_below="@id/tv_facebook_time"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@{viewModel.message}"/>
+
+        <ImageView
+            android:id="@+id/tv_facebook_image"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_below="@id/tv_facebook_message"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/font_normal"
+            android:visibility="@{viewModel.mediaImageVisibility}"
+            app:image="@{viewModel.image}"/>
+
+        <ImageView
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_facebook_image"
+            android:layout_alignTop="@+id/tv_facebook_image"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="8dp"
+            android:src="@android:drawable/ic_media_play"
+            android:visibility="@{viewModel.videoIconVisibility}"/>
+
+    </RelativeLayout>
+</layout>

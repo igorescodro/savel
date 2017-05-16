@@ -51,6 +51,11 @@ public class RelationParser {
      */
     private static final String INSTAGRAM_HOST = "instagram.com";
 
+    /**
+     * Host indicating the resource is from Facebook.
+     */
+    private static final String FACEBOOK_HOST = "facebook.com";
+
     private List<MusicBrainzRelation> mRelationList;
 
     private String mDiscogsId;
@@ -60,6 +65,8 @@ public class RelationParser {
     private String mSpotifyId;
 
     private String mInstagramId;
+
+    private String mFacebookId;
 
     @Inject
     public RelationParser() {
@@ -116,6 +123,9 @@ public class RelationParser {
                 break;
             case INSTAGRAM_HOST:
                 mInstagramId = extractIdFromLastPath(urlString);
+                break;
+            case FACEBOOK_HOST:
+                mFacebookId = extractIdFromLastPath(urlString);
                 break;
         }
     }
@@ -205,5 +215,9 @@ public class RelationParser {
     @Nullable
     public String getInstagramId() {
         return mInstagramId;
+    }
+
+    public String getFacebookId() {
+        return mFacebookId;
     }
 }

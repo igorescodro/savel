@@ -9,17 +9,43 @@
             type="com.escodro.savel.ui.artist.releases.ReleaseViewModel"/>
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.RecyclerView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            bind:adapter="@{viewModel.recyclerViewAdapter}"
-            bind:layout_manager="@{viewModel.linearLayoutManager}"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Albums"
+                android:textSize="@dimen/font_huge"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                bind:adapter="@{viewModel.albumAdapter}"
+                bind:layout_manager="@{viewModel.albumLayoutManager}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Singles"
+                android:textSize="@dimen/font_huge"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                bind:adapter="@{viewModel.singleAdapter}"
+                bind:layout_manager="@{viewModel.singleLayoutManager}"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </layout>

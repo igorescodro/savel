@@ -10,7 +10,7 @@ import javax.inject.Inject;
  * <p>
  * Created by Igor Escodro on 12/05/17.
  */
-public class ReleaseItemContract extends BaseContract {
+public class ReleaseItemContract {
 
     @Inject
     public ReleaseItemContract() {

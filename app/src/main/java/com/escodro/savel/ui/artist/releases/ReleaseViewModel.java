@@ -3,6 +3,7 @@ package com.escodro.savel.ui.artist.releases;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.escodro.savel.data.local.contract.ReleaseContract;
 import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.databinding.ItemArtistReleaseBinding;
@@ -21,11 +22,21 @@ import javax.inject.Provider;
 public class ReleaseViewModel {
 
     @Inject
-    ReleaseRecyclerAdapter mAdapter;
+    ReleaseContract mContract;
+
+    @Inject
+    ReleaseRecyclerAdapter mAlbumAdapter;
+
+    @Inject
+    ReleaseRecyclerAdapter mSingleAdapter;
 
     @Inject
     @LayoutHorizontal
-    Provider<LinearLayoutManager> mLayoutManagerProvider;
+    Provider<LinearLayoutManager> mAlbumLayoutProvider;
+
+    @Inject
+    @LayoutHorizontal
+    Provider<LinearLayoutManager> mSingleLayoutProvider;
 
     /**
      * Default injectable constructor to be used in {@link ReleaseFragment}.
@@ -36,14 +47,24 @@ public class ReleaseViewModel {
     }
 
     private void updateReleaseList(SavelArtist artist) {
-        mAdapter.updateReleaseList(artist.getReleases());
+        mContract.setReleaseList(artist.getReleases());
+        mAlbumAdapter.updateReleaseList(mContract.getAlbumReleases());
+        mSingleAdapter.updateReleaseList(mContract.getSingleReleases());
     }
 
-    public RecyclerView.Adapter<BindingHolder<ItemArtistReleaseBinding>> getRecyclerViewAdapter() {
-        return mAdapter;
+    public RecyclerView.Adapter<BindingHolder<ItemArtistReleaseBinding>> getAlbumAdapter() {
+        return mAlbumAdapter;
     }
 
-    public LinearLayoutManager getLinearLayoutManager() {
-        return mLayoutManagerProvider.get();
+    public LinearLayoutManager getAlbumLayoutManager() {
+        return mAlbumLayoutProvider.get();
+    }
+
+    public RecyclerView.Adapter<BindingHolder<ItemArtistReleaseBinding>> getSingleAdapter() {
+        return mSingleAdapter;
+    }
+
+    public LinearLayoutManager getSingleLayoutManager() {
+        return mSingleLayoutProvider.get();
     }
 }

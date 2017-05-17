@@ -39,6 +39,6 @@ public interface FacebookService {
      * @see <a href="https://developers.facebook.com/docs/graph-api/reference/v2.9/user/feed">User
      * feed | Facebook for Developers</a>
      */
-    @GET("{artistId}/feed?fields=" + FIELDS)
+    @GET("{artistId}/posts?fields=" + FIELDS)
     Observable<FacebookResponse> getTimeline(@Path("artistId") String artistId);
 }

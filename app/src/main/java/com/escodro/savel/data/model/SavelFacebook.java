@@ -3,6 +3,7 @@ package com.escodro.savel.data.model;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.escodro.savel.BuildConfig;
 import com.escodro.savel.data.model.facebook.FacebookPost;
 import com.escodro.savel.util.adapter.DateConverter;
 
@@ -119,7 +120,7 @@ public class SavelFacebook {
     }
 
     public String getProfilePictureUrl() {
-        return "https://graph.facebook.com/" + mUserId + "/picture?type=large";
+        return String.format(BuildConfig.API_FACEBOOK_PROFILE_ENDPOINT, mUserId);
     }
 
     public void setUserId(String userId) {

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtistList;
+import com.escodro.savel.data.model.musicbrainz.MusicBrainzReleaseGroupList;
 import com.escodro.savel.data.remote.service.MusicBrainzService;
 import com.escodro.savel.injection.qualifier.MusicBrainz;
 import com.escodro.savel.util.adapter.NetworkErrorHandler;
@@ -42,6 +43,18 @@ public class MusicBrainzRepository {
      */
     public Observable<MusicBrainzArtist> getArtistInfo(String artistId) {
         return mService.getArtistById(artistId)
+                .retryWhen(retryOnUnknownHost());
+    }
+
+    /**
+     * Get a {@link MusicBrainzReleaseGroupList} entity from {@link MusicBrainzService} server.
+     *
+     * @param artistId artist MBID
+     *
+     * @return observable of MusicBrainz Release Group entity
+     */
+    public Observable<MusicBrainzReleaseGroupList> getReleaseGroupByArtistId(String artistId) {
+        return mService.getReleaseGroupByArtistId(artistId)
                 .retryWhen(retryOnUnknownHost());
     }
 

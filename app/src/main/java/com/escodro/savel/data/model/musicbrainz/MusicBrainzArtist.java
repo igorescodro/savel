@@ -14,9 +14,6 @@ import java.util.List;
  */
 public class MusicBrainzArtist {
 
-    @SerializedName("release-groups")
-    private List<MusicBrainzReleaseGroup> releaseGroups = null;
-
     @SerializedName("isnis")
     private List<String> isnis = null;
 
@@ -82,14 +79,6 @@ public class MusicBrainzArtist {
             areaName = area.getName();
         }
         return areaName;
-    }
-
-    @NonNull
-    public List<MusicBrainzReleaseGroup> getReleases() {
-        if (releaseGroups == null) {
-            releaseGroups = new ArrayList<>();
-        }
-        return releaseGroups;
     }
 
     @NonNull

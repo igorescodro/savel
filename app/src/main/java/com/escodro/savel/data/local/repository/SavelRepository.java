@@ -91,6 +91,7 @@ public class SavelRepository {
                                     .map(convertToInstagramList()),
                             mFacebookRepository.getTimeline(mRelationParser.getFacebookId())
                                     .map(convertToFacebookList()),
+                            mMusicBrainzRepository.getReleaseGroupByArtistId(artistId),
                             SavelArtist::new);
                 });
     }

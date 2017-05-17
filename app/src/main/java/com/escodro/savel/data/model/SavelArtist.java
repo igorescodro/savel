@@ -6,9 +6,11 @@ import android.support.annotation.Nullable;
 import com.escodro.savel.data.model.discogs.DiscogsArtist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzReleaseGroup;
+import com.escodro.savel.data.model.musicbrainz.MusicBrainzReleaseGroupList;
 import com.escodro.savel.data.model.spotify.SpotifyArtist;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,18 +39,19 @@ public class SavelArtist {
                        List<SavelTweet> tweetList,
                        SpotifyArtist spotifyArtist,
                        List<SavelInstagram> instaTimeline,
-                       List<SavelFacebook> facebookTimeline) {
+                       List<SavelFacebook> facebookTimeline,
+                       MusicBrainzReleaseGroupList releaseGroupList) {
         mMusicBrainzArtist = musicBrainzArtist;
         mDiscogsArtist = discogsArtist;
         mTweetList = tweetList;
         mSpotifyArtist = spotifyArtist;
         mInstaTimeline = instaTimeline;
         mFacebookTimeline = facebookTimeline;
-        mReleases = convertToReleases();
+        mReleases = convertToReleases(releaseGroupList);
     }
 
     public SavelArtist(MusicBrainzArtist musicBrainzArtist) {
-        this(musicBrainzArtist, null, null, null, null, null);
+        this(musicBrainzArtist, null, null, null, null, null, null);
     }
 
     @Nullable
@@ -141,9 +144,11 @@ public class SavelArtist {
     }
 
     @NonNull
-    private List<SavelRelease> convertToReleases() {
+    private List<SavelRelease> convertToReleases(MusicBrainzReleaseGroupList releaseGroupList) {
+        if (releaseGroupList == null) return Collections.emptyList();
+
         final List<SavelRelease> releases = new ArrayList<>();
-        final List<MusicBrainzReleaseGroup> mbReleases = mMusicBrainzArtist.getReleases();
+        final List<MusicBrainzReleaseGroup> mbReleases = releaseGroupList.getReleaseGroups();
         for (MusicBrainzReleaseGroup releaseGroup : mbReleases) {
             final SavelRelease release = new SavelRelease();
             release.setReleaseGroup(releaseGroup);

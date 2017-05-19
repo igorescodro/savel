@@ -2,8 +2,6 @@ package com.escodro.savel.data.model;
 
 import android.support.annotation.DrawableRes;
 
-import javax.inject.Inject;
-
 /**
  * Model to represent the fields in the Network Error layout.
  * <p/>
@@ -11,17 +9,13 @@ import javax.inject.Inject;
  */
 public class NetworkError {
 
-    private String mTitle;
+    private final String mTitle;
 
-    private String mDescription;
+    private final String mDescription;
 
-    private int mIconResource;
+    private final int mIconResource;
 
-    @Inject
-    public NetworkError() {
-    }
-
-    public void setError(String title, String description, @DrawableRes int iconResource) {
+    public NetworkError(String title, String description, @DrawableRes int iconResource) {
         mTitle = title;
         mDescription = description;
         mIconResource = iconResource;

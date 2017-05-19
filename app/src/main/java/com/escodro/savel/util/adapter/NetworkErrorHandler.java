@@ -30,9 +30,6 @@ public class NetworkErrorHandler {
     }
 
     @Inject
-    NetworkError mNetworkErrorProvider;
-
-    @Inject
     Context mContext;
 
     /**
@@ -44,26 +41,36 @@ public class NetworkErrorHandler {
      * @return NetworkError object
      */
     public NetworkError handleError(Throwable throwable) {
+        final NetworkError networkError;
         if (throwable instanceof UnknownHostException) {
-            getUnknownHostError();
+            networkError = getUnknownHostError();
         } else if (isServerUnavailable(throwable)) {
-            getServiceUnavailableError();
+            networkError = getServiceUnavailableError();
+        } else {
+            networkError = getUnknownError();
         }
-        return mNetworkErrorProvider;
+        return networkError;
     }
 
-    private void getUnknownHostError() {
-        mNetworkErrorProvider.setError(
+    private NetworkError getUnknownHostError() {
+        return new NetworkError(
                 getStringFromResource(R.string.network_error_no_connection_title),
                 getStringFromResource(R.string.network_error_no_connection_description),
                 android.R.drawable.ic_delete);
     }
 
-    private void getServiceUnavailableError() {
-        mNetworkErrorProvider.setError(
+    private NetworkError getServiceUnavailableError() {
+        return new NetworkError(
                 getStringFromResource(R.string.network_error_service_unavailable_title),
                 getStringFromResource(R.string.network_error_service_unavailable_description),
                 android.R.drawable.presence_busy);
+    }
+
+    private NetworkError getUnknownError() {
+        return new NetworkError(
+                getStringFromResource(R.string.network_error_unknown_title),
+                getStringFromResource(R.string.network_error_unknown_description),
+                android.R.drawable.ic_dialog_alert);
     }
 
     private String getStringFromResource(@StringRes int resId) {

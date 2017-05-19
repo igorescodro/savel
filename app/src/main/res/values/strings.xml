@@ -5,6 +5,8 @@
     <string name="network.error.no.connection.description">Please check your internet connection and try again</string>
     <string name="network.error.service.unavailable.title">Service Unavailable</string>
     <string name="network.error.service.unavailable.description">The web service did not respond.Please try again.</string>
+    <string name="network.error.unknown.title">Unknown Error</string>
+    <string name="network.error.unknown.description">A unknown error occurred.</string>
     <string name="network.error.retry">Retry</string>
 
     <string name="artist.loading">Loading…</string>

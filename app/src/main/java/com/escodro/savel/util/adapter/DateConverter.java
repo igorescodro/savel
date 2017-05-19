@@ -1,14 +1,11 @@
 package com.escodro.savel.util.adapter;
 
-import android.content.Context;
-import android.text.format.DateUtils;
+import com.escodro.savel.data.remote.service.MusicBrainzService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
-import javax.inject.Inject;
 
 import timber.log.Timber;
 
@@ -20,14 +17,10 @@ import timber.log.Timber;
  */
 public class DateConverter {
 
-    private final Context mContext;
-
     /**
-     * Default injectable constructor.
+     * Private constructor to avoid instantiation.
      */
-    @Inject
-    public DateConverter(Context context) {
-        mContext = context;
+    private DateConverter() {
     }
 
     /**
@@ -38,7 +31,7 @@ public class DateConverter {
      *
      * @return time in milliseconds
      */
-    public long timeToMillis(String formattedDate, String format) {
+    public static long timeToMillis(String formattedDate, String format) {
         long timeInMillis = 0;
         final Calendar cal = Calendar.getInstance();
         final SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.ENGLISH);
@@ -53,28 +46,40 @@ public class DateConverter {
     }
 
     /**
+     * Convert an formatted time String to time in milliseconds based on the given format, trying
+     * the possible formats given in the array. This method is needed since
+     * {@link MusicBrainzService#getReleaseGroupByArtistId(String)} does not have a pattern to
+     * return the date.
+     *
+     * @param formattedDate   the formatted date in string
+     * @param possibleFormats array of possible formats to be parsed
+     *
+     * @return time in milliseconds
+     */
+    public static long timeToMillis(String formattedDate, String[] possibleFormats) {
+        long timeInMillis = 0;
+        final Calendar cal = Calendar.getInstance();
+        for (String format : possibleFormats) {
+            try {
+                final SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.ENGLISH);
+                cal.setTime(sdf.parse(formattedDate));
+                timeInMillis = cal.getTimeInMillis();
+            } catch (ParseException e) {
+                // Do nothing.
+            }
+        }
+        return timeInMillis;
+    }
+
+    /**
      * Convert from Unix Timestamp to milliseconds.
      *
      * @param formattedDate the formatted date in string
      *
      * @return time in milliseconds
      */
-    public long unixTimestampToMillis(String formattedDate) {
+    public static long unixTimestampToMillis(String formattedDate) {
         return Long.valueOf(formattedDate) * 1000;
     }
 
-    /**
-     * Return the relative date based on the current date. E.g: "10:18AM" if the occurrence
-     * occurred today and "May 10" if occurred yesterday.
-     *
-     * @param timeInMillis time in milliseconds
-     *
-     * @return formatted relative date
-     */
-    public String getRelativeDateTimeString(long timeInMillis) {
-        return DateUtils.getRelativeTimeSpanString(
-                mContext,
-                timeInMillis,
-                false).toString();
-    }
 }

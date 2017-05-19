@@ -6,7 +6,6 @@ import android.view.View;
 import com.escodro.savel.data.model.SavelTweet;
 import com.escodro.savel.data.model.twitter.TwitterTweet;
 import com.escodro.savel.ui.base.TimelineEntryViewModel;
-import com.escodro.savel.util.adapter.DateConverter;
 
 import javax.inject.Inject;
 
@@ -26,9 +25,6 @@ public class TwitterItemViewModel extends TimelineEntryViewModel {
     private boolean isRetweet;
 
     private String mTimelineUser;
-
-    @Inject
-    DateConverter mDateConverter;
 
     @Inject
     public TwitterItemViewModel() {
@@ -61,7 +57,7 @@ public class TwitterItemViewModel extends TimelineEntryViewModel {
     }
 
     public String getCreationTime() {
-        return mDateConverter.getRelativeDateTimeString(mTweet.getCreatedTime());
+        return getRelativeDateTimeString(mTweet.getCreatedTime());
     }
 
     public int getRetweetVisibility() {

@@ -4,7 +4,6 @@ import android.view.View;
 
 import com.escodro.savel.data.model.SavelFacebook;
 import com.escodro.savel.ui.base.TimelineEntryViewModel;
-import com.escodro.savel.util.adapter.DateConverter;
 
 import javax.inject.Inject;
 
@@ -16,9 +15,6 @@ import javax.inject.Inject;
 public class FacebookItemViewModel extends TimelineEntryViewModel {
 
     private SavelFacebook mFacebookItem;
-
-    @Inject
-    DateConverter mDateConverter;
 
     @Inject
     public FacebookItemViewModel() {
@@ -42,7 +38,7 @@ public class FacebookItemViewModel extends TimelineEntryViewModel {
     }
 
     public String getCreationTime() {
-        return mDateConverter.getRelativeDateTimeString(mFacebookItem.getCreatedTime());
+        return getRelativeDateTimeString(mFacebookItem.getCreatedTime());
     }
 
     public String getImage() {

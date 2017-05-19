@@ -150,8 +150,7 @@ public class SavelArtist {
         final List<SavelRelease> releases = new ArrayList<>();
         final List<MusicBrainzReleaseGroup> mbReleases = releaseGroupList.getReleaseGroups();
         for (MusicBrainzReleaseGroup releaseGroup : mbReleases) {
-            final SavelRelease release = new SavelRelease();
-            release.setReleaseGroup(releaseGroup);
+            final SavelRelease release = new SavelRelease(releaseGroup);
             releases.add(release);
         }
         return releases;

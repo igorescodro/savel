@@ -22,9 +22,6 @@ public class SavelFacebook {
 
     private FacebookPost mFacebookItem;
 
-    @Inject
-    DateConverter mDateFormatter;
-
     private String mUserId;
 
     @Inject
@@ -47,7 +44,7 @@ public class SavelFacebook {
     public long getCreatedTime() {
         long creationDate = 0;
         if (mFacebookItem != null && mFacebookItem.getCreatedTime() != null) {
-            creationDate = mDateFormatter.timeToMillis(
+            creationDate = DateConverter.timeToMillis(
                     mFacebookItem.getCreatedTime(), FACEBOOK_DATE_FORMAT);
         }
         return creationDate;

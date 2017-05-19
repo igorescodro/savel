@@ -26,9 +26,6 @@ public class SavelTweet {
     Provider<SavelTweet> mRetweetProvider;
 
     @Inject
-    DateConverter mDateFormatter;
-
-    @Inject
     public SavelTweet() {
     }
 
@@ -39,7 +36,7 @@ public class SavelTweet {
     public long getCreatedTime() {
         long creationDate = 0;
         if (mTweetEntity != null && mTweetEntity.getCreatedTime() != null) {
-            creationDate = mDateFormatter
+            creationDate = DateConverter
                     .timeToMillis(mTweetEntity.getCreatedTime(), TWITTER_DATE_FORMAT);
         }
         return creationDate;

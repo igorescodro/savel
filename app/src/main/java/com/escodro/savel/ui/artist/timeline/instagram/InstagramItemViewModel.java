@@ -4,9 +4,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.escodro.savel.data.model.SavelInstagram;
-import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.ui.base.TimelineEntryViewModel;
-import com.escodro.savel.util.adapter.DateConverter;
 
 import javax.inject.Inject;
 
@@ -20,9 +18,6 @@ public class InstagramItemViewModel extends TimelineEntryViewModel {
     private static final String TYPE_VIDEO = "video";
 
     private SavelInstagram mInstagramItem;
-
-    @Inject
-    DateConverter mDateConverter;
 
     @Inject
     public InstagramItemViewModel() {
@@ -45,7 +40,7 @@ public class InstagramItemViewModel extends TimelineEntryViewModel {
     }
 
     public String getCreationTime() {
-        return mDateConverter.getRelativeDateTimeString(mInstagramItem.getCreatedTime());
+        return getRelativeDateTimeString(mInstagramItem.getCreatedTime());
     }
 
     public int getVideoIconVisibility() {

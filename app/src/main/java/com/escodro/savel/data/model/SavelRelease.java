@@ -4,8 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzReleaseGroup;
-
-import javax.inject.Inject;
+import com.escodro.savel.util.adapter.DateConverter;
 
 /**
  * Object containing the consolidated information about the artist releases.
@@ -14,48 +13,36 @@ import javax.inject.Inject;
  */
 public class SavelRelease {
 
-    private MusicBrainzReleaseGroup mReleaseGroup;
+    /**
+     * Constant to represent the possible date formats coming from the server.
+     */
+    private static final String[] DATE_FORMATS = {"yyyy-MM-dd", "yyyy", "yyyy-MM"};
 
-    @Inject
-    public SavelRelease() {
-    }
+    private final MusicBrainzReleaseGroup mReleaseGroup;
 
-    public void setReleaseGroup(@NonNull MusicBrainzReleaseGroup releaseGroup) {
+    public SavelRelease(@NonNull MusicBrainzReleaseGroup releaseGroup) {
         mReleaseGroup = releaseGroup;
     }
 
     @Nullable
     public String getId() {
-        String id = null;
-        if (mReleaseGroup != null) {
-            id = mReleaseGroup.getId();
-        }
-        return id;
+        return mReleaseGroup.getId();
     }
 
     @Nullable
     public String getPrimaryType() {
-        String primaryType = null;
-        if (mReleaseGroup != null) {
-            primaryType = mReleaseGroup.getPrimaryType();
-        }
-        return primaryType;
+        return mReleaseGroup.getPrimaryType();
     }
 
     @Nullable
     public String getTitle() {
-        String title = null;
-        if (mReleaseGroup != null) {
-            title = mReleaseGroup.getTitle();
-        }
-        return title;
+        return mReleaseGroup.getTitle();
     }
 
-    @Nullable
-    public String getReleaseDate() {
-        String releaseDate = null;
-        if (mReleaseGroup != null) {
-            releaseDate = mReleaseGroup.getReleaseDate();
+    public long getReleaseDateInMillis() {
+        long releaseDate = 0;
+        if (mReleaseGroup.getReleaseDate() != null) {
+            releaseDate = DateConverter.timeToMillis(mReleaseGroup.getReleaseDate(), DATE_FORMATS);
         }
         return releaseDate;
     }

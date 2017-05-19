@@ -20,9 +20,6 @@ public class SavelInstagram {
     private InstagramItem mInstagramItem;
 
     @Inject
-    DateConverter mDateFormatter;
-
-    @Inject
     public SavelInstagram() {
     }
 
@@ -33,7 +30,7 @@ public class SavelInstagram {
     public long getCreatedTime() {
         long creationDate = 0;
         if (mInstagramItem != null && mInstagramItem.getCreatedTime() != null) {
-            creationDate = mDateFormatter.unixTimestampToMillis(mInstagramItem.getCreatedTime());
+            creationDate = DateConverter.unixTimestampToMillis(mInstagramItem.getCreatedTime());
         }
         return creationDate;
     }

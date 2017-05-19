@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringDef;
 
 import com.escodro.savel.data.model.SavelRelease;
+import com.escodro.savel.ui.artist.releases.ReleaseComparator;
 import com.escodro.savel.ui.artist.releases.ReleaseViewModel;
 
 import java.lang.annotation.Retention;
@@ -35,6 +36,9 @@ public class ReleaseContract {
     private final Map<String, List<SavelRelease>> mSubReleases;
 
     @Inject
+    ReleaseComparator mReleaseComparator;
+
+    @Inject
     public ReleaseContract() {
         mSubReleases = new HashMap<>();
     }
@@ -46,6 +50,7 @@ public class ReleaseContract {
      * @param releases list of all releases
      */
     public void setReleaseList(@NonNull List<SavelRelease> releases) {
+        releases.sort(mReleaseComparator);
         processList(releases);
     }
 

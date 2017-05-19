@@ -20,30 +20,24 @@ public class SavelFacebook {
 
     private static final String FACEBOOK_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
 
-    private FacebookPost mFacebookItem;
+    private final FacebookPost mFacebookItem;
 
     private String mUserId;
 
     @Inject
-    public SavelFacebook() {
-    }
-
-    public void setFacebookItem(@NonNull FacebookPost facebookItem) {
+    public SavelFacebook(@NonNull FacebookPost facebookItem, @NonNull String userId) {
         mFacebookItem = facebookItem;
+        mUserId = userId;
     }
 
     @Nullable
     public String getId() {
-        String id = null;
-        if (mFacebookItem != null) {
-            id = mFacebookItem.getId();
-        }
-        return id;
+        return mFacebookItem.getId();
     }
 
     public long getCreatedTime() {
         long creationDate = 0;
-        if (mFacebookItem != null && mFacebookItem.getCreatedTime() != null) {
+        if (mFacebookItem.getCreatedTime() != null) {
             creationDate = DateConverter.timeToMillis(
                     mFacebookItem.getCreatedTime(), FACEBOOK_DATE_FORMAT);
         }
@@ -52,64 +46,36 @@ public class SavelFacebook {
 
     @Nullable
     public String getMediaPicture() {
-        String media = null;
-        if (mFacebookItem != null) {
-            media = mFacebookItem.getMediaPicture();
-        }
-        return media;
+        return mFacebookItem.getMediaPicture();
     }
 
     @Nullable
     public String getMessage() {
-        String message = null;
-        if (mFacebookItem != null) {
-            message = mFacebookItem.getMessage();
-        }
-        return message;
+        return mFacebookItem.getMessage();
     }
 
     @Nullable
     public String getIcon() {
-        String icon = null;
-        if (mFacebookItem != null) {
-            icon = mFacebookItem.getIcon();
-        }
-        return icon;
+        return mFacebookItem.getIcon();
     }
 
     @Nullable
     public String getPostUrl() {
-        String postUrl = null;
-        if (mFacebookItem != null) {
-            postUrl = mFacebookItem.getPostUrl();
-        }
-        return postUrl;
+        return mFacebookItem.getPostUrl();
     }
 
     @Nullable
     public String getUsername() {
-        String username = null;
-        if (mFacebookItem != null) {
-            username = mFacebookItem.getUsername();
-        }
-        return username;
+        return mFacebookItem.getUsername();
     }
 
     @Nullable
     public String getVideoUrl() {
-        String videoUrl = null;
-        if (mFacebookItem != null) {
-            videoUrl = mFacebookItem.getVideoUrl();
-        }
-        return videoUrl;
+        return mFacebookItem.getVideoUrl();
     }
 
     public boolean isVideo() {
-        boolean isVideo = false;
-        if (mFacebookItem != null) {
-            isVideo = mFacebookItem.getVideoUrl() != null;
-        }
-        return isVideo;
+        return mFacebookItem.getVideoUrl() != null;
     }
 
     public boolean hasMedia() {
@@ -118,9 +84,5 @@ public class SavelFacebook {
 
     public String getProfilePictureUrl() {
         return String.format(BuildConfig.API_FACEBOOK_PROFILE_ENDPOINT, mUserId);
-    }
-
-    public void setUserId(String userId) {
-        mUserId = userId;
     }
 }

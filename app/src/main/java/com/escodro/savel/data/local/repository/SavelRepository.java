@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
@@ -53,15 +52,6 @@ public class SavelRepository {
 
     @Inject
     FacebookRepository mFacebookRepository;
-
-    @Inject
-    Provider<SavelTweet> mTweetProvider;
-
-    @Inject
-    Provider<SavelInstagram> mInstagramProvider;
-
-    @Inject
-    Provider<SavelFacebook> mFacebookProvider;
 
     @Inject
     RelationParser mRelationParser;
@@ -122,9 +112,7 @@ public class SavelRepository {
             final List<InstagramItem> items = instagramTimeline.getItems();
             if (items != null) {
                 for (InstagramItem item : items) {
-                    final SavelInstagram instagram = mInstagramProvider.get();
-                    instagram.setInstagramItem(item);
-                    timeline.add(instagram);
+                    timeline.add(new SavelInstagram(item));
                 }
             }
             return timeline;
@@ -136,9 +124,7 @@ public class SavelRepository {
         return tweetList -> {
             final List<SavelTweet> tweets = new ArrayList<>();
             for (TwitterTweet tweetEntity : tweetList) {
-                final SavelTweet tweet = mTweetProvider.get();
-                tweet.setTweetEntity(tweetEntity);
-                tweets.add(tweet);
+                tweets.add(new SavelTweet(tweetEntity));
             }
             return tweets;
         };
@@ -151,10 +137,8 @@ public class SavelRepository {
             final List<FacebookPost> items = facebookTimeline.getData();
             if (items != null) {
                 for (FacebookPost fbPost : items) {
-                    final SavelFacebook facebook = mFacebookProvider.get();
-                    facebook.setFacebookItem(fbPost);
-                    facebook.setUserId(mRelationParser.getFacebookId());
-                    timeline.add(facebook);
+                    final String userId = mRelationParser.getFacebookId();
+                    timeline.add(new SavelFacebook(fbPost, userId));
                 }
             }
             return timeline;

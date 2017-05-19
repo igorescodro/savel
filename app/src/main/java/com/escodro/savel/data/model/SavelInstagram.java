@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.util.adapter.DateConverter;
 
-import javax.inject.Inject;
-
 /**
  * Object to represent the {@link com.escodro.savel.data.remote.service.InstagramService} item.
  * The intent of this object is to better encapsulate the fields and contains only relative
@@ -17,19 +15,15 @@ import javax.inject.Inject;
  */
 public class SavelInstagram {
 
-    private InstagramItem mInstagramItem;
+    private final InstagramItem mInstagramItem;
 
-    @Inject
-    public SavelInstagram() {
-    }
-
-    public void setInstagramItem(@NonNull InstagramItem instagramItem) {
+    public SavelInstagram(@NonNull InstagramItem instagramItem) {
         mInstagramItem = instagramItem;
     }
 
     public long getCreatedTime() {
         long creationDate = 0;
-        if (mInstagramItem != null && mInstagramItem.getCreatedTime() != null) {
+        if (mInstagramItem.getCreatedTime() != null) {
             creationDate = DateConverter.unixTimestampToMillis(mInstagramItem.getCreatedTime());
         }
         return creationDate;
@@ -37,46 +31,26 @@ public class SavelInstagram {
 
     @Nullable
     public String getImageUrl() {
-        String imageUrl = null;
-        if (mInstagramItem != null) {
-            imageUrl = mInstagramItem.getImageUrl();
-        }
-        return imageUrl;
+        return mInstagramItem.getImageUrl();
     }
 
     @Nullable
     public String getUsername() {
-        String username = null;
-        if (mInstagramItem != null) {
-            username = mInstagramItem.getUsername();
-        }
-        return username;
+        return mInstagramItem.getUsername();
     }
 
     @Nullable
     public String getProfilePicture() {
-        String profilePic = null;
-        if (mInstagramItem != null) {
-            profilePic = mInstagramItem.getProfilePicture();
-        }
-        return profilePic;
+        return mInstagramItem.getProfilePicture();
     }
 
     @Nullable
     public String getType() {
-        String type = null;
-        if (mInstagramItem != null) {
-            type = mInstagramItem.getType();
-        }
-        return type;
+        return mInstagramItem.getType();
     }
 
     @Nullable
     public String getLink() {
-        String type = null;
-        if (mInstagramItem != null) {
-            type = mInstagramItem.getLink();
-        }
-        return type;
+        return mInstagramItem.getLink();
     }
 }

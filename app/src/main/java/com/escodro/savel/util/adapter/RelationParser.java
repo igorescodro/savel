@@ -160,7 +160,7 @@ public class RelationParser {
         try {
             url = new URL(urlString);
         } catch (MalformedURLException e) {
-            Timber.w("Url from social network malformed. Skipping invalid URL: " + urlString);
+            Timber.w("Url from social network malformed. Skipping invalid URL: %s", urlString);
             return null;
         }
         return url;

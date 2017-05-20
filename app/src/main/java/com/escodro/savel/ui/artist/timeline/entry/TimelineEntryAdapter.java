@@ -11,6 +11,7 @@ import com.escodro.savel.ui.artist.timeline.instagram.InstagramEntry;
 import com.escodro.savel.ui.artist.timeline.twitter.TwitterEntry;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -53,7 +54,7 @@ public class TimelineEntryAdapter {
         timeline.addAll(getInstagramEntries(artist.getInstagramTimeline()));
         timeline.addAll(getFacebookEntries(artist.getFacebookTimeline()));
 
-        timeline.sort(mComparator);
+        Collections.sort(timeline, mComparator);
 
         return timeline;
     }

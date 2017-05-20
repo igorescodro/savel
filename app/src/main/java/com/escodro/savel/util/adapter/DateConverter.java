@@ -39,8 +39,8 @@ public class DateConverter {
             cal.setTime(sdf.parse(formattedDate));
             timeInMillis = cal.getTimeInMillis();
         } catch (ParseException e) {
-            Timber.e("Could not format the given date: " + formattedDate + " using the format: "
-                    + format);
+            Timber.e("Could not format the given date: %s  using the format: %s",
+                    formattedDate, format);
         }
         return timeInMillis;
     }

@@ -145,7 +145,9 @@ public class NetworkModule {
         final Cache cache = new Cache(cacheDir, DISK_CACHE_SIZE);
         final OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
 
-        interceptors.forEach(okHttpBuilder::addInterceptor);
+        for (Interceptor interceptor : interceptors) {
+            okHttpBuilder.addInterceptor(interceptor);
+        }
 
         okHttpBuilder.cache(cache);
         okHttpBuilder.readTimeout(30, TimeUnit.SECONDS);

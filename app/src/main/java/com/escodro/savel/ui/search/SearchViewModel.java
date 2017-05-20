@@ -16,6 +16,7 @@ import com.escodro.savel.injection.qualifier.LayoutVertical;
 import com.escodro.savel.ui.base.NetworkViewModel;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class SearchViewModel extends NetworkViewModel<List<SavelArtist>> impleme
     @Override
     public void onResult(List<SavelArtist> result) {
         mRecyclerViewVisibility.set(View.VISIBLE);
-        result.sort(this);
+        Collections.sort(result, this);
         mAdapter.updateSearchList(result);
     }
 

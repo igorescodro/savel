@@ -50,7 +50,7 @@ public class ReleaseContract {
      * @param releases list of all releases
      */
     public void setReleaseList(@NonNull List<SavelRelease> releases) {
-        releases.sort(mReleaseComparator);
+        Collections.sort(releases, mReleaseComparator);
         processList(releases);
     }
 

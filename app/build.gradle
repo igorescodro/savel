@@ -25,6 +25,11 @@ android {
             targetCompatibility JavaVersion.VERSION_1_8
         }
     }
+    lintOptions {
+        apply from: "${rootDir}/config/lint.gradle", to: it
+        lintConfig file("${rootDir}/config/lint/lint-config.xml")
+        htmlOutput file("${buildDir}/reports/lint/lint.html")
+    }
     buildTypes {
         all {
             buildConfigField 'String', 'API_MUSICBRAINZ_ENDPOINT', "\"http://musicbrainz.org/ws/2/\""
@@ -34,7 +39,7 @@ android {
             buildConfigField 'String', 'API_INSTAGRAM_ENDPOINT', "\"https://www.instagram.com\""
             buildConfigField 'String', 'API_COVER_ART_ENDPOINT', "\"https://coverartarchive.org/release-group/%s/front-250\""
             buildConfigField 'String', 'API_FACEBOOK_ENDPOINT', "\"https://graph.facebook.com/\""
-            buildConfigField 'String', 'API_FACEBOOK_PROFILE_ENDPOINT',"\"https://graph.facebook.com/%s/picture?type=large\""
+            buildConfigField 'String', 'API_FACEBOOK_PROFILE_ENDPOINT', "\"https://graph.facebook.com/%s/picture?type=large\""
 
             buildConfigField 'String', 'KEY_DISCOGS_API', keystoreProperties['DiscogsApiKey']
             buildConfigField 'String', 'KEY_TWITTER_API', keystoreProperties['TwitterApiKey']

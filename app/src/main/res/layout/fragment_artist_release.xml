@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Albums"
+                android:text="@string/artist.release.albums"
                 android:textSize="@dimen/font_huge"/>
 
             <android.support.v7.widget.RecyclerView
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:text="Singles"
+                android:text="@string/artist.release.singles"
                 android:textSize="@dimen/font_huge"/>
 
             <android.support.v7.widget.RecyclerView

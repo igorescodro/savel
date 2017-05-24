@@ -16,4 +16,7 @@
     <string name="item.menu.artist.releases">Releases</string>
 
     <string name="twitter.timeline.retweeted">%s retweeted</string>
+
+    <string name="artist.release.albums">Albums</string>
+    <string name="artist.release.singles">Singles</string>
 </resources>

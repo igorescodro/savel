@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:bind="http://schemas.android.com/tools">
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -34,19 +34,20 @@
             android:layout_marginEnd="24dp"
             android:layout_marginStart="24dp"
             android:imeOptions="actionSearch"
-            android:maxLines="1"
             android:inputType="textAutoCorrect|textCapWords"
+            android:maxLines="1"
             android:text="@={viewModel.mQuery}"
-            bind:editor_action="@{viewModel.onSearchClicked}"/>
+            tools:editor_action="@{viewModel.onSearchClicked}"
+            tools:ignore="LabelFor"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/tv_search"
             android:visibility="@{viewModel.mRecyclerViewVisibility}"
-            bind:adapter="@{viewModel.recyclerViewAdapter}"
-            bind:item_decoration="@{viewModel.itemDecoration}"
-            bind:layout_manager="@{viewModel.linearLayoutManager}"/>
+            tools:adapter="@{viewModel.recyclerViewAdapter}"
+            tools:item_decoration="@{viewModel.itemDecoration}"
+            tools:layout_manager="@{viewModel.linearLayoutManager}"/>
 
     </RelativeLayout>
 

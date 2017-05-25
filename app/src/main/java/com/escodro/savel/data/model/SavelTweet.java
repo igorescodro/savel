@@ -17,6 +17,8 @@ public class SavelTweet {
 
     private static final String TWITTER_DATE_FORMAT = "EEE MMM dd HH:mm:ss z yyyy";
 
+    private static final String LOW_RESOLUTION_IMAGE = "_normal";
+
     private final TwitterTweet mTweetEntity;
 
     public SavelTweet(@NonNull TwitterTweet tweetEntity) {
@@ -49,7 +51,12 @@ public class SavelTweet {
 
     @Nullable
     public String getProfileImageUrl() {
-        return mTweetEntity.getProfileImageUrl();
+        String path = mTweetEntity.getProfileImageUrl();
+        if (path != null) {
+            path = path.replace(LOW_RESOLUTION_IMAGE, "");
+        }
+
+        return path;
     }
 
     @Nullable

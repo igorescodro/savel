@@ -87,13 +87,17 @@ public class RelationParser {
      * Process the list to retrieve the ids from various resources.
      */
     private void processList() {
-        if (mRelationList == null) return;
+        if (mRelationList == null) {
+            return;
+        }
 
         for (MusicBrainzRelation relation : mRelationList) {
             final String url = relation.getUrl();
             final String type = relation.getType();
 
-            if (type == null) return;
+            if (type == null) {
+                return;
+            }
 
             switch (type) {
                 case DISCOGS:
@@ -119,7 +123,9 @@ public class RelationParser {
      */
     private void processSocialNetwork(String urlString) {
         final String host = getHostWithoutPrefix(urlString);
-        if (host == null) return;
+        if (host == null) {
+            return;
+        }
 
         switch (host) {
             case TWITTER_HOST:
@@ -144,7 +150,9 @@ public class RelationParser {
      */
     private void processStreamingService(String urlString) {
         final URL url = getHost(urlString);
-        if (url == null) return;
+        if (url == null) {
+            return;
+        }
 
         switch (url.getHost()) {
             case SPOTIFY_HOST:

@@ -145,7 +145,9 @@ public class SavelArtist {
 
     @NonNull
     private List<SavelRelease> convertToReleases(MusicBrainzReleaseGroupList releaseGroupList) {
-        if (releaseGroupList == null) return Collections.emptyList();
+        if (releaseGroupList == null) {
+            return Collections.emptyList();
+        }
 
         final List<SavelRelease> releases = new ArrayList<>();
         final List<MusicBrainzReleaseGroup> mbReleases = releaseGroupList.getReleaseGroups();

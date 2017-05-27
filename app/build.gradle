@@ -86,3 +86,4 @@ dependencies {
 }
 
 apply from: "${rootDir}/config/findbugs.gradle"
+apply from: "${rootDir}/config/pmd.gradle"

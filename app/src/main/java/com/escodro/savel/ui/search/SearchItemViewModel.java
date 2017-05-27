@@ -43,7 +43,9 @@ public class SearchItemViewModel {
 
     public View.OnClickListener onItemClick() {
         return view -> {
-            if (mArtist == null) return;
+            if (mArtist == null) {
+                return;
+            }
             ArtistActivity.startActivity(mContext, mArtist.getId());
         };
     }

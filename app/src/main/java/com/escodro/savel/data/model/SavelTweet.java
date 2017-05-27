@@ -41,7 +41,7 @@ public class SavelTweet {
 
     @Nullable
     public String getUsername() {
-        return mTweetEntity.getUserName();
+        return mTweetEntity.getUsername();
     }
 
     @Nullable

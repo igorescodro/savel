@@ -1,5 +1,6 @@
 package com.escodro.savel.ui.artist.timeline.entry;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 import javax.inject.Inject;
@@ -10,7 +11,9 @@ import javax.inject.Inject;
  * <p/>
  * Created by Igor Escodro on 08/05/17.
  */
-public class TimelineEntryComparator implements Comparator<TimelineEntryType> {
+public class TimelineEntryComparator implements Comparator<TimelineEntryType>, Serializable {
+
+    private static final long serialVersionUID = 3L;
 
     /**
      * Default injectable constructor.

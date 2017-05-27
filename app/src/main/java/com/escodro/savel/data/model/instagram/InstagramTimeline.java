@@ -14,7 +14,7 @@ import java.util.List;
 public class InstagramTimeline {
 
     @SerializedName("items")
-    private List<InstagramItem> items = null;
+    private List<InstagramItem> items;
 
     @SerializedName("more_available")
     private Boolean moreAvailable;

@@ -79,7 +79,7 @@ public class DateConverter {
      * @return time in milliseconds
      */
     public static long unixTimestampToMillis(String formattedDate) {
-        return Long.valueOf(formattedDate) * 1000;
+        return Long.parseLong(formattedDate) * 1000;
     }
 
 }

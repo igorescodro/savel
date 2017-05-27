@@ -100,7 +100,7 @@ public class TwitterTweet {
     }
 
     @Nullable
-    public String getUserName() {
+    public String getUsername() {
         String username = null;
         if (user != null) {
             username = user.getName();

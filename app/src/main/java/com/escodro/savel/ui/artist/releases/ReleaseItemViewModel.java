@@ -2,6 +2,7 @@ package com.escodro.savel.ui.artist.releases;
 
 import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
+import android.support.annotation.Nullable;
 
 import com.escodro.savel.data.local.contract.ReleaseItemContract;
 import com.escodro.savel.data.model.SavelRelease;
@@ -32,7 +33,12 @@ public class ReleaseItemViewModel extends BaseObservable {
         imageUrl.set(mContract.getCoverArtUrl(release.getId()));
     }
 
+    @Nullable
     public String getTitle() {
-        return mRelease.getTitle();
+        String title = null;
+        if (mRelease != null) {
+            title = mRelease.getTitle();
+        }
+        return title;
     }
 }

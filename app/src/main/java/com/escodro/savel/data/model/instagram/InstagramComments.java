@@ -12,7 +12,7 @@ import java.util.List;
 public class InstagramComments {
 
     @SerializedName("data")
-    private List<InstagramData> data = null;
+    private List<InstagramData> data;
 
     @SerializedName("count")
     private Integer count;

@@ -1,5 +1,7 @@
 package com.escodro.savel.ui.artist;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,10 +21,17 @@ import javax.inject.Inject;
  */
 public class ArtistActivity extends AppCompatActivity {
 
-    public static final String EXTRA_ARTIST_ID = "artist_id";
+    private static final String EXTRA_ARTIST_ID = "artist_id";
 
     @Inject
     ArtistViewModel mViewModel;
+
+    public static void startActivity(Context context, String artistId) {
+        final Intent intent = new Intent(context, ArtistActivity.class);
+        intent.putExtra(ArtistActivity.EXTRA_ARTIST_ID, artistId);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -4,7 +4,6 @@ import android.databinding.ObservableField;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
@@ -17,7 +16,6 @@ import com.escodro.savel.ui.base.NetworkViewModel;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,8 +28,7 @@ import io.reactivex.Observable;
  * <p/>
  * Created by Igor Escodro on 24/04/17.
  */
-public class SearchViewModel extends NetworkViewModel<List<SavelArtist>> implements
-        Comparator<SavelArtist> {
+public class SearchViewModel extends NetworkViewModel<List<SavelArtist>> {
 
     /**
      * Two-way binding {@link ObservableField} to handle user input query.
@@ -49,6 +46,9 @@ public class SearchViewModel extends NetworkViewModel<List<SavelArtist>> impleme
 
     @Inject
     SearchRecyclerAdapter mAdapter;
+
+    @Inject
+    SearchComparator mSearchComparator;
 
     @Inject
     @LayoutVertical
@@ -72,7 +72,7 @@ public class SearchViewModel extends NetworkViewModel<List<SavelArtist>> impleme
     @Override
     public void onResult(List<SavelArtist> result) {
         mRecyclerViewVisibility.set(View.VISIBLE);
-        Collections.sort(result, this);
+        Collections.sort(result, mSearchComparator);
         mAdapter.updateSearchList(result);
     }
 
@@ -96,32 +96,5 @@ public class SearchViewModel extends NetworkViewModel<List<SavelArtist>> impleme
 
     public DividerItemDecoration getItemDecoration() {
         return mItemDecoration;
-    }
-
-    /**
-     * Custom comparator to send all the {@link SavelArtist}s without {@link SavelArtist#getArea()}
-     * to the bottom of the list. This is needed once
-     * {@link com.escodro.savel.data.remote.service.MusicBrainzService}
-     * does not have a nice implementation of popularity and less famous artists can appear on top.
-     * Usually more famous artists have a better description (like {@link SavelArtist#getArea()}.
-     *
-     * @param t0 first artist to compare
-     * @param t1 second artist to compare
-     *
-     * @return relegation of {@link SavelArtist} with <code>null</code> {@link
-     * SavelArtist#getArea()}
-     */
-    @Override
-    public int compare(SavelArtist t0, SavelArtist t1) {
-        if (TextUtils.equals(t0.getArea(), t1.getArea())) {
-            return 0;
-        }
-        if (t0.getArea() == null) {
-            return 1;
-        }
-        if (t1.getArea() == null) {
-            return -1;
-        }
-        return 0;
     }
 }

@@ -47,7 +47,11 @@ public class InstagramEntry implements TimelineEntryType {
      */
     @Override
     public long getEntryTimeInMillis() {
-        return mInstagramItem.getCreatedTime();
+        long timeInMillis = 0L;
+        if (mInstagramItem != null) {
+            timeInMillis = mInstagramItem.getCreatedTime();
+        }
+        return timeInMillis;
     }
 
     /**

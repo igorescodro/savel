@@ -13,7 +13,7 @@ import java.util.List;
 public class FacebookResponse {
 
     @SerializedName("data")
-    private List<FacebookPost> data = null;
+    private List<FacebookPost> data;
 
     @Nullable
     public List<FacebookPost> getData() {

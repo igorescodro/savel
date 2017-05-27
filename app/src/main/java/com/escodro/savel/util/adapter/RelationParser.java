@@ -87,6 +87,8 @@ public class RelationParser {
      * Process the list to retrieve the ids from various resources.
      */
     private void processList() {
+        if (mRelationList == null) return;
+
         for (MusicBrainzRelation relation : mRelationList) {
             final String url = relation.getUrl();
             final String type = relation.getType();
@@ -103,6 +105,8 @@ public class RelationParser {
                 case STREAMING_MUSIC:
                     processStreamingService(url);
                     break;
+                default:
+                    //Do nothing.
             }
         }
     }
@@ -127,6 +131,8 @@ public class RelationParser {
             case FACEBOOK_HOST:
                 mFacebookId = extractIdFromLastPath(urlString);
                 break;
+            default:
+                //Do nothing.
         }
     }
 
@@ -144,6 +150,8 @@ public class RelationParser {
             case SPOTIFY_HOST:
                 mSpotifyId = extractIdFromLastPath(urlString);
                 break;
+            default:
+                //Do nothing.
         }
     }
 

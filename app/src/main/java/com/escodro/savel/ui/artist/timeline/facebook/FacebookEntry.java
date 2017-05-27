@@ -41,7 +41,11 @@ public class FacebookEntry implements TimelineEntryType {
 
     @Override
     public long getEntryTimeInMillis() {
-        return mFacebookItem.getCreatedTime();
+        long timeInMillis = 0L;
+        if (mFacebookItem != null) {
+            timeInMillis = mFacebookItem.getCreatedTime();
+        }
+        return timeInMillis;
     }
 
     public void setFacebookItem(SavelFacebook facebookItem) {

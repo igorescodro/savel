@@ -41,7 +41,11 @@ public class TwitterEntry implements TimelineEntryType {
 
     @Override
     public long getEntryTimeInMillis() {
-        return mTweet.getCreatedTime();
+        long timeInMillis = 0L;
+        if (mTweet != null) {
+            timeInMillis = mTweet.getCreatedTime();
+        }
+        return timeInMillis;
     }
 
     /**

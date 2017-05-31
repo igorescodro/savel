@@ -139,4 +139,25 @@ public class TwitterTweet {
     public TwitterTweet getRetweet() {
         return retweetedStatus;
     }
+
+    public boolean isPlayable() {
+        boolean isPlayable = false;
+        if (extendedEntities != null) {
+            isPlayable = extendedEntities.isPlayable();
+        }
+        return isPlayable;
+    }
+
+    public boolean hasMedia() {
+        return extendedEntities != null;
+    }
+
+    @Nullable
+    public String getMediaThumbnail() {
+        String thumbnail = null;
+        if (extendedEntities != null) {
+            thumbnail = extendedEntities.getMediaThumbnail();
+        }
+        return thumbnail;
+    }
 }

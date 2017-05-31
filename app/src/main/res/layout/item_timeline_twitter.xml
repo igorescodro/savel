@@ -77,5 +77,26 @@
             android:text="@{viewModel.text}"
             android:textSize="@dimen/font_normal"/>
 
+        <ImageView
+            android:id="@+id/iv_twitter_image"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_below="@id/tv_tweet_text"
+            android:layout_marginBottom="32dp"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/font_normal"
+            android:visibility="@{viewModel.mediaImageVisibility}"
+            app:image="@{viewModel.image}"/>
+
+        <ImageView
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_twitter_image"
+            android:layout_alignTop="@+id/iv_twitter_image"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="8dp"
+            android:src="@android:drawable/ic_media_play"
+            android:visibility="@{viewModel.videoIconVisibility}"/>
+
     </RelativeLayout>
 </layout>

@@ -76,4 +76,17 @@ public class SavelTweet {
         }
         return tweet;
     }
+
+    public boolean isPlayable() {
+        return mTweetEntity.isPlayable();
+    }
+
+    public boolean hasMedia() {
+        return mTweetEntity.hasMedia();
+    }
+
+    @Nullable
+    public String getMediaThumbnail() {
+        return mTweetEntity.getMediaThumbnail();
+    }
 }

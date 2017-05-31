@@ -1,6 +1,8 @@
 
 package com.escodro.savel.data.model.twitter;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -10,6 +12,10 @@ import java.util.List;
  * {@link com.escodro.savel.data.remote.service.TwitterService}.
  */
 public class TwitterMedia {
+
+    private static final String TYPE_VIDEO = "video";
+
+    private static final String TYPE_GIF = "animated_gif";
 
     @SerializedName("id")
     private String id;
@@ -40,4 +46,12 @@ public class TwitterMedia {
 
     @SerializedName("sizes")
     private TwitterSize sizes;
+
+    public String getMediaThumbnail() {
+        return mediaUrl;
+    }
+
+    public boolean isPlayable() {
+        return TextUtils.equals(type, TYPE_VIDEO) || TextUtils.equals(type, TYPE_GIF);
+    }
 }

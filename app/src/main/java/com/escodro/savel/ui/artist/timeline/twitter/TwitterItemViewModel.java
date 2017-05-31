@@ -83,4 +83,16 @@ public class TwitterItemViewModel extends TimelineEntryViewModel {
         final String tweetId = mTweet.getId();
         return BASE_STATUS_URL + username + STATUS_PATH + tweetId;
     }
+
+    public int getVideoIconVisibility() {
+        return mTweet.isPlayable() ? View.VISIBLE : View.GONE;
+    }
+
+    public int getMediaImageVisibility() {
+        return mTweet.hasMedia() ? View.VISIBLE : View.GONE;
+    }
+
+    public String getImage() {
+        return mTweet.getMediaThumbnail();
+    }
 }

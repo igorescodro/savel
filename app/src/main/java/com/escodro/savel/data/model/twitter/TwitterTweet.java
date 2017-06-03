@@ -26,9 +26,6 @@ public class TwitterTweet {
     @SerializedName("truncated")
     private Boolean truncated;
 
-    @SerializedName("entities")
-    private TwitterEntity entities;
-
     @SerializedName("source")
     private String source;
 

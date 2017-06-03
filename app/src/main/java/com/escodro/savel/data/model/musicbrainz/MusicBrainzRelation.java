@@ -5,8 +5,6 @@ import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Object to represent the Relation entity in
  * {@link com.escodro.savel.data.remote.service.MusicBrainzService}.
@@ -18,9 +16,6 @@ public class MusicBrainzRelation {
 
     @SerializedName("type-id")
     private String typeId;
-
-    @SerializedName("attributes")
-    private List<Object> attributes = null;
 
     @SerializedName("target-credit")
     private String targetCredit;

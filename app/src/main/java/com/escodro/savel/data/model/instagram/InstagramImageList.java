@@ -19,7 +19,6 @@ public class InstagramImageList {
 
     @SerializedName("standard_resolution")
     private InstagramResolution standardResolution;
-    private String mImageUrl;
 
     @Nullable
     public String getImageUrl() {

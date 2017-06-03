@@ -32,9 +32,6 @@ public class TwitterUser {
     @SerializedName("url")
     private String url;
 
-    @SerializedName("entities")
-    private TwitterProfileEntity entities;
-
     @SerializedName("protected")
     private Boolean _protected;
 

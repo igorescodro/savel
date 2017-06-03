@@ -5,8 +5,6 @@ import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Object to represent the Media entity in
  * {@link com.escodro.savel.data.remote.service.TwitterService}.
@@ -22,9 +20,6 @@ public class TwitterMedia {
 
     @SerializedName("id_str")
     private String idStr;
-
-    @SerializedName("indices")
-    private List<Integer> indices = null;
 
     @SerializedName("media_url")
     private String mediaUrl;

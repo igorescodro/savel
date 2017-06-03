@@ -14,17 +14,11 @@ import java.util.List;
  */
 public class MusicBrainzArtist {
 
-    @SerializedName("isnis")
-    private List<String> isnis = null;
-
     @SerializedName("area")
     private MusicBrainzArea area;
 
     @SerializedName("life-span")
     private MusicBrainzLifeSpan lifeSpan;
-
-    @SerializedName("ipis")
-    private List<String> ipis = null;
 
     @SerializedName("begin_area")
     private MusicBrainzBeginArea beginArea;

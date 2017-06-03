@@ -4,8 +4,6 @@ import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Object to represent the ReleaseGroup entity in
  * {@link com.escodro.savel.data.remote.service.MusicBrainzService}.
@@ -24,17 +22,11 @@ public class MusicBrainzReleaseGroup {
     @SerializedName("disambiguation")
     private String disambiguation;
 
-    @SerializedName("secondary-type-ids")
-    private List<String> secondaryTypeIds = null;
-
     @SerializedName("first-release-date")
     private String firstReleaseDate;
 
     @SerializedName("id")
     private String id;
-
-    @SerializedName("secondary-types")
-    private List<String> secondaryTypes = null;
 
     @Nullable
     public String getPrimaryType() {

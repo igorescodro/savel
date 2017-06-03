@@ -1,6 +1,7 @@
 package com.escodro.savel.ui.common;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
@@ -36,6 +37,7 @@ public class CustomTabsHandler {
         builder.setSecondaryToolbarColor(secondaryColor);
 
         mCustomTabsIntent = builder.build();
+        mCustomTabsIntent.intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     /**

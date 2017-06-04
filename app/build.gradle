@@ -44,6 +44,7 @@ android {
             buildConfigField 'String', 'KEY_DISCOGS_API', keystoreProperties['DiscogsApiKey']
             buildConfigField 'String', 'KEY_TWITTER_API', keystoreProperties['TwitterApiKey']
             buildConfigField 'String', 'KEY_FACEBOOK_API', keystoreProperties['FacebookApiKey']
+            buildConfigField 'String', 'KEY_SPOTIFY_API', keystoreProperties['SpotifyApiKey']
         }
         release {
             minifyEnabled false

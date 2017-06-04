@@ -122,7 +122,11 @@ public class OkHttpInterceptorModule {
     @Singleton
     @NonNull
     Interceptor provideSpotifyInterceptor() {
-        return new HttpLoggingInterceptor();
+        return chain -> {
+            final Request request = chain.request().newBuilder().addHeader("Authorization",
+                    "Bearer " + BuildConfig.KEY_SPOTIFY_API).build();
+            return chain.proceed(request);
+        };
     }
 
     @Spotify

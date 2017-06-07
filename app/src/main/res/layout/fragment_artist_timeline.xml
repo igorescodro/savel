@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:bind="http://schemas.android.com/tools">
 
     <data>
@@ -9,11 +10,20 @@
             type="com.escodro.savel.ui.artist.timeline.TimelineViewModel"/>
     </data>
 
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <include
+            layout="@layout/layout_network_error"
+            app:networkError="@{viewModel.networkError}"
+            app:onClick="@{viewModel.onClickRetryButton}"
+            app:visibility="@{viewModel.networkErrorVisibility}"/>
+
+        <include
+            layout="@layout/layout_loading"
+            app:visibility="@{viewModel.loadingVisibility}"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -22,5 +32,5 @@
             bind:item_decoration="@{viewModel.itemDecoration}"
             bind:layout_manager="@{viewModel.linearLayoutManager}"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 </layout>

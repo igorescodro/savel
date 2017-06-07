@@ -9,17 +9,22 @@ import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.data.model.SavelTimeline;
 import com.escodro.savel.injection.qualifier.LayoutVertical;
 import com.escodro.savel.ui.artist.timeline.entry.TimelineEntryAdapter;
+import com.escodro.savel.ui.base.NetworkViewModel;
 import com.escodro.savel.util.viewholder.BindingHolder;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import io.reactivex.Observable;
+
 /**
  * ViewModel responsible to provide {@link SavelArtist} information to {@link TimelineFragment}.
  * <p/>
- * Created by IgorEscodro on 06/05/17.
+ * Created by Igor Escodro on 06/05/17.
  */
-public class TimelineViewModel {
+public class TimelineViewModel extends NetworkViewModel<SavelTimeline> {
+
+    private TimelineProvider mTimelineProvider;
 
     @Inject
     TimelineRecyclerAdapter mAdapter;
@@ -40,11 +45,18 @@ public class TimelineViewModel {
      */
     @Inject
     public TimelineViewModel(TimelineProvider provider) {
-        provider.getObservable().subscribe(this::updateTimelineList);
+        mTimelineProvider = provider;
+        loadData();
     }
 
-    private void updateTimelineList(SavelTimeline artist) {
-        mAdapter.updateTimelineList(mTimelineAdapter.extractTimeline(artist));
+    @Override
+    public Observable<SavelTimeline> getObservable() {
+        return mTimelineProvider.getObservable();
+    }
+
+    @Override
+    public void onResult(SavelTimeline timeline) {
+        mAdapter.updateTimelineList(mTimelineAdapter.extractTimeline(timeline));
     }
 
     public RecyclerView.Adapter<BindingHolder> getRecyclerViewAdapter() {

@@ -9,8 +9,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import timber.log.Timber;
 
 /**
@@ -68,17 +66,7 @@ public class RelationParser {
 
     private String mFacebookId;
 
-    @Inject
-    public RelationParser() {
-    }
-
-    /**
-     * Set the {@link List} of {@link MusicBrainzRelation} to be processed, parsing the ids from
-     * the resources.
-     *
-     * @param relationList list of MusicBrainz Relation
-     */
-    public void setRelationList(@NonNull List<MusicBrainzRelation> relationList) {
+    public RelationParser(@NonNull List<MusicBrainzRelation> relationList) {
         mRelationList = relationList;
         processList();
     }

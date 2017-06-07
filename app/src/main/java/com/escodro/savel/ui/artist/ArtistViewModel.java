@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 
 import com.escodro.savel.R;
 import com.escodro.savel.data.local.contract.ArtistContract;
-import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.ui.artist.profile.ProfileFragment;
 import com.escodro.savel.ui.artist.releases.ReleaseFragment;
@@ -37,9 +36,6 @@ public class ArtistViewModel extends NetworkViewModel<SavelArtist> {
     @Inject
     ArtistContract mContract;
 
-    @Inject
-    ArtistProvider mProvider;
-
     private FragmentManager mFragmentManager;
 
     private String mArtistId;
@@ -60,7 +56,7 @@ public class ArtistViewModel extends NetworkViewModel<SavelArtist> {
 
     @Override
     public void onResult(SavelArtist result) {
-        mProvider.storeData(result);
+        // Do nothing
     }
 
     public BottomNavigationView.OnNavigationItemSelectedListener getNavigationListener() {

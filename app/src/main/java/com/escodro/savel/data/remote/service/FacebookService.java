@@ -26,7 +26,7 @@ public interface FacebookService {
             "icon," +
             "permalink_url," +
             "source," +
-            "from,first_name";
+            "from";
 
     /**
      * Connect to posts endpoint and retrieve a {@link FacebookResponse} containing the artist

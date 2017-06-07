@@ -5,12 +5,14 @@ import android.support.annotation.NonNull;
 import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.data.model.SavelFacebook;
 import com.escodro.savel.data.model.SavelInstagram;
+import com.escodro.savel.data.model.SavelTimeline;
 import com.escodro.savel.data.model.SavelTweet;
 import com.escodro.savel.data.model.facebook.FacebookPost;
 import com.escodro.savel.data.model.facebook.FacebookResponse;
 import com.escodro.savel.data.model.instagram.InstagramItem;
 import com.escodro.savel.data.model.instagram.InstagramTimeline;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
+import com.escodro.savel.data.model.musicbrainz.MusicBrainzRelation;
 import com.escodro.savel.data.model.twitter.TwitterTweet;
 import com.escodro.savel.data.remote.repository.DiscogsRepository;
 import com.escodro.savel.data.remote.repository.FacebookRepository;
@@ -54,9 +56,6 @@ public class SavelRepository {
     FacebookRepository mFacebookRepository;
 
     @Inject
-    RelationParser mRelationParser;
-
-    @Inject
     public SavelRepository() {
     }
 
@@ -70,20 +69,32 @@ public class SavelRepository {
     public Observable<SavelArtist> getArtist(String artistId) {
         return mMusicBrainzRepository.getArtistInfo(artistId)
                 .flatMap(result -> {
-                    mRelationParser.setRelationList(result.getRelations());
+                    final RelationParser parser = new RelationParser(result.getRelations());
                     return Observable.zip(
                             Observable.just(result),
-                            mDiscogsRepository.getArtist(mRelationParser.getDiscogsId()),
-                            mTwitterRepository.getArtistTimeline(mRelationParser.getTwitterId())
-                                    .map(convertToTwitterList()),
-                            mSpotifyRepository.getArtistInfo(mRelationParser.getSpotifyId()),
-                            mInstaRepository.getArtistTimeline(mRelationParser.getInstagramId())
-                                    .map(convertToInstagramList()),
-                            mFacebookRepository.getTimeline(mRelationParser.getFacebookId())
-                                    .map(convertToFacebookList()),
+                            mDiscogsRepository.getArtist(parser.getDiscogsId()),
+                            mSpotifyRepository.getArtistInfo(parser.getSpotifyId()),
                             mMusicBrainzRepository.getReleaseGroupByArtistId(artistId),
                             SavelArtist::new);
                 });
+    }
+
+    /**
+     * Get the wrapped {@link SavelTimeline} from social networks.
+     *
+     * @return artist wrapper
+     */
+    public Observable<SavelTimeline> getArtistTimeLine(List<MusicBrainzRelation> relations) {
+        final RelationParser parser = new RelationParser(relations);
+        return Observable.zip(
+                mTwitterRepository.getArtistTimeline(
+                        parser.getTwitterId()).map(convertToTwitterList()),
+                mInstaRepository.getArtistTimeline(
+                        parser.getInstagramId()).map(convertToInstagramList()),
+                mFacebookRepository.getTimeline(
+                        parser.getFacebookId()).map(convertToFacebookList()),
+                SavelTimeline::new
+        );
     }
 
     /**
@@ -137,8 +148,7 @@ public class SavelRepository {
             final List<FacebookPost> items = facebookTimeline.getData();
             if (items != null) {
                 for (FacebookPost fbPost : items) {
-                    final String userId = mRelationParser.getFacebookId();
-                    timeline.add(new SavelFacebook(fbPost, userId));
+                    timeline.add(new SavelFacebook(fbPost));
                 }
             }
             return timeline;

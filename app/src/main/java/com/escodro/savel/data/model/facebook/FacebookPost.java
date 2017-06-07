@@ -69,6 +69,15 @@ public class FacebookPost {
     }
 
     @Nullable
+    public String getUserId() {
+        String id = null;
+        if (from != null) {
+            id = from.getUserId();
+        }
+        return id;
+    }
+
+    @Nullable
     public String getId() {
         return id;
     }

@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.escodro.savel.data.model.discogs.DiscogsArtist;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzArtist;
+import com.escodro.savel.data.model.musicbrainz.MusicBrainzRelation;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzReleaseGroup;
 import com.escodro.savel.data.model.musicbrainz.MusicBrainzReleaseGroupList;
 import com.escodro.savel.data.model.spotify.SpotifyArtist;
@@ -24,34 +25,22 @@ public class SavelArtist {
 
     private final DiscogsArtist mDiscogsArtist;
 
-    private List<SavelTweet> mTweetList;
-
     private final SpotifyArtist mSpotifyArtist;
-
-    private List<SavelInstagram> mInstaTimeline;
-
-    private List<SavelFacebook> mFacebookTimeline;
 
     private List<SavelRelease> mReleases;
 
     public SavelArtist(MusicBrainzArtist musicBrainzArtist,
-                       DiscogsArtist discogsArtist,
-                       List<SavelTweet> tweetList,
-                       SpotifyArtist spotifyArtist,
-                       List<SavelInstagram> instaTimeline,
-                       List<SavelFacebook> facebookTimeline,
-                       MusicBrainzReleaseGroupList releaseGroupList) {
+            DiscogsArtist discogsArtist,
+            SpotifyArtist spotifyArtist,
+            MusicBrainzReleaseGroupList releaseGroupList) {
         mMusicBrainzArtist = musicBrainzArtist;
         mDiscogsArtist = discogsArtist;
-        mTweetList = tweetList;
         mSpotifyArtist = spotifyArtist;
-        mInstaTimeline = instaTimeline;
-        mFacebookTimeline = facebookTimeline;
         mReleases = convertToReleases(releaseGroupList);
     }
 
     public SavelArtist(MusicBrainzArtist musicBrainzArtist) {
-        this(musicBrainzArtist, null, null, null, null, null, null);
+        this(musicBrainzArtist, null, null, null);
     }
 
     @Nullable
@@ -112,35 +101,20 @@ public class SavelArtist {
     }
 
     @NonNull
-    public List<SavelTweet> getTweetList() {
-        if (mTweetList == null) {
-            mTweetList = new ArrayList<>();
-        }
-        return mTweetList;
-    }
-
-    @NonNull
-    public List<SavelInstagram> getInstagramTimeline() {
-        if (mInstaTimeline == null) {
-            mInstaTimeline = new ArrayList<>();
-        }
-        return mInstaTimeline;
-    }
-
-    @NonNull
-    public List<SavelFacebook> getFacebookTimeline() {
-        if (mFacebookTimeline == null) {
-            mFacebookTimeline = new ArrayList<>();
-        }
-        return mFacebookTimeline;
-    }
-
-    @NonNull
     public List<SavelRelease> getReleases() {
         if (mReleases == null) {
-            mReleases = new ArrayList<>();
+            mReleases = Collections.emptyList();
         }
         return mReleases;
+    }
+
+    @NonNull
+    public List<MusicBrainzRelation> getRelations() {
+        List<MusicBrainzRelation> relations = Collections.emptyList();
+        if (mMusicBrainzArtist != null) {
+            relations = mMusicBrainzArtist.getRelations();
+        }
+        return relations;
     }
 
     @NonNull

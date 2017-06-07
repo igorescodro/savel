@@ -1,8 +1,13 @@
 package com.escodro.savel.data.local.contract;
 
+import com.escodro.savel.data.local.provider.ArtistProvider;
+import com.escodro.savel.data.local.provider.TimelineProvider;
 import com.escodro.savel.data.local.repository.SavelRepository;
 import com.escodro.savel.data.model.SavelArtist;
+import com.escodro.savel.data.model.musicbrainz.MusicBrainzRelation;
 import com.escodro.savel.ui.artist.ArtistViewModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -19,6 +24,12 @@ public class ArtistContract extends BaseContract {
     SavelRepository mSavelRepository;
 
     @Inject
+    ArtistProvider mArtistProvider;
+
+    @Inject
+    TimelineProvider mTimelineProvider;
+
+    @Inject
     public ArtistContract() {
     }
 
@@ -31,6 +42,23 @@ public class ArtistContract extends BaseContract {
      * @return observable of artist
      */
     public Observable<SavelArtist> getArtist(String artistId) {
-        return mSavelRepository.getArtist(artistId).compose(applySchedulers());
+        final Observable<SavelArtist> observable =
+                mSavelRepository.getArtist(artistId).compose(applySchedulers()).share();
+        observable.subscribe(this::processArtist);
+        return observable;
+    }
+
+    /**
+     * On receive the {@link SavelArtist}, store it on the {@link ArtistProvider}. After that, get
+     * the {@link java.util.List} of {@link com.escodro.savel.data.model.SavelTimeline} and stores
+     * it on the {@link TimelineProvider}.
+     *
+     * @param savelArtist savel artist
+     */
+    private void processArtist(SavelArtist savelArtist) {
+        mArtistProvider.storeData(savelArtist);
+
+        final List<MusicBrainzRelation> relations = savelArtist.getRelations();
+        mSavelRepository.getArtistTimeLine(relations).subscribe(mTimelineProvider::storeData);
     }
 }

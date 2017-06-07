@@ -1,6 +1,8 @@
 package com.escodro.savel.data.local.provider;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 
 /**
@@ -25,7 +27,9 @@ public abstract class ObservableProvider<T> {
      * @return observable to be subscribed
      */
     public Observable<T> getObservable() {
-        return mPublishSubject;
+        return mPublishSubject
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
     /**

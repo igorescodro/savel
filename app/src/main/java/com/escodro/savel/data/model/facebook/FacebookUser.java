@@ -17,6 +17,11 @@ public class FacebookUser {
     private String id;
 
     @Nullable
+    public String getUserId() {
+        return id;
+    }
+
+    @Nullable
     public String getName() {
         return name;
     }

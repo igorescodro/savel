@@ -2,6 +2,7 @@ package com.escodro.savel.injection.module;
 
 import com.escodro.savel.data.local.provider.ArtistProvider;
 import com.escodro.savel.data.local.provider.ObservableProvider;
+import com.escodro.savel.data.local.provider.TimelineProvider;
 
 import javax.inject.Singleton;
 
@@ -20,5 +21,11 @@ public class ProviderModule {
     @Provides
     ArtistProvider provideArtistProvider() {
         return new ArtistProvider();
+    }
+
+    @Singleton
+    @Provides
+    TimelineProvider provideTimelineProvider() {
+        return new TimelineProvider();
     }
 }

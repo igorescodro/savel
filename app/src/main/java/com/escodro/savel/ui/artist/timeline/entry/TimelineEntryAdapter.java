@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.data.model.SavelFacebook;
 import com.escodro.savel.data.model.SavelInstagram;
+import com.escodro.savel.data.model.SavelTimeline;
 import com.escodro.savel.data.model.SavelTweet;
 import com.escodro.savel.ui.artist.timeline.facebook.FacebookEntry;
 import com.escodro.savel.ui.artist.timeline.instagram.InstagramEntry;
@@ -44,15 +45,15 @@ public class TimelineEntryAdapter {
     /**
      * Extract a {@link List} of {@link TimelineEntryType} from an {@link SavelArtist}.
      *
-     * @param artist artist with timeline attributes
+     * @param savelArtist artist with timeline attributes
      *
      * @return list of timeline entries
      */
-    public List<TimelineEntryType> extractTimeline(@NonNull SavelArtist artist) {
+    public List<TimelineEntryType> extractTimeline(@NonNull SavelTimeline savelArtist) {
         final List<TimelineEntryType> timeline = new ArrayList<>();
-        timeline.addAll(getTwitterEntries(artist.getTweetList()));
-        timeline.addAll(getInstagramEntries(artist.getInstagramTimeline()));
-        timeline.addAll(getFacebookEntries(artist.getFacebookTimeline()));
+        timeline.addAll(getTwitterEntries(savelArtist.getTweetList()));
+        timeline.addAll(getInstagramEntries(savelArtist.getInstagramTimeline()));
+        timeline.addAll(getFacebookEntries(savelArtist.getFacebookTimeline()));
 
         Collections.sort(timeline, mComparator);
 

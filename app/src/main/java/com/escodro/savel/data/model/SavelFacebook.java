@@ -22,12 +22,9 @@ public class SavelFacebook {
 
     private final FacebookPost mFacebookItem;
 
-    private String mUserId;
-
     @Inject
-    public SavelFacebook(@NonNull FacebookPost facebookItem, @NonNull String userId) {
+    public SavelFacebook(@NonNull FacebookPost facebookItem) {
         mFacebookItem = facebookItem;
-        mUserId = userId;
     }
 
     @Nullable
@@ -83,6 +80,6 @@ public class SavelFacebook {
     }
 
     public String getProfilePictureUrl() {
-        return String.format(BuildConfig.API_FACEBOOK_PROFILE_ENDPOINT, mUserId);
+        return String.format(BuildConfig.API_FACEBOOK_PROFILE_ENDPOINT, mFacebookItem.getUserId());
     }
 }

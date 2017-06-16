@@ -10,6 +10,8 @@ import com.escodro.savel.util.adapter.NetworkErrorHandler;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Generic ViewModel to handle the network flow. This view model is responsible to show and hide
@@ -40,6 +42,8 @@ public abstract class NetworkViewModel<T> extends BaseObservable {
      */
     public final ObservableField<NetworkError> networkError;
 
+    private T mResult;
+
     @Inject
     NetworkErrorHandler mNetworkErrorHandler;
 
@@ -55,7 +59,10 @@ public abstract class NetworkViewModel<T> extends BaseObservable {
      */
     protected void loadData() {
         showLoadingScreen();
-        getObservable().subscribe(this::setResult, this::handleError);
+        getObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::setResult, this::handleError);
     }
 
     /**
@@ -66,18 +73,22 @@ public abstract class NetworkViewModel<T> extends BaseObservable {
      * @param result result from observable request
      */
     private void setResult(T result) {
+        mResult = result;
         hideLoadingScreen();
         onResult(result);
     }
 
     /**
      * Failure method to be used in the {@link Observable#subscribe()}. It handles the error
-     * thrown by the observable and shows in a more friendly format to the user.
+     * thrown by the observable and shows in a more friendly format to the user. It only shows
+     * the error screen if there is no value in cache.
      *
      * @param throwable error thrown by the observables
      */
     private void handleError(Throwable throwable) {
-        showNetworkErrorScreen(throwable);
+        if (mResult == null) {
+            showNetworkErrorScreen(throwable);
+        }
     }
 
     /**

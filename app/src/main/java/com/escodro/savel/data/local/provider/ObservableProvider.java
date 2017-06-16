@@ -8,8 +8,9 @@ import io.reactivex.subjects.PublishSubject;
 /**
  * Data provider which can be subscribed and notifies the {@link io.reactivex.Observer}s when a
  * change occurs. The concept of the this provider is very similar with an
- * {@link android.databinding.ObservableField} in Data Binding.<br>
- * The child class must provide a way of storing and retrieving the data (even if only in memory).
+ * {@link android.databinding.ObservableField} in Data Binding.<br> This provider is used to avoid
+ * passing objects though every class need the information, e.g. if many Fragments needs a
+ * information already loaded in the Activity.
  * <p/>
  * Created by Igor Escodro on 05/05/17.
  */

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.escodro.savel.R;
 import com.escodro.savel.data.local.contract.ArtistContract;
+import com.escodro.savel.data.local.database.model.ArtistRealm;
 import com.escodro.savel.data.model.SavelArtist;
 import com.escodro.savel.ui.artist.profile.ProfileFragment;
 import com.escodro.savel.ui.artist.releases.ReleaseFragment;
@@ -22,7 +23,7 @@ import io.reactivex.Observable;
  * <p/>
  * Created by Igor Escodro on 05/05/17.
  */
-public class ArtistViewModel extends NetworkViewModel<SavelArtist> {
+public class ArtistViewModel extends NetworkViewModel<ArtistRealm> {
 
     @Inject
     ProfileFragment mArtistFragment;
@@ -50,12 +51,12 @@ public class ArtistViewModel extends NetworkViewModel<SavelArtist> {
     }
 
     @Override
-    public Observable<SavelArtist> getObservable() {
+    public Observable<ArtistRealm> getObservable() {
         return mContract.getArtist(mArtistId);
     }
 
     @Override
-    public void onResult(SavelArtist result) {
+    public void onResult(ArtistRealm result) {
         // Do nothing
     }
 

@@ -43,14 +43,14 @@ public class ReleaseViewModel {
      */
     @Inject
     public ReleaseViewModel(ArtistProvider provider) {
-        provider.getObservable().subscribe(this::updateReleaseList);
+//        provider.getObservable().subscribe(this::updateReleaseList);
     }
 
-    private void updateReleaseList(SavelArtist artist) {
-        mContract.setReleaseList(artist.getReleases());
-        mAlbumAdapter.updateReleaseList(mContract.getAlbumReleases());
-        mSingleAdapter.updateReleaseList(mContract.getSingleReleases());
-    }
+//    private void updateReleaseList(SavelArtist artist) {
+//        mContract.setReleaseList(artist.getReleases());
+//        mAlbumAdapter.updateReleaseList(mContract.getAlbumReleases());
+//        mSingleAdapter.updateReleaseList(mContract.getSingleReleases());
+//    }
 
     public RecyclerView.Adapter<BindingHolder<ItemArtistReleaseBinding>> getAlbumAdapter() {
         return mAlbumAdapter;

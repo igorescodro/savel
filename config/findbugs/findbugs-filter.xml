@@ -18,5 +18,9 @@
     <Match>
         <Class name="~.*databinding.*"/>
     </Match>
+    <!-- Ignore Realm generated classes -->
+    <Match>
+        <Class name="~io.realm.*"/>
+    </Match>
 
 </FindBugsFilter>

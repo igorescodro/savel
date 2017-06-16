@@ -2,7 +2,10 @@ package com.escodro.savel;
 
 import android.app.Application;
 
+import com.escodro.savel.data.local.database.DatabaseRealm;
 import com.escodro.savel.injection.Injector;
+
+import javax.inject.Inject;
 
 import timber.log.Timber;
 import timber.log.Timber.DebugTree;
@@ -15,11 +18,19 @@ import timber.log.Timber.DebugTree;
 
 public class SavelApplication extends Application {
 
+    @Inject
+    DatabaseRealm mDatabaseRealm;
+
     @Override
     public void onCreate() {
         super.onCreate();
         initializeComponent();
+        initializeRealm();
         enableLogging();
+    }
+
+    private void initializeRealm() {
+        mDatabaseRealm.setup();
     }
 
     /**

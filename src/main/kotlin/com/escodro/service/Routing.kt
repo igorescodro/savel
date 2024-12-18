@@ -1,4 +1,4 @@
-package com.escodro
+package com.escodro.service
 
 import io.ktor.client.*
 import io.ktor.client.call.*

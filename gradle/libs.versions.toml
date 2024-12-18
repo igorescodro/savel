@@ -11,6 +11,7 @@ ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "k
 ktor-server-negotiation = { module = "io.ktor:ktor-server-content-negotiation-jvm", version.ref = "ktor-version" }
 ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml-jvm", version.ref = "ktor-version" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor-version" }
+ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages", version.ref = "ktor-version" }
 
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor-version" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-version" }

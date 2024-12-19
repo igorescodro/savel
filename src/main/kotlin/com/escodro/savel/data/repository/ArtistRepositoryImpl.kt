@@ -9,5 +9,7 @@ internal class ArtistRepositoryImpl(
 ) : ArtistRepository {
 
     override suspend fun searchArtist(name: String): SearchArtistResponse =
-        musicBrainzApi.searchArtist(name = name)
+        SearchArtistResponse(
+            artists = musicBrainzApi.searchArtist(name = name)
+        )
 }

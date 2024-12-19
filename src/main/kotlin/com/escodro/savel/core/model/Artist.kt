@@ -1,4 +1,4 @@
-package com.escodro.savel.domain.model
+package com.escodro.savel.core.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

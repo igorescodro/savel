@@ -10,8 +10,9 @@ internal class SearchRouteProvider(
 ) : RouteProvider {
 
     override val routes: Routing.() -> Unit = {
-        get("/search/{query}") {
-            val searchResult: Result<SearchArtistResponse> = searchArtist(name = call.parameters["query"])
+        get("/search/artist/") {
+            val query = call.queryParameters["query"]
+            val searchResult: Result<SearchArtistResponse> = searchArtist(name = query)
             call.respond(searchResult.getOrThrow())
         }
     }

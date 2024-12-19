@@ -10,8 +10,8 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-    configureRouting()
     install(Koin) {
         modules(savelModule)
     }
+    configureRouting()
 }

@@ -1,13 +1,11 @@
 package com.escodro.service
 
-import com.escodro.domain.model.SearchArtistResponse
-import com.escodro.domain.usecase.SearchArtist
+import com.escodro.service.route.RouteProvider
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.koin.ktor.ext.inject
+import org.koin.ktor.ext.getKoin
 
 fun Application.configureRouting() {
 
@@ -17,12 +15,9 @@ fun Application.configureRouting() {
         json()
     }
 
-    val searchArtist: SearchArtist by inject()
+    val routes: List<RouteProvider> = getKoin().getAll()
 
     routing {
-        get("/search/{query}") {
-            val searchResult: Result<SearchArtistResponse> = searchArtist(name = call.parameters["query"])
-            call.respond(searchResult.getOrThrow())
-        }
+        routes.forEach { provider -> provider.routes(this) }
     }
 }

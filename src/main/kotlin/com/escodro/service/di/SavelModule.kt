@@ -7,6 +7,7 @@ import org.koin.dsl.module
 
 internal val savelModule = module {
     includes(
+        serviceModule,
         domainModule,
         repositoryModule,
         remoteModule,

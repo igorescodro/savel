@@ -1,8 +1,8 @@
-package com.escodro.savel.remote
+package com.escodro.savel.data.remote
 
+import com.escodro.savel.data.remote.client.SavelHttpClient
 import com.escodro.savel.data.repository.datasource.MusicBrainzApi
 import com.escodro.savel.domain.model.SearchArtistResponse
-import com.escodro.savel.remote.client.SavelHttpClient
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 

@@ -1,4 +1,4 @@
-package com.escodro.savel.remote.client
+package com.escodro.savel.data.remote.client
 
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*

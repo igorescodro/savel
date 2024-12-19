@@ -1,8 +1,8 @@
-package com.escodro.savel.remote.di
+package com.escodro.savel.data.remote.di
 
+import com.escodro.savel.data.remote.MusicBrainzApiImpl
+import com.escodro.savel.data.remote.client.SavelHttpClient
 import com.escodro.savel.data.repository.datasource.MusicBrainzApi
-import com.escodro.savel.remote.MusicBrainzApiImpl
-import com.escodro.savel.remote.client.SavelHttpClient
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind

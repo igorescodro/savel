@@ -1,7 +1,7 @@
 package com.escodro.savel.data.remote.musicbrainz.mapper
 
+import com.escodro.savel.core.model.artist.ExternalProvider
 import com.escodro.savel.core.model.artist.ExternalResource
-import com.escodro.savel.core.model.artist.ResourceProvider
 import com.escodro.savel.data.remote.musicbrainz.artist.Relation
 
 internal class ExternalResourceMapper {
@@ -15,7 +15,7 @@ internal class ExternalResourceMapper {
         val id = url?.split("/")?.get(4) ?: return null
 
         return ExternalResource(
-            provider = ResourceProvider.Spotify,
+            provider = ExternalProvider.Spotify,
             id = id,
             url = url,
         )

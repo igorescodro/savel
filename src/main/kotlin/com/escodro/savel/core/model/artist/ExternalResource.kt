@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ExternalResource(
-    @SerialName("provider") val provider: ResourceProvider,
+    @SerialName("provider") val provider: ExternalProvider,
     @SerialName("id") val id: String,
     @SerialName("url") val url: String?,
 )

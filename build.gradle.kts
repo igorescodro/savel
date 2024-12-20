@@ -38,6 +38,7 @@ dependencies {
 
     implementation(libs.ktor.serialization)
     implementation(libs.logback.classic)
+    implementation(libs.kotlin.datetime)
 
     implementation(libs.koin.ktor)
 

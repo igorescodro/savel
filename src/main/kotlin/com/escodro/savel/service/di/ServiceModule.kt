@@ -6,7 +6,8 @@ import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-internal val serviceModule = module {
+internal val serviceModule =
+    module {
 
-    factoryOf(::SearchRouteProvider) bind RouteProvider::class
-}
+        factoryOf(::SearchRouteProvider) bind RouteProvider::class
+    }

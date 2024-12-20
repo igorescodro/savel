@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class LifeSpan(
     @SerialName("begin") val begin: String? = null,
-    @SerialName("ended") val ended: Boolean? = null
+    @SerialName("ended") val ended: Boolean? = null,
 )

@@ -17,5 +17,5 @@ data class Relation(
     @SerialName("begin") val begin: String? = null,
     @SerialName("source-credit") val sourceCredit: String? = null,
     @SerialName("end") val end: String? = null,
-    @SerialName("type-id") val typeId: String? = null
+    @SerialName("type-id") val typeId: String? = null,
 )

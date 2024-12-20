@@ -4,7 +4,8 @@ import com.escodro.savel.domain.usecase.SearchArtist
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
-val domainModule = module {
+val domainModule =
+    module {
 
-    factoryOf(::SearchArtist)
-}
+        factoryOf(::SearchArtist)
+    }

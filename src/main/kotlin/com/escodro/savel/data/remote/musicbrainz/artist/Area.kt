@@ -10,5 +10,5 @@ data class Area(
     @SerialName("type-id") val typeId: String? = null,
     @SerialName("name") val name: String,
     @SerialName("sort-name") val sortName: String,
-    @SerialName("life-span") val lifeSpan: LifeSpan? = null
+    @SerialName("life-span") val lifeSpan: LifeSpan? = null,
 )

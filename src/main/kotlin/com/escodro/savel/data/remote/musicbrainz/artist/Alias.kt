@@ -12,5 +12,5 @@ data class Alias(
     @SerialName("type") val type: String? = null,
     @SerialName("primary") val primary: Boolean? = null,
     @SerialName("begin-date") val beginDate: String? = null,
-    @SerialName("end-date") val endDate: String? = null
+    @SerialName("end-date") val endDate: String? = null,
 )

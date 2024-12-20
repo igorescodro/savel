@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Tag(
     @SerialName("count") val count: Int,
-    @SerialName("name") val name: String
+    @SerialName("name") val name: String,
 )

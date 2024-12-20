@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class SearchArtistResponse(
-    @SerialName("artists") val artists: List<Artist>
+    @SerialName("artists") val artists: List<Artist>,
 )

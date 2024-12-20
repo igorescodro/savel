@@ -5,11 +5,12 @@ import com.escodro.savel.data.repository.di.repositoryModule
 import com.escodro.savel.domain.di.domainModule
 import org.koin.dsl.module
 
-internal val savelModule = module {
-    includes(
-        serviceModule,
-        domainModule,
-        repositoryModule,
-        remoteModule,
-    )
-}
+internal val savelModule =
+    module {
+        includes(
+            serviceModule,
+            domainModule,
+            repositoryModule,
+            remoteModule,
+        )
+    }

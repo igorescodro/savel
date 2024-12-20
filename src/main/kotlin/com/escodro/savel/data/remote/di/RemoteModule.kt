@@ -10,13 +10,14 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val remoteModule = module {
-    // Client
-    singleOf(::SavelHttpClient)
+val remoteModule =
+    module {
+        // Client
+        singleOf(::SavelHttpClient)
 
-    // MusicBrainz
-    factoryOf(::MusicBrainzApi) bind ArtistDataSource::class
+        // MusicBrainz
+        factoryOf(::MusicBrainzApi) bind ArtistDataSource::class
 
-    factoryOf(::ArtistMapper)
-    factoryOf(::ExternalResourceMapper)
-}
+        factoryOf(::ArtistMapper)
+        factoryOf(::ExternalResourceMapper)
+    }

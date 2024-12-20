@@ -1,4 +1,4 @@
-package com.escodro.savel.core.model
+package com.escodro.savel.core.model.artist
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 internal data class Artist(
     @SerialName("id") val id: String,
     @SerialName("name") val name: String,
-    @SerialName("country") val country: String? = null,
+    @SerialName("external_ids") val externalResourceList: List<ExternalResource>
 )

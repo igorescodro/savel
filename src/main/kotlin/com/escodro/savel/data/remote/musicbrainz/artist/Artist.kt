@@ -1,4 +1,4 @@
-package com.escodro.savel.data.remote.model.artist
+package com.escodro.savel.data.remote.musicbrainz.artist
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -20,5 +20,6 @@ data class Artist(
     @SerialName("isnis") val isnis: List<String>? = null,
     @SerialName("life-span") val lifeSpan: LifeSpan? = null,
     @SerialName("aliases") val aliases: List<Alias>? = null,
-    @SerialName("tags") val tags: List<Tag>? = null
+    @SerialName("tags") val tags: List<Tag>? = null,
+    @SerialName("relations") val relations: List<Relation>? = null,
 )

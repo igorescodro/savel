@@ -1,6 +1,6 @@
 package com.escodro.savel.domain.model
 
-import com.escodro.savel.core.model.Artist
+import com.escodro.savel.core.model.artist.Artist
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

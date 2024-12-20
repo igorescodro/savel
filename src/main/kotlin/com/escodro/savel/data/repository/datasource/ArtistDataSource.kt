@@ -1,6 +1,6 @@
 package com.escodro.savel.data.repository.datasource
 
-import com.escodro.savel.core.model.Artist
+import com.escodro.savel.core.model.artist.Artist
 
 internal interface ArtistDataSource {
 

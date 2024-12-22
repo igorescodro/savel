@@ -5,12 +5,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Artist(
-    @SerialName("id") val id: String,
+    @SerialName("id") val id: String? = null,
     @SerialName("type") val type: String? = null,
     @SerialName("type-id") val typeId: String? = null,
     @SerialName("score") val score: Int? = null,
     @SerialName("gender-id") val genderId: String? = null,
-    @SerialName("name") val name: String,
+    @SerialName("name") val name: String? = null,
     @SerialName("sort-name") val sortName: String? = null,
     @SerialName("gender") val gender: String? = null,
     @SerialName("country") val country: String? = null,

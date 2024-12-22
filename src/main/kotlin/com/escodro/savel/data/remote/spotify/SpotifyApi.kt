@@ -22,7 +22,7 @@ internal class SpotifyApi(
 
         val response =
             httpClient.client.submitForm(
-                url = "${URL}api/token",
+                url = "$URL/api/token",
                 formParameters =
                     Parameters.build {
                         append("grant_type", "client_credentials")
@@ -42,6 +42,6 @@ internal class SpotifyApi(
     }
 
     private companion object {
-        const val URL = "https://accounts.spotify.com/"
+        const val URL = "https://accounts.spotify.com"
     }
 }

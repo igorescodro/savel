@@ -16,7 +16,7 @@ internal class ArtistImageDataSourceImpl(
     override suspend fun getArtistImage(artistId: String): ArtistImage {
         val token = tokenDataSource.getToken() ?: return ArtistImage(imageUrl = null)
         val response =
-            httpClient.client.get("${URL}artists/$artistId/") {
+            httpClient.client.get("$URL/artists/$artistId/") {
                 bearerAuth(token.value)
             }
 
@@ -30,6 +30,6 @@ internal class ArtistImageDataSourceImpl(
     }
 
     private companion object {
-        private const val URL = "https://api.spotify.com/v1/"
+        private const val URL = "https://api.spotify.com/v1"
     }
 }

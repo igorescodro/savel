@@ -42,7 +42,7 @@ internal class MusicBrainzApi(
                 artistList.map { artist ->
                     async {
                         val response =
-                            httpClient.client.get("$URL${artist.id}") {
+                            httpClient.client.get("$URL/${artist.id}") {
                                 parameter("fmt", "json")
                                 parameter("inc", "url-rels")
                                 headers {
@@ -62,6 +62,6 @@ internal class MusicBrainzApi(
         }
 
     private companion object {
-        const val URL = "https://musicbrainz.org/ws/2/artist/"
+        const val URL = "https://musicbrainz.org/ws/2/artist"
     }
 }

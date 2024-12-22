@@ -1,9 +1,9 @@
 package com.escodro.savel.data.memory
 
-import com.escodro.savel.data.repository.datasource.SaveTokenDataSource
+import com.escodro.savel.data.repository.datasource.StoreTokenDataSource
 import com.escodro.savel.data.repository.model.Token
 
-internal class MemorySaveToken : SaveTokenDataSource {
+internal class MemoryStoreToken : StoreTokenDataSource {
     private var token: Token? = null
 
     override suspend fun saveToken(token: Token) {

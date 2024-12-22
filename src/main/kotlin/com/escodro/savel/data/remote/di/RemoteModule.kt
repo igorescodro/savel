@@ -4,8 +4,8 @@ import com.escodro.savel.data.remote.client.SavelHttpClient
 import com.escodro.savel.data.remote.musicbrainz.MusicBrainzApi
 import com.escodro.savel.data.remote.musicbrainz.mapper.ArtistMapper
 import com.escodro.savel.data.remote.musicbrainz.mapper.ExternalResourceMapper
-import com.escodro.savel.data.remote.spotify.ArtistImageDataSourceImpl
-import com.escodro.savel.data.remote.spotify.SpotifyApi
+import com.escodro.savel.data.remote.spotify.SpotifyArtistDataSource
+import com.escodro.savel.data.remote.spotify.SpotifyTokenDataSource
 import com.escodro.savel.data.remote.spotify.mapper.TokenMapper
 import com.escodro.savel.data.repository.datasource.ArtistDataSource
 import com.escodro.savel.data.repository.datasource.ArtistImageDataSource
@@ -27,8 +27,8 @@ val remoteModule =
         factoryOf(::ExternalResourceMapper)
 
         // Spotify API
-        factoryOf(::SpotifyApi) bind RetrieveTokenDataSource::class
-        factoryOf(::ArtistImageDataSourceImpl) bind ArtistImageDataSource::class
+        factoryOf(::SpotifyTokenDataSource) bind RetrieveTokenDataSource::class
+        factoryOf(::SpotifyArtistDataSource) bind ArtistImageDataSource::class
 
         factoryOf(::TokenMapper)
     }

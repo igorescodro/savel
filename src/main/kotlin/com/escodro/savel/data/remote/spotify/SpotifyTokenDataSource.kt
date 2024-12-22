@@ -10,7 +10,7 @@ import io.ktor.client.request.forms.submitForm
 import io.ktor.http.Parameters
 import io.ktor.server.config.HoconApplicationConfig
 
-internal class SpotifyApi(
+internal class SpotifyTokenDataSource(
     private val httpClient: SavelHttpClient,
     private val config: HoconApplicationConfig,
     private val mapper: TokenMapper,

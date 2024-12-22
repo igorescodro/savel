@@ -5,7 +5,7 @@ import com.escodro.savel.data.repository.TokenRepositoryImpl
 import com.escodro.savel.data.repository.model.Token
 import com.escodro.savel.repository.fake.DateTimeProviderFake
 import com.escodro.savel.repository.fake.RetrieveTokenDataSourceFake
-import com.escodro.savel.repository.fake.SaveTokenDataSourceFake
+import com.escodro.savel.repository.fake.StoreTokenDataSourceFake
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
 import kotlin.test.BeforeTest
@@ -16,14 +16,14 @@ import kotlin.test.assertNull
 internal class TokenRepositoryTest {
     private val retrieveTokenDataSource = RetrieveTokenDataSourceFake()
 
-    private val saveTokenDataSource = SaveTokenDataSourceFake()
+    private val saveTokenDataSource = StoreTokenDataSourceFake()
 
     private val dateTimeProvider = DateTimeProviderFake()
 
     private val tokenRepository =
         TokenRepositoryImpl(
             retrieveTokenDataSource = retrieveTokenDataSource,
-            saveTokenDataSource = saveTokenDataSource,
+            storeTokenDataSource = saveTokenDataSource,
             dateTimeProvider = dateTimeProvider,
         )
 

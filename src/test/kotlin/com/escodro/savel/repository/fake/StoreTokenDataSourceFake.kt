@@ -1,9 +1,9 @@
 package com.escodro.savel.repository.fake
 
-import com.escodro.savel.data.repository.datasource.SaveTokenDataSource
+import com.escodro.savel.data.repository.datasource.StoreTokenDataSource
 import com.escodro.savel.data.repository.model.Token
 
-internal class SaveTokenDataSourceFake : SaveTokenDataSource {
+internal class StoreTokenDataSourceFake : StoreTokenDataSource {
     var token: Token? = null
 
     override suspend fun saveToken(token: Token) {

@@ -8,7 +8,6 @@ import com.escodro.savel.data.repository.model.Token
 import io.ktor.client.call.body
 import io.ktor.client.request.forms.submitForm
 import io.ktor.http.Parameters
-import io.ktor.http.headers
 import io.ktor.server.config.HoconApplicationConfig
 
 internal class SpotifyApi(
@@ -29,13 +28,7 @@ internal class SpotifyApi(
                         append("client_id", clientId)
                         append("client_secret", clientSecret)
                     },
-            ) {
-                headers {
-                    httpClient.headers.forEach { (key, value) ->
-                        append(key, value)
-                    }
-                }
-            }
+            )
 
         val token = response.body<SpotifyToken>()
         return mapper.toRepo(token)

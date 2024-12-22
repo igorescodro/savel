@@ -7,7 +7,6 @@ import com.escodro.savel.data.remote.musicbrainz.mapper.ArtistMapper
 import com.escodro.savel.data.repository.datasource.ArtistDataSource
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import io.ktor.client.request.headers
 import io.ktor.client.request.parameter
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -25,11 +24,6 @@ internal class MusicBrainzApi(
                 parameter("query", "artist:\"$name\"")
                 parameter("fmt", "json")
                 parameter("limit", "10")
-                headers {
-                    httpClient.headers.forEach { (key, value) ->
-                        append(key, value)
-                    }
-                }
             }
         val responseBody = response.body<SearchArtistResponse>()
         val artistList = responseBody.artists
@@ -45,11 +39,6 @@ internal class MusicBrainzApi(
                             httpClient.client.get("$URL/${artist.id}") {
                                 parameter("fmt", "json")
                                 parameter("inc", "url-rels")
-                                headers {
-                                    httpClient.headers.forEach { (key, value) ->
-                                        append(key, value)
-                                    }
-                                }
                             }
                         val responseBody = response.body<RepoArtist>()
                         artistMapper.toCore(

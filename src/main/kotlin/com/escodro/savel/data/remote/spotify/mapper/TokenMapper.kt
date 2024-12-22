@@ -18,7 +18,7 @@ internal class TokenMapper(
         val expirationTime = currentTime + expiresAt
 
         return Token(
-            value = "${token.type} ${token.value}",
+            value = token.value,
             provider = ExternalProvider.Spotify,
             expiresAt = expirationTime,
         )

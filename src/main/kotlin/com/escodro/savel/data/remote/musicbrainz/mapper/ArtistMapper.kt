@@ -1,7 +1,7 @@
 package com.escodro.savel.data.remote.musicbrainz.mapper
 
-import com.escodro.savel.data.remote.musicbrainz.artist.Artist
-import com.escodro.savel.data.remote.musicbrainz.artist.Relation
+import com.escodro.savel.data.remote.musicbrainz.model.artist.Artist
+import com.escodro.savel.data.remote.musicbrainz.model.artist.Relation
 import com.escodro.savel.core.model.artist.Artist as CoreArtist
 
 internal class ArtistMapper(

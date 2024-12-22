@@ -1,4 +1,4 @@
-package com.escodro.savel.data.remote.musicbrainz.artist
+package com.escodro.savel.data.remote.musicbrainz.model.artist
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -2,8 +2,8 @@ package com.escodro.savel.data.remote.musicbrainz
 
 import com.escodro.savel.core.model.artist.Artist
 import com.escodro.savel.data.remote.client.SavelHttpClient
-import com.escodro.savel.data.remote.musicbrainz.artist.SearchArtistResponse
 import com.escodro.savel.data.remote.musicbrainz.mapper.ArtistMapper
+import com.escodro.savel.data.remote.musicbrainz.model.artist.SearchArtistResponse
 import com.escodro.savel.data.repository.datasource.ArtistDataSource
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -12,9 +12,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import com.escodro.savel.core.model.artist.Artist as CoreArtist
-import com.escodro.savel.data.remote.musicbrainz.artist.Artist as RepoArtist
+import com.escodro.savel.data.remote.musicbrainz.model.artist.Artist as RepoArtist
 
-internal class MusicBrainzApi(
+internal class MusicBrainzArtistDataSource(
     private val httpClient: SavelHttpClient,
     private val artistMapper: ArtistMapper,
 ) : ArtistDataSource {

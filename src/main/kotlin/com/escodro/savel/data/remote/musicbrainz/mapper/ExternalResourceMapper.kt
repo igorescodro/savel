@@ -2,7 +2,7 @@ package com.escodro.savel.data.remote.musicbrainz.mapper
 
 import com.escodro.savel.core.model.artist.ExternalProvider
 import com.escodro.savel.core.model.artist.ExternalResource
-import com.escodro.savel.data.remote.musicbrainz.artist.Relation
+import com.escodro.savel.data.remote.musicbrainz.model.artist.Relation
 
 internal class ExternalResourceMapper {
     fun toExternalResourceList(relationList: List<Relation>): List<ExternalResource> =

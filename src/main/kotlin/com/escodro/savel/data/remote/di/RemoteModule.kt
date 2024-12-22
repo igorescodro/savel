@@ -1,7 +1,7 @@
 package com.escodro.savel.data.remote.di
 
 import com.escodro.savel.data.remote.client.SavelHttpClient
-import com.escodro.savel.data.remote.musicbrainz.MusicBrainzApi
+import com.escodro.savel.data.remote.musicbrainz.MusicBrainzArtistDataSource
 import com.escodro.savel.data.remote.musicbrainz.mapper.ArtistMapper
 import com.escodro.savel.data.remote.musicbrainz.mapper.ExternalResourceMapper
 import com.escodro.savel.data.remote.spotify.SpotifyArtistDataSource
@@ -21,7 +21,7 @@ val remoteModule =
         singleOf(::SavelHttpClient)
 
         // MusicBrainz
-        factoryOf(::MusicBrainzApi) bind ArtistDataSource::class
+        factoryOf(::MusicBrainzArtistDataSource) bind ArtistDataSource::class
 
         factoryOf(::ArtistMapper)
         factoryOf(::ExternalResourceMapper)

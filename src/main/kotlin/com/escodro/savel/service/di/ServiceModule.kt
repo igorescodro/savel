@@ -1,5 +1,6 @@
 package com.escodro.savel.service.di
 
+import com.escodro.savel.service.route.ArtistRouteProvider
 import com.escodro.savel.service.route.RouteProvider
 import com.escodro.savel.service.route.SearchRouteProvider
 import com.typesafe.config.ConfigFactory
@@ -11,6 +12,7 @@ import org.koin.dsl.module
 internal val serviceModule =
     module {
         factoryOf(::SearchRouteProvider) bind RouteProvider::class
+        factoryOf(::ArtistRouteProvider) bind RouteProvider::class
 
         single<HoconApplicationConfig> {
             HoconApplicationConfig(ConfigFactory.load("secrets.conf"))

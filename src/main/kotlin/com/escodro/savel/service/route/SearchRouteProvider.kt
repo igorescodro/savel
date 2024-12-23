@@ -1,7 +1,7 @@
 package com.escodro.savel.service.route
 
 import com.escodro.savel.domain.model.SearchArtistResponse
-import com.escodro.savel.domain.usecase.SearchArtist
+import com.escodro.savel.domain.usecase.search.SearchArtist
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get

@@ -1,5 +1,7 @@
-package com.escodro.savel.core.model.artist
+package com.escodro.savel.core.model.search
 
+import com.escodro.savel.core.model.artist.ArtistImage
+import com.escodro.savel.core.model.artist.CoreArtist
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient

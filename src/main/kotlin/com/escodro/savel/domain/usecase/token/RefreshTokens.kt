@@ -1,4 +1,4 @@
-package com.escodro.savel.domain.usecase
+package com.escodro.savel.domain.usecase.token
 
 import com.escodro.savel.domain.repository.TokenRepository
 

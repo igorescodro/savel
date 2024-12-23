@@ -1,6 +1,6 @@
 package com.escodro.savel.data.remote.musicbrainz
 
-import com.escodro.savel.core.model.artist.SearchArtist
+import com.escodro.savel.core.model.search.SearchArtist
 import com.escodro.savel.data.remote.client.SavelHttpClient
 import com.escodro.savel.data.remote.musicbrainz.mapper.ArtistMapper
 import com.escodro.savel.data.remote.musicbrainz.model.artist.SearchArtistResponse

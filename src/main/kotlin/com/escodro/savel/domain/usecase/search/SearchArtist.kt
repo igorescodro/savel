@@ -1,4 +1,4 @@
-package com.escodro.savel.domain.usecase
+package com.escodro.savel.domain.usecase.search
 
 import com.escodro.savel.domain.model.SearchArtistResponse
 import com.escodro.savel.domain.repository.ArtistRepository

@@ -13,6 +13,6 @@ internal val serviceModule =
         factoryOf(::SearchRouteProvider) bind RouteProvider::class
 
         single<HoconApplicationConfig> {
-            HoconApplicationConfig(ConfigFactory.load())
+            HoconApplicationConfig(ConfigFactory.load("secrets.conf"))
         }
     }

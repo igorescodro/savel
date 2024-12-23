@@ -20,6 +20,12 @@ ktor {
     }
 }
 
+tasks.withType<Jar> {
+    from("src/main/resources") {
+        include("**/*")
+    }
+}
+
 repositories {
     mavenCentral()
 }

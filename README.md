@@ -11,7 +11,7 @@ Each service requires a set of keys in order to send requests. The keys are stor
 tracked by the version control system. The file must be created in the following path:
 
 ```
-../src/main/resources/application.conf
+../src/main/resources/secrets.conf
 ```
 
 The file must have the following structure:

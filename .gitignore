@@ -42,4 +42,4 @@ bin/
 .DS_Store
 
 ### Secrets ###
-src/main/resources/application.conf
+src/main/resources/secrets.conf

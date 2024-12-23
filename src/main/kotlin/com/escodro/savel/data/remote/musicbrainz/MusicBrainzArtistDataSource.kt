@@ -1,6 +1,6 @@
 package com.escodro.savel.data.remote.musicbrainz
 
-import com.escodro.savel.core.model.artist.Artist
+import com.escodro.savel.core.model.artist.SearchArtist
 import com.escodro.savel.data.remote.client.SavelHttpClient
 import com.escodro.savel.data.remote.musicbrainz.mapper.ArtistMapper
 import com.escodro.savel.data.remote.musicbrainz.model.artist.SearchArtistResponse
@@ -11,14 +11,13 @@ import io.ktor.client.request.parameter
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
-import com.escodro.savel.core.model.artist.Artist as CoreArtist
 import com.escodro.savel.data.remote.musicbrainz.model.artist.Artist as RepoArtist
 
 internal class MusicBrainzArtistDataSource(
     private val httpClient: SavelHttpClient,
     private val artistMapper: ArtistMapper,
 ) : ArtistDataSource {
-    override suspend fun searchArtist(name: String): List<CoreArtist> {
+    override suspend fun searchArtist(name: String): List<SearchArtist> {
         val response =
             httpClient.client.get(URL) {
                 parameter("query", "artist:\"$name\"")
@@ -30,7 +29,7 @@ internal class MusicBrainzArtistDataSource(
         return getArtistWithResourceIds(artistList = artistList)
     }
 
-    private suspend fun getArtistWithResourceIds(artistList: List<RepoArtist>): List<Artist> =
+    private suspend fun getArtistWithResourceIds(artistList: List<RepoArtist>): List<SearchArtist> =
         coroutineScope {
             val deferredResponses =
                 artistList.map { artist ->

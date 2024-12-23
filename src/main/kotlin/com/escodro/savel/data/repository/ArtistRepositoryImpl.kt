@@ -1,7 +1,6 @@
 package com.escodro.savel.data.repository
 
-import com.escodro.savel.core.model.artist.Artist
-import com.escodro.savel.core.model.provider.ExternalProvider
+import com.escodro.savel.core.model.artist.SearchArtist
 import com.escodro.savel.data.repository.datasource.ArtistDataSource
 import com.escodro.savel.data.repository.datasource.ArtistImageDataSource
 import com.escodro.savel.domain.model.SearchArtistResponse
@@ -25,10 +24,10 @@ internal class ArtistRepositoryImpl(
             SearchArtistResponse(artists = updatedArtistList)
         }
 
-    private fun CoroutineScope.updateArtistWithImage(artist: Artist) =
+    private fun CoroutineScope.updateArtistWithImage(artist: SearchArtist) =
         async {
-            artist.externalResourceList.find { it.provider == ExternalProvider.Spotify }?.let {
-                val imageUrl = artistImageDataSource.getArtistImage(it.id)
+            artist.imageId?.let { imageId ->
+                val imageUrl = artistImageDataSource.getArtistImage(imageId)
                 artist.copy(imageUrl = imageUrl)
             } ?: artist
         }

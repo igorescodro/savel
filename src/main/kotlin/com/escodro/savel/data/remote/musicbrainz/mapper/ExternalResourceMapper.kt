@@ -10,6 +10,8 @@ internal class ExternalResourceMapper {
             getSpotifyExternalResource(relationList),
         )
 
+    fun toArtistImageId(relationList: List<Relation>): String? = getSpotifyExternalResource(relationList)?.id
+
     private fun getSpotifyExternalResource(relationList: List<Relation>): ExternalResource? {
         val url = relationList.find { relation -> relation.url.resource.contains(SPOTIFY_MASK) }?.url?.resource
         val id = url?.split("/")?.get(4) ?: return null

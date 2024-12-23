@@ -1,4 +1,4 @@
-package com.escodro.savel.core.model.artist
+package com.escodro.savel.core.model.provider
 
 enum class ExternalProvider {
     Spotify,

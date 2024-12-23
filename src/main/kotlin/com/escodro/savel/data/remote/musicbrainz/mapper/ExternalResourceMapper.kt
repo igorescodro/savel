@@ -1,7 +1,7 @@
 package com.escodro.savel.data.remote.musicbrainz.mapper
 
-import com.escodro.savel.core.model.artist.ExternalProvider
 import com.escodro.savel.core.model.artist.ExternalResource
+import com.escodro.savel.core.model.provider.ExternalProvider
 import com.escodro.savel.data.remote.musicbrainz.model.artist.Relation
 
 internal class ExternalResourceMapper {

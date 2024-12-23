@@ -1,7 +1,7 @@
 package com.escodro.savel.data.repository
 
 import com.escodro.savel.core.model.artist.Artist
-import com.escodro.savel.core.model.artist.ExternalProvider
+import com.escodro.savel.core.model.provider.ExternalProvider
 import com.escodro.savel.data.repository.datasource.ArtistDataSource
 import com.escodro.savel.data.repository.datasource.ArtistImageDataSource
 import com.escodro.savel.domain.model.SearchArtistResponse

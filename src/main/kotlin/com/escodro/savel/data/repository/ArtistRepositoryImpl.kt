@@ -20,7 +20,12 @@ internal class ArtistRepositoryImpl(
         coroutineScope {
             tokenRepository.refreshToken()
             val artistList = artistDataSource.searchArtist(name)
-            val updatedArtistList = artistList.map { artist -> updateArtistWithImage(artist) }.awaitAll()
+            val updatedArtistList =
+                artistList
+                    .map { artist -> updateArtistWithImage(artist) }
+                    .awaitAll()
+                    .sortedBy { it.imageUrl?.imageUrl.isNullOrEmpty() }
+
             SearchArtistResponse(artists = updatedArtistList)
         }
 

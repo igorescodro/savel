@@ -10,57 +10,42 @@ internal class ExternalResourceMapper {
             return null
         }
 
-        return with(relationList) {
-            listOfNotNull(
-                getExternalResource(mask = SPOTIFY_MASK, provider = ExternalProvider.Spotify, idIndex = 4),
-                getExternalResource(mask = APPLE_MUSIC_MASK, provider = ExternalProvider.AppleMusic, idIndex = 5),
-                getExternalResource(mask = INSTAGRAM_MASK, provider = ExternalProvider.Instagram, idIndex = 3),
-                getExternalResource(mask = DEEZER_MASK, provider = ExternalProvider.Deezer, idIndex = 4),
-                getExternalResource(mask = TIDAL_MASK, provider = ExternalProvider.Tidal, idIndex = 4),
-                getExternalResource(mask = YOUTUBE_MASK, provider = ExternalProvider.Youtube, idIndex = 4),
-                getExternalResource(mask = YOUTUBE_MUSIC_MASK, provider = ExternalProvider.YouTubeMusic, idIndex = 4),
-                getExternalResource(mask = AMAZON_MUSIC_MASK, provider = ExternalProvider.AmazonMusic, idIndex = 4),
-                getExternalResource(mask = TIKTOK_MASK, provider = ExternalProvider.TikTok, idIndex = 3),
-                getExternalResource(mask = FACEBOOK_MASK, provider = ExternalProvider.Facebook, idIndex = 3),
-                getExternalResource(mask = THREADS_MASK, provider = ExternalProvider.Threads, idIndex = 3),
-                getExternalResource(mask = TWITTER_MASK, provider = ExternalProvider.Twitter, idIndex = 3),
-            ).flatten()
-        }
+        return Resource.entries.flatMap { website -> relationList.getExternalResource(website = website) }
     }
 
     fun toArtistImageId(relationList: List<Relation>): String? =
         relationList
-            .getExternalResource(mask = SPOTIFY_MASK, provider = ExternalProvider.Spotify, idIndex = 4)
+            .getExternalResource(Resource.SPOTIFY)
             .firstOrNull()
             ?.id
 
-    private fun List<Relation>.getExternalResource(
-        mask: String,
-        provider: ExternalProvider,
-        idIndex: Int,
-    ): List<ExternalResource> {
-        val providerList = this.filter { it.url.resource.contains(mask) }
+    private fun List<Relation>.getExternalResource(website: Resource): List<ExternalResource> {
+        val providerList = this.filter { it.url.resource.contains(website.url) }
         return providerList.mapNotNull { relation ->
             val id =
                 relation.url.resource
                     .split("/")
-                    .getOrNull(idIndex) ?: return@mapNotNull null
-            ExternalResource(provider = provider, id = id, url = relation.url.resource)
+                    .getOrNull(website.idIndex) ?: return@mapNotNull null
+            ExternalResource(provider = website.provider, id = id, url = relation.url.resource)
         }
     }
 
-    private companion object {
-        const val SPOTIFY_MASK = "open.spotify.com/artist/"
-        const val APPLE_MUSIC_MASK = "music.apple.com/"
-        const val INSTAGRAM_MASK = "instagram.com/"
-        const val DEEZER_MASK = "deezer.com/"
-        const val TIDAL_MASK = "tidal.com/artist/"
-        const val YOUTUBE_MASK = "www.youtube.com/channel/"
-        const val YOUTUBE_MUSIC_MASK = "music.youtube.com/channel/"
-        const val AMAZON_MUSIC_MASK = "music.amazon.com/artists/"
-        const val TIKTOK_MASK = "tiktok.com/"
-        const val FACEBOOK_MASK = "facebook.com/"
-        const val THREADS_MASK = "threads.net/"
-        const val TWITTER_MASK = "twitter.com/"
+    private enum class Resource(
+        val url: String,
+        val provider: ExternalProvider,
+        val idIndex: Int,
+    ) {
+        SPOTIFY(url = "open.spotify.com/artist/", provider = ExternalProvider.Spotify, idIndex = 4),
+        APPLE_MUSIC(url = "music.apple.com/", provider = ExternalProvider.AppleMusic, idIndex = 5),
+        INSTAGRAM(url = "instagram.com/", provider = ExternalProvider.Instagram, idIndex = 3),
+        DEEZER(url = "deezer.com/", provider = ExternalProvider.Deezer, idIndex = 4),
+        TIDAL(url = "tidal.com/artist/", provider = ExternalProvider.Tidal, idIndex = 4),
+        YOUTUBE(url = "www.youtube.com/channel/", provider = ExternalProvider.Youtube, idIndex = 4),
+        YOUTUBE_MUSIC(url = "music.youtube.com/channel/", provider = ExternalProvider.YouTubeMusic, idIndex = 4),
+        AMAZON_MUSIC(url = "music.amazon.com/artists/", provider = ExternalProvider.AmazonMusic, idIndex = 4),
+        TIKTOK(url = "tiktok.com/", provider = ExternalProvider.TikTok, idIndex = 3),
+        FACEBOOK(url = "facebook.com/", provider = ExternalProvider.Facebook, idIndex = 3),
+        THREADS(url = "threads.net/", provider = ExternalProvider.Threads, idIndex = 3),
+        TWITTER(url = "twitter.com/", provider = ExternalProvider.Twitter, idIndex = 3),
     }
 }

@@ -1,5 +1,6 @@
 package com.escodro.savel.data.remote.musicbrainz
 
+import com.escodro.savel.core.model.artist.FullArtist
 import com.escodro.savel.core.model.search.SearchArtist
 import com.escodro.savel.data.remote.client.SavelHttpClient
 import com.escodro.savel.data.remote.musicbrainz.mapper.ArtistMapper
@@ -27,6 +28,16 @@ internal class MusicBrainzArtistDataSource(
         val responseBody = response.body<SearchArtistResponse>()
         val artistList = responseBody.artists
         return getArtistWithResourceIds(artistList = artistList)
+    }
+
+    override suspend fun getArtistById(artistId: String): FullArtist {
+        val response =
+            httpClient.client.get("$URL/$artistId") {
+                parameter("fmt", "json")
+                parameter("inc", "url-rels")
+            }
+        val responseBody = response.body<RepoArtist>()
+        return artistMapper.toFullArtist(artist = responseBody)
     }
 
     private suspend fun getArtistWithResourceIds(artistList: List<RepoArtist>): List<SearchArtist> =

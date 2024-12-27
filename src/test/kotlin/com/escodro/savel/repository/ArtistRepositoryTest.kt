@@ -29,6 +29,7 @@ internal class ArtistRepositoryTest {
     fun setup() {
         artistDataSource.clear()
         artistImageDataSource.clear()
+        tokenRepository.clear()
     }
 
     @Test
@@ -98,4 +99,48 @@ internal class ArtistRepositoryTest {
             assertEquals(artist3.name, result.artists[1].name)
             assertEquals(artist2.name, result.artists[2].name)
         }
+
+    @Test
+    fun `when search artist then refresh token is called`() {
+        runTest {
+            // Given
+            val artist = ArtistFactory.createSearchArtist()
+            artistDataSource.artistList = listOf(artist)
+
+            // When
+            artistRepository.searchArtist("artist")
+
+            // Then
+            assertTrue(tokenRepository.wasCalled)
+        }
+    }
+
+    @Test
+    fun `when get artist by id then return artist`() =
+        runTest {
+            // Given
+            val artist = ArtistFactory.createFullArtist()
+            artistDataSource.artist = artist
+
+            // When
+            val result = artistRepository.getArtistById("artistId")
+
+            // Then
+            assertEquals(artist, result)
+        }
+
+    @Test
+    fun `when get artist is called then refresh token is called`() {
+        runTest {
+            // Given
+            val artist = ArtistFactory.createFullArtist()
+            artistDataSource.artist = artist
+
+            // When
+            artistRepository.getArtistById("artistId")
+
+            // Then
+            assertTrue(tokenRepository.wasCalled)
+        }
+    }
 }

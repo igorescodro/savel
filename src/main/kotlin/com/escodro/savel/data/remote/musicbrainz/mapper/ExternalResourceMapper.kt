@@ -5,10 +5,12 @@ import com.escodro.savel.core.model.provider.ExternalProvider
 import com.escodro.savel.data.remote.musicbrainz.model.artist.Relation
 
 internal class ExternalResourceMapper {
-    fun toExternalResourceList(relationList: List<Relation>): List<ExternalResource> =
-        listOfNotNull(
+    fun toExternalResourceList(relationList: List<Relation>?): List<ExternalResource>? {
+        if (relationList == null) return null
+        return listOfNotNull(
             getSpotifyExternalResource(relationList),
         )
+    }
 
     fun toArtistImageId(relationList: List<Relation>): String? = getSpotifyExternalResource(relationList)?.id
 

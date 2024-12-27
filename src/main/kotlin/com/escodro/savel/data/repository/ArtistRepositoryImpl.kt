@@ -1,5 +1,6 @@
 package com.escodro.savel.data.repository
 
+import com.escodro.savel.core.model.artist.FullArtist
 import com.escodro.savel.core.model.search.SearchArtist
 import com.escodro.savel.data.repository.datasource.ArtistDataSource
 import com.escodro.savel.data.repository.datasource.ArtistImageDataSource
@@ -29,6 +30,12 @@ internal class ArtistRepositoryImpl(
             SearchArtistResponse(artists = updatedArtistList)
         }
 
+    override suspend fun getArtistById(artistId: String): FullArtist {
+        tokenRepository.refreshToken()
+        val updatedArtist = updateArtistWithImage(artistDataSource.getArtistById(artistId))
+        return updatedArtist
+    }
+
     private fun CoroutineScope.updateArtistWithImage(artist: SearchArtist) =
         async {
             artist.imageId?.let { imageId ->
@@ -36,4 +43,10 @@ internal class ArtistRepositoryImpl(
                 artist.copy(imageUrl = imageUrl)
             } ?: artist
         }
+
+    private suspend fun updateArtistWithImage(artist: FullArtist) =
+        artist.imageId?.let { imageId ->
+            val imageUrl = artistImageDataSource.getArtistImage(imageId)
+            artist.copy(imageUrl = imageUrl)
+        } ?: artist
 }

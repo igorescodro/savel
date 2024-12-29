@@ -5,6 +5,7 @@ ktor-version = "3.0.2"
 logback-version = "1.4.14"
 koin-version = "4.0.0"
 datetime-version = "0.6.1"
+google-firebase-version = "9.4.2"
 
 [libraries]
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor-version" }
@@ -26,6 +27,8 @@ kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version
 kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime-version" }
 
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin-version" }
+
+google-firebase-admin = { module = "com.google.firebase:firebase-admin", version.ref = "google-firebase-version" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }

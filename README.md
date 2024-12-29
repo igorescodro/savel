@@ -17,6 +17,12 @@ tracked by the version control system. The file must be created in the following
 The file must have the following structure:
 
 ```hocon
+service {
+    google {
+        projectId = "<my-google-cloud-project-id>"
+    }
+}
+
 api {
     spotify {
         clientId = "<my-client-id>"

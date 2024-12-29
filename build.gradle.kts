@@ -50,6 +50,8 @@ dependencies {
 
     implementation(libs.koin.ktor)
 
+    implementation(libs.google.firebase.admin)
+
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 }

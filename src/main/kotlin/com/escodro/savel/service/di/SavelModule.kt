@@ -1,5 +1,6 @@
 package com.escodro.savel.service.di
 
+import com.escodro.savel.data.local.di.localModule
 import com.escodro.savel.data.memory.di.memoryModule
 import com.escodro.savel.data.remote.di.remoteModule
 import com.escodro.savel.data.repository.di.repositoryModule
@@ -13,6 +14,7 @@ internal val savelModule =
             serviceModule,
             domainModule,
             repositoryModule,
+            localModule,
             remoteModule,
             memoryModule,
             dateTimeModule,

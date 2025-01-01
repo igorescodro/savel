@@ -8,9 +8,13 @@ import com.escodro.savel.repository.fake.StoreArtistDataSourceFake
 import com.escodro.savel.repository.fake.TokenRepositoryFake
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.Clock
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import kotlin.time.Duration.Companion.days
 
 internal class ArtistRepositoryTest {
     private val artistDataSource = ArtistDataSourceFake()
@@ -162,6 +166,41 @@ internal class ArtistRepositoryTest {
             // Then
             assertEquals(1, storeArtistDataSource.artistMap.size)
             assertEquals(artist, storeArtistDataSource.artistMap["ts-13"])
+        }
+    }
+
+    @Test
+    fun `when the cache is expired then a refresh artist info is returned`() {
+        runTest {
+            // Given
+            val ttl = (Clock.System.now() - 1.days).toEpochMilliseconds()
+            val artist = ArtistFactory.createFullArtist(id = "ftp-2012", timeToLive = ttl)
+            artistDataSource.artist = artist
+
+            // When
+            val result = artistRepository.getArtistById("ftp-2012")
+
+            // Then
+            assertEquals(artist, result)
+            assertTrue(tokenRepository.wasCalled)
+        }
+    }
+
+    @Test
+    fun `when the cache is valid then the artist is returned from the store`() {
+        runTest {
+            // Given
+            val ttl = (Clock.System.now() + 1.days).toEpochMilliseconds()
+            val artist = ArtistFactory.createFullArtist(id = "lp-2005", timeToLive = ttl)
+            storeArtistDataSource.artistMap = mapOf("lp-2005" to artist)
+
+            // When
+            val result = artistRepository.getArtistById("lp-2005")
+
+            // Then
+            assertEquals(artist, result)
+            assertFalse(tokenRepository.wasCalled)
+            assertNull(artistDataSource.artist)
         }
     }
 }

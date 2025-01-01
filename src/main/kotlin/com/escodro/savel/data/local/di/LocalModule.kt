@@ -3,6 +3,7 @@ package com.escodro.savel.data.local.di
 import com.escodro.savel.data.local.FirestoreDatabase
 import com.escodro.savel.data.local.dao.ArtistDao
 import com.escodro.savel.data.local.mapper.ArtistMapper
+import com.escodro.savel.data.local.mapper.ExternalResourceMapper
 import com.escodro.savel.data.repository.datasource.StoreArtistDataSource
 import com.google.cloud.firestore.Firestore
 import org.koin.core.module.dsl.factoryOf
@@ -20,4 +21,5 @@ val localModule =
 
         // Mappers
         factoryOf(::ArtistMapper)
+        factoryOf(::ExternalResourceMapper)
     }

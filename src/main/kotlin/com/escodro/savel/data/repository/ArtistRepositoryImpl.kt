@@ -33,11 +33,18 @@ internal class ArtistRepositoryImpl(
         }
 
     override suspend fun getArtistById(artistId: String): FullArtist {
+        val artist = storeArtistDataSource.getArtistById(artistId)
+        if (artist != null && isCacheValid(artist)) {
+            return artist
+        }
         tokenRepository.refreshToken()
         val updatedArtist = updateArtistWithImage(artistDataSource.getArtistById(artistId))
         storeArtistDataSource.saveArtist(updatedArtist)
         return updatedArtist
     }
+
+    private fun isCacheValid(artist: FullArtist): Boolean =
+        artist.timeToLive != null && artist.timeToLive > Clock.System.now().toEpochMilliseconds()
 
     private fun CoroutineScope.updateArtistWithImage(artist: SearchArtist) =
         async {

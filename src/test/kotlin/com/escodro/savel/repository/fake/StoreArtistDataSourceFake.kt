@@ -11,6 +11,8 @@ internal class StoreArtistDataSourceFake : StoreArtistDataSource {
         return true
     }
 
+    override fun getArtistById(artistId: String): FullArtist? = artistMap[artistId]
+
     fun clear() {
         artistMap = emptyMap()
     }

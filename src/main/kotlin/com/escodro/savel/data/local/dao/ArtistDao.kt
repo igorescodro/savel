@@ -14,7 +14,11 @@ internal class ArtistDao(
     private val artistMapper: ArtistMapper,
 ) : StoreArtistDataSource {
     override fun saveArtist(artist: FullArtist): Boolean {
-        val localArtist: Artist = artistMapper.toLocal(artist = artist, ttl = getTimeToLiveInMillis())
+        val localArtist: Artist =
+            artistMapper.toLocal(
+                artist = artist,
+                ttl = getTimeToLiveInMillis(),
+            )
 
         if (localArtist.id.isNullOrEmpty() || localArtist.name.isNullOrEmpty()) {
             return false

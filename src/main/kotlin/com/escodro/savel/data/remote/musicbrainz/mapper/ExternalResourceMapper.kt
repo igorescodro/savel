@@ -10,7 +10,11 @@ internal class ExternalResourceMapper {
             return null
         }
 
-        return Resource.entries.flatMap { website -> relationList.getExternalResource(website = website) }
+        return Resource.entries.flatMap { website ->
+            relationList.getExternalResource(
+                website = website,
+            )
+        }
     }
 
     fun toArtistImageId(relationList: List<Relation>): String? =
@@ -35,17 +39,65 @@ internal class ExternalResourceMapper {
         val provider: ExternalProvider,
         val idIndex: Int,
     ) {
-        SPOTIFY(url = "open.spotify.com/artist/", provider = ExternalProvider.Spotify, idIndex = 4),
-        APPLE_MUSIC(url = "music.apple.com/", provider = ExternalProvider.AppleMusic, idIndex = 5),
-        INSTAGRAM(url = "instagram.com/", provider = ExternalProvider.Instagram, idIndex = 3),
-        DEEZER(url = "deezer.com/", provider = ExternalProvider.Deezer, idIndex = 4),
-        TIDAL(url = "tidal.com/artist/", provider = ExternalProvider.Tidal, idIndex = 4),
-        YOUTUBE(url = "www.youtube.com/channel/", provider = ExternalProvider.Youtube, idIndex = 4),
-        YOUTUBE_MUSIC(url = "music.youtube.com/channel/", provider = ExternalProvider.YouTubeMusic, idIndex = 4),
-        AMAZON_MUSIC(url = "music.amazon.com/artists/", provider = ExternalProvider.AmazonMusic, idIndex = 4),
-        TIKTOK(url = "tiktok.com/", provider = ExternalProvider.TikTok, idIndex = 3),
-        FACEBOOK(url = "facebook.com/", provider = ExternalProvider.Facebook, idIndex = 3),
-        THREADS(url = "threads.net/", provider = ExternalProvider.Threads, idIndex = 3),
-        TWITTER(url = "twitter.com/", provider = ExternalProvider.Twitter, idIndex = 3),
+        SPOTIFY(
+            url = "open.spotify.com/artist/",
+            provider = ExternalProvider.Spotify,
+            idIndex = 4,
+        ),
+        APPLE_MUSIC(
+            url = "music.apple.com/",
+            provider = ExternalProvider.AppleMusic,
+            idIndex = 5,
+        ),
+        INSTAGRAM(
+            url = "instagram.com/",
+            provider = ExternalProvider.Instagram,
+            idIndex = 3,
+        ),
+        DEEZER(
+            url = "deezer.com/",
+            provider = ExternalProvider.Deezer,
+            idIndex = 4,
+        ),
+        TIDAL(
+            url = "tidal.com/artist/",
+            provider = ExternalProvider.Tidal,
+            idIndex = 4,
+        ),
+        YOUTUBE(
+            url = "www.youtube.com/channel/",
+            provider = ExternalProvider.Youtube,
+            idIndex = 4,
+        ),
+        YOUTUBE_MUSIC(
+            url = "music.youtube.com/channel/",
+            provider = ExternalProvider.YouTubeMusic,
+            idIndex = 4,
+        ),
+        AMAZON_MUSIC(
+            url = "music.amazon.com/artists/",
+            provider = ExternalProvider.AmazonMusic,
+            idIndex = 4,
+        ),
+        TIKTOK(
+            url = "tiktok.com/",
+            provider = ExternalProvider.TikTok,
+            idIndex = 3,
+        ),
+        FACEBOOK(
+            url = "facebook.com/",
+            provider = ExternalProvider.Facebook,
+            idIndex = 3,
+        ),
+        THREADS(
+            url = "threads.net/",
+            provider = ExternalProvider.Threads,
+            idIndex = 3,
+        ),
+        TWITTER(
+            url = "twitter.com/",
+            provider = ExternalProvider.Twitter,
+            idIndex = 3,
+        ),
     }
 }

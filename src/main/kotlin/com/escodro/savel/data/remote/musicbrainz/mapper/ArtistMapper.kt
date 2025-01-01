@@ -24,7 +24,10 @@ internal class ArtistMapper(
         FullArtist(
             id = artist.id,
             name = artist.name,
-            imageId = artist.relations?.let { list -> externalResourceMapper.toArtistImageId(list) },
+            imageId =
+                artist.relations?.let { list ->
+                    externalResourceMapper.toArtistImageId(list)
+                },
             // MusicBrainz API does not provide the image URL
             imageUrl = null,
             externalResources = externalResourceMapper.toExternalResourceList(artist.relations),

@@ -7,4 +7,5 @@ internal data class Artist(
     val name: String?,
     val imageUrl: String?,
     val externalResources: List<ExternalResource>?,
+    val timeToLive: Long,
 )

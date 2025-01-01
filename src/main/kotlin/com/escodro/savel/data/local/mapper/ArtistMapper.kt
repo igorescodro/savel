@@ -9,14 +9,14 @@ internal class ArtistMapper(
 ) {
     fun toLocal(
         artist: FullArtist,
-        ttl: Long,
+        ttlInMillis: Long,
     ): Artist =
         Artist(
             id = artist.id,
             name = artist.name,
             imageUrl = artist.imageUrl?.imageUrl,
             externalResources = externalResourceMapper.toLocal(artist.externalResources),
-            timeToLive = ttl,
+            ttlInMillis = ttlInMillis,
         )
 
     fun toCore(artist: Artist): FullArtist =
@@ -25,6 +25,6 @@ internal class ArtistMapper(
             name = artist.name,
             imageUrl = artist.imageUrl?.let { imageUrl -> ArtistImage(imageUrl) },
             externalResources = externalResourceMapper.toCore(artist.externalResources),
-            timeToLive = artist.timeToLive,
+            ttlInMillis = artist.ttlInMillis,
         )
 }

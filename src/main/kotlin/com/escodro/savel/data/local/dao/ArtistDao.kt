@@ -17,13 +17,15 @@ internal class ArtistDao(
         val localArtist: Artist =
             artistMapper.toLocal(
                 artist = artist,
-                ttl = getTimeToLiveInMillis(),
+                ttlInMillis = getTimeToLiveInMillis(),
             )
 
-        if (localArtist.id.isNullOrEmpty() || localArtist.name.isNullOrEmpty()) {
+        // Smart cast since the property is open due to Firestore annotation
+        val artistId = localArtist.id
+        if (artistId.isNullOrEmpty() || localArtist.name.isNullOrEmpty()) {
             return false
         }
-        firestore.collection(COLLECTION_NAME).document(localArtist.id).set(localArtist)
+        firestore.collection(COLLECTION_NAME).document(artistId).set(localArtist)
         return true
     }
 

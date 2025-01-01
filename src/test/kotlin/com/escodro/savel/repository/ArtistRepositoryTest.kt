@@ -174,7 +174,7 @@ internal class ArtistRepositoryTest {
         runTest {
             // Given
             val ttl = (Clock.System.now() - 1.days).toEpochMilliseconds()
-            val artist = ArtistFactory.createFullArtist(id = "ftp-2012", timeToLive = ttl)
+            val artist = ArtistFactory.createFullArtist(id = "ftp-2012", ttlInMillis = ttl)
             artistDataSource.artist = artist
 
             // When
@@ -191,7 +191,7 @@ internal class ArtistRepositoryTest {
         runTest {
             // Given
             val ttl = (Clock.System.now() + 1.days).toEpochMilliseconds()
-            val artist = ArtistFactory.createFullArtist(id = "lp-2005", timeToLive = ttl)
+            val artist = ArtistFactory.createFullArtist(id = "lp-2005", ttlInMillis = ttl)
             storeArtistDataSource.artistMap = mapOf("lp-2005" to artist)
 
             // When

@@ -23,13 +23,13 @@ internal object ArtistFactory {
         id: String = "artist_${Random.nextInt()}",
         name: String = "Artist ${Random.nextInt()}",
         imageUrl: String? = null,
-        timeToLive: Long? = null,
+        ttlInMillis: Long? = null,
     ): FullArtist =
         FullArtist(
             id = id,
             name = name,
             imageUrl = ArtistImage(imageUrl = imageUrl),
             externalResources = emptyList(),
-            timeToLive = timeToLive,
+            ttlInMillis = ttlInMillis,
         )
 }

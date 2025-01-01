@@ -45,7 +45,7 @@ internal class ArtistRepositoryImpl(
     }
 
     private fun isCacheValid(artist: FullArtist): Boolean =
-        artist.timeToLive != null && artist.timeToLive > Clock.System.now().toEpochMilliseconds()
+        artist.ttlInMillis != null && artist.ttlInMillis > Clock.System.now().toEpochMilliseconds()
 
     private fun CoroutineScope.updateArtistWithImage(artist: SearchArtist) =
         async {

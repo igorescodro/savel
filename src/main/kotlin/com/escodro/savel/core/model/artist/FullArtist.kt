@@ -11,5 +11,5 @@ data class FullArtist(
     @Transient override val imageId: String? = null,
     @SerialName("image_url") override val imageUrl: ArtistImage?,
     @SerialName("external_resources") val externalResources: List<ExternalResource>?,
-    @Transient val timeToLive: Long? = null,
+    @Transient val ttlInMillis: Long? = null,
 ) : CoreArtist

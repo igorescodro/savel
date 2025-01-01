@@ -4,6 +4,7 @@ import com.escodro.savel.core.model.artist.FullArtist
 import com.escodro.savel.core.model.search.SearchArtist
 import com.escodro.savel.data.repository.datasource.ArtistDataSource
 import com.escodro.savel.data.repository.datasource.ArtistImageDataSource
+import com.escodro.savel.data.repository.datasource.StoreArtistDataSource
 import com.escodro.savel.domain.model.SearchArtistResponse
 import com.escodro.savel.domain.repository.ArtistRepository
 import com.escodro.savel.domain.repository.TokenRepository
@@ -15,6 +16,7 @@ import kotlinx.coroutines.coroutineScope
 internal class ArtistRepositoryImpl(
     private val artistDataSource: ArtistDataSource,
     private val artistImageDataSource: ArtistImageDataSource,
+    private val storeArtistDataSource: StoreArtistDataSource,
     private val tokenRepository: TokenRepository,
 ) : ArtistRepository {
     override suspend fun searchArtist(name: String): SearchArtistResponse =
@@ -33,6 +35,7 @@ internal class ArtistRepositoryImpl(
     override suspend fun getArtistById(artistId: String): FullArtist {
         tokenRepository.refreshToken()
         val updatedArtist = updateArtistWithImage(artistDataSource.getArtistById(artistId))
+        storeArtistDataSource.saveArtist(updatedArtist)
         return updatedArtist
     }
 

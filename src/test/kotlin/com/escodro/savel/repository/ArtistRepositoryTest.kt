@@ -4,6 +4,7 @@ import com.escodro.savel.data.repository.ArtistRepositoryImpl
 import com.escodro.savel.repository.factory.ArtistFactory
 import com.escodro.savel.repository.fake.ArtistDataSourceFake
 import com.escodro.savel.repository.fake.ArtistImageDataSourceFake
+import com.escodro.savel.repository.fake.StoreArtistDataSourceFake
 import com.escodro.savel.repository.fake.TokenRepositoryFake
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.test.runTest
@@ -18,10 +19,13 @@ internal class ArtistRepositoryTest {
 
     private val tokenRepository = TokenRepositoryFake()
 
+    private val storeArtistDataSource = StoreArtistDataSourceFake()
+
     private val artistRepository =
         ArtistRepositoryImpl(
             artistDataSource = artistDataSource,
             artistImageDataSource = artistImageDataSource,
+            storeArtistDataSource = storeArtistDataSource,
             tokenRepository = tokenRepository,
         )
 
@@ -29,6 +33,7 @@ internal class ArtistRepositoryTest {
     fun setup() {
         artistDataSource.clear()
         artistImageDataSource.clear()
+        storeArtistDataSource.clear()
         tokenRepository.clear()
     }
 
@@ -141,6 +146,22 @@ internal class ArtistRepositoryTest {
 
             // Then
             assertTrue(tokenRepository.wasCalled)
+        }
+    }
+
+    @Test
+    fun `when the artist is fetch then the artist is saved in the store`() {
+        runTest {
+            // Given
+            val artist = ArtistFactory.createFullArtist(id = "ts-13")
+            artistDataSource.artist = artist
+
+            // When
+            artistRepository.getArtistById("ts-13")
+
+            // Then
+            assertEquals(1, storeArtistDataSource.artistMap.size)
+            assertEquals(artist, storeArtistDataSource.artistMap["ts-13"])
         }
     }
 }

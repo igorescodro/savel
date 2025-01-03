@@ -2,7 +2,7 @@
 FROM gradle:latest AS cache
 RUN mkdir -p /home/gradle/cache_home
 ENV GRADLE_USER_HOME /home/gradle/cache_home
-COPY build.gradle.* gradle.properties /home/gradle/app/
+COPY server/build.gradle.* gradle.properties /home/gradle/app/
 COPY gradle /home/gradle/app/gradle
 WORKDIR /home/gradle/app
 RUN gradle clean build -i --stacktrace
@@ -14,16 +14,14 @@ COPY . /usr/src/app/
 WORKDIR /usr/src/app
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
-# Build the fat JAR, Gradle also supports shadow
-# and boot JAR by default.
-RUN gradle buildFatJar --no-daemon
+RUN gradle shadowJar --no-daemon
 
 # Stage 3: Create the Runtime Image
 FROM amazoncorretto:22 AS runtime
 EXPOSE 8080
 RUN mkdir /app
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/savel-docker.jar
-ENTRYPOINT ["java", "-jar", "-Dconfig.file=application.yml", "/app/savel-docker.jar"]
+COPY --from=build /home/gradle/src/server/build/libs/*.jar /app/savel.jar
+ENTRYPOINT ["java", "-jar", "-Dconfig.file=application.yml", "/app/savel.jar"]
 
 # Command to build the Docker image for Google Cloud Run
 # docker buildx build --platform linux/amd64 -t igorescodro/savel:latest --load .

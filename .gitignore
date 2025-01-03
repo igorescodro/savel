@@ -55,4 +55,4 @@ xcuserdata
 
 
 ### Secrets ###
-src/main/resources/secrets.conf
+server/src/main/resources/secrets.conf

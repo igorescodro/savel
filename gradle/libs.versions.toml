@@ -6,6 +6,9 @@ logback-version = "1.4.14"
 koin-version = "4.0.0"
 datetime-version = "0.6.1"
 google-firebase-version = "9.4.2"
+agp-version = "8.5.2"
+compose-multiplatform-version = "1.7.0"
+shadow-version = "9.0.0-beta4"
 
 [libraries]
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor-version" }
@@ -34,3 +37,9 @@ google-firebase-admin = { module = "com.google.firebase:firebase-admin", version
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor-version" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization-version" }
+android-application = { id = "com.android.application", version.ref = "agp-version" }
+android-library = { id = "com.android.library", version.ref = "agp-version" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform-version" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin-version" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin-version" }
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow-version" }

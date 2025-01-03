@@ -1,8 +1,11 @@
 .gradle
 build/
+.kotlin/
+local.properties
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+.idea
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -40,6 +43,16 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Xcode ###
+xcuserdata
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
+
 
 ### Secrets ###
 src/main/resources/secrets.conf

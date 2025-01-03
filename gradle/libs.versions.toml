@@ -10,6 +10,10 @@ agp-version = "8.5.2"
 compose-multiplatform-version = "1.7.0"
 shadow-version = "9.0.0-beta4"
 
+android-compileSdk = "34"
+android-minSdk = "24"
+android-targetSdk = "34"
+
 [libraries]
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor-version" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor-version" }
